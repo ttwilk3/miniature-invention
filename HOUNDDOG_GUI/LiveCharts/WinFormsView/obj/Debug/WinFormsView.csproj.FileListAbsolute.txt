@@ -1,0 +1,26 @@
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.WinForms.dll.config
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.WinForms.XML
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.WinForms.dll
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.WinForms.pdb
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.dll
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.pdb
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.xml
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\obj\Debug\WinFormsView.csprojResolveAssemblyReference.cache
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\obj\Debug\LiveCharts.WinForms.dll
+C:\Users\truearrow\Desktop\Live-Charts-master\WinFormsView\obj\Debug\LiveCharts.WinForms.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\obj\Debug\WinFormsView.csprojResolveAssemblyReference.cache
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\obj\Debug\LiveCharts.WinForms.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\obj\Debug\LiveCharts.WinForms.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.WinForms.dll.config
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.WinForms.XML
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.WinForms.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.WinForms.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.xml
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Debug\LiveCharts.Wpf.xml

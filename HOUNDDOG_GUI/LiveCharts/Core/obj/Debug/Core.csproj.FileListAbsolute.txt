@@ -1,0 +1,6 @@
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\Core\bin\Debug\LiveCharts.XML
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\Core\bin\Debug\LiveCharts.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\Core\bin\Debug\LiveCharts.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\Core\obj\Debug\LiveCharts.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG_GUI\LiveCharts\Core\obj\Debug\LiveCharts.pdb

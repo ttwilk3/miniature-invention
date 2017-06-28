@@ -1,0 +1,6 @@
+C:\Users\truearrow\Desktop\Live-Charts-master\Core40\bin\Debug\LiveCharts.xml
+C:\Users\truearrow\Desktop\Live-Charts-master\Core40\bin\Debug\LiveCharts.dll
+C:\Users\truearrow\Desktop\Live-Charts-master\Core40\bin\Debug\LiveCharts.pdb
+C:\Users\truearrow\Desktop\Live-Charts-master\Core40\obj\Debug\Core40.csprojResolveAssemblyReference.cache
+C:\Users\truearrow\Desktop\Live-Charts-master\Core40\obj\Debug\LiveCharts.dll
+C:\Users\truearrow\Desktop\Live-Charts-master\Core40\obj\Debug\LiveCharts.pdb
