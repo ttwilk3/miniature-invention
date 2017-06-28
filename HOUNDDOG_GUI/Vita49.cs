@@ -12,6 +12,8 @@ namespace HOUNDDOG_GUI
         Dictionary<string, string> TSI = new Dictionary<string, string>();
         Dictionary<string, string> TSF = new Dictionary<string, string>();
         Dictionary<string, string> dataFormatCodes = new Dictionary<string, string>();
+        Dictionary<string, string> dataSampleType = new Dictionary<string, string>();
+        Dictionary<string, string> dataItemFormat = new Dictionary<string, string>();
         bool trail = false;
         bool dataPack = false;
         bool validVita = false;
@@ -233,7 +235,19 @@ namespace HOUNDDOG_GUI
                         if (i == 1 || i == 9 || i == 12)
                         {
                             string val = conversionToNums(temp, true);
-                            report.Append("Context Field " + i + " Value: " + val + "\n");
+
+                            if (i == 1)
+                            {
+                                report.Append("Reference Point Identifier: " + val + "\n");
+                            }
+                            else if (i == 9)
+                            {
+                                report.Append("Over-Range Count: " + val + "\n");
+                            }
+                            else if (i == 12)
+                            {
+                                report.Append("Timestamp Calibration Time: " + val + "\n");
+                            }
                         }
                         else if (i == 7)
                         {
@@ -273,35 +287,155 @@ namespace HOUNDDOG_GUI
                         }
                         else if (i == 15)
                         {
-                            // Do Later See Table 5-4
+                            report.Append("State and Event Indicators:\n");
+
+                            report.Append("     Calibrated Time Indicator Enabled: " + (temp[0].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Valid Data Indicator Enabled: " + (temp[1].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Referenece Lock Indicator Enabled: " + (temp[2].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     AGC/MGC Indicator Enabled: " + (temp[3].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Detected Signal Indicator Enabled: " + (temp[4].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Spectral Inversion Indicator Enabled: " + (temp[5].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Over-Range Indicator Enabled: " + (temp[6].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Sample Loss Indicator Enabled: " + (temp[7].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+
+                            report.Append("     Calibrated Time Indicator: " + (temp[12].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Valid Data Indicator: " + (temp[13].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Referenece Lock Indicator: " + (temp[14].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     AGC/MGC Indicator: " + (temp[15].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Detected Signal Indicator: " + (temp[16].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Spectral Inversion Indicator: " + (temp[17].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Over-Range Indicator: " + (temp[18].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
+                            report.Append("     Sample Loss Indicator: " + (temp[19].Equals('1') ? " 0x1 True" : " 0x0 False") + "\n");
                         }
                         else if (i == 21)
                         {
-                            // Do Later -- Need Documentation
+                            // TODO -- Need Documentation
                         }
-                       
+
                     }
                     else if ((i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 10 || i == 11 || i == 14 || i == 16) && contextPackInd[i] == true)
                     {
                         // Words 2
                         temp = binWords.Substring(ind, 64);
                         ind += 64;
+                        // 11 14 16
+                        if (i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 10)
+                        {
+                            string freqInt = temp.Substring(0, 42);
+                            string freqFrac = temp.Substring(42);
+
+                            string val1 = conversionToNums(freqInt, true);
+                            string val2 = conversionToNums(freqFrac, false);
+
+                            string value = val1 + "." + val2 + " Hz\n";
+                            if (i == 2)
+                            {
+                                report.Append("Bandwidth: " + value);
+                            }
+                            else if (i == 3)
+                            {
+                                report.Append("IF Reference Frequency: " + value);
+                            }
+                            else if (i == 4)
+                            {
+                                report.Append("RF Reference Frequency: " + value);
+                            }
+                            else if (i == 5)
+                            {
+                                report.Append("RF Reference Frequency Offset: " + value);
+                            }
+                            else if (i == 6)
+                            {
+                                report.Append("IF Band Offset: " + value);
+                            }
+                            else if (i == 10)
+                            {
+                                report.Append("Sample Rate: " + value);
+                            }
+                        }
+                        else if (i == 11)
+                        {
+                            // TODO -- Picoseconds?
+                        }
+                        else if (i == 14)
+                        {
+                            // TODO -- Fig 5-7 Need Documentation
+                        }
+                        else if (i == 16)
+                        {
+                            string temp2 = "";
+                            report.Append("Data Packet Payload Format:\n");
+
+                            report.Append("     Packing Method: " + temp[0] + "\n");
+
+                            temp2 = temp.Substring(1, 2);
+                            report.Append("     Real/Complex: " + dataSampleType[temp2] + "\n");
+
+                            temp2 = temp.Substring(3, 5);
+                            report.Append("     Data Item Format: " + dataItemFormat[temp2] + "\n");
+
+                            report.Append("     Sample-Component Repeat Indicator: " + (temp[8].Equals('1') ? "0x1 True" : "0x0 False") + "\n");
+
+                            temp2 = temp.Substring(9, 3);
+                            report.Append("     Event-Tag Size: " + Convert.ToInt32(temp2, 2) + "\n");
+
+                            temp2 = temp.Substring(12, 4);
+                            report.Append("     Channel-Tag Size: " + Convert.ToInt32(temp2, 2) + "\n");
+
+                            temp2 = temp.Substring(20, 6);
+                            report.Append("     Item Packing Field Size: " + Convert.ToInt32(temp2, 2) + "\n");
+
+                            temp2 = temp.Substring(26, 6);
+                            report.Append("     Data Item Size: " + Convert.ToInt32(temp2, 2) + "\n");
+
+                            temp2 = temp.Substring(32, 16);
+                            report.Append("     Repeat Count: " + Convert.ToInt32(temp2, 2) + "\n");
+
+                            temp2 = temp.Substring(48);
+                            report.Append("     Vector Size: " + Convert.ToInt32(temp2, 2) + "\n");
+                        }
                     }
                     else if ((i == 17 || i == 18) && contextPackInd[i] == true)
                     {
                         // Words 11
                         temp = binWords.Substring(ind, 352);
                         ind += 352;
+
+                        if (i == 17)
+                        {
+                            // TODO -- Need Documentation
+                        }
+                        else if (i == 18)
+                        {
+                            // TODO -- Need Documentation
+                        }
                     }
                     else if ((i == 19 || i == 20) && contextPackInd[i] == true)
                     {
                         // Words 13
                         temp = binWords.Substring(ind, 416);
                         ind += 416;
+                        
+                        if (i == 19)
+                        {
+                            // TODO -- Need Documentation
+                        }
+                        else if (i == 20)
+                        {
+                            // TODO -- Need Documentation
+                        }
                     }
                     else if ((i == 22 || i == 23) && contextPackInd[i] == true)
                     {
                         // Words Variable
+                        if (i == 22)
+                        {
+                            // TODO -- Need Documentation
+                        }
+                        else if (i == 23)
+                        {
+                            // TODO -- Need Documentation
+                        }
                     }
                     temp = "";
                 }
@@ -381,6 +515,28 @@ namespace HOUNDDOG_GUI
             dataFormatCodes.Add("1011", "16-bit Unsigned Fixed Point");
             dataFormatCodes.Add("1100", "32-bit Unsigned Fixed Point");
             dataFormatCodes.Add("1101", "64-bit Unsigned Fixed Point");
+
+            dataSampleType.Add("00", "Real");
+            dataSampleType.Add("01", "Complex, Cartesian");
+            dataSampleType.Add("10", "Complex, Polar");
+
+            dataItemFormat.Add("00000", "Signed Fixed-Point");
+            dataItemFormat.Add("00001", "Signed VRT, 1-bit Exponent");
+            dataItemFormat.Add("00010", "Signed VRT, 2-bit Exponent");
+            dataItemFormat.Add("00011", "Signed VRT, 3-bit Exponent");
+            dataItemFormat.Add("00100", "Signed VRT, 4-bit Exponent");
+            dataItemFormat.Add("00101", "Signed VRT, 5-bit Exponent");
+            dataItemFormat.Add("00110", "Signed VRT, 6-bit Exponent");
+            dataItemFormat.Add("01101", "IEEE-754 Half-Precision Floating-Point");
+            dataItemFormat.Add("01110", "IEEE-754 Single-Precision Floating-Point");
+            dataItemFormat.Add("01111", "IEEE-754 Double-Precision Floating-Point");
+            dataItemFormat.Add("10000", "Unsigned Fixed-Point");
+            dataItemFormat.Add("10001", "Unsigned VRT, 1-bit Exponent");
+            dataItemFormat.Add("10010", "Unsigned VRT, 2-bit Exponent");
+            dataItemFormat.Add("10011", "Unsigned VRT, 3-bit Exponent");
+            dataItemFormat.Add("10100", "Unsigned VRT, 4-bit Exponent");
+            dataItemFormat.Add("10101", "Unsigned VRT, 5-bit Exponent");
+            dataItemFormat.Add("10110", "Unsigned VRT, 6-bit Exponent");
         }
     }
 }
