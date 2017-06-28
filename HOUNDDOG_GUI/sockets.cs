@@ -231,10 +231,12 @@ namespace HOUNDDOG_GUI
                 string report3 = string.Empty;
                 if (pack.PackType == false)
                 {
-                    contextData = s.SubArray(62, s.Length - 63);
+                    contextData = s.SubArray(62, s.Length - 62);
                     contextStr = formatContextData(contextData, true);
                     string conBin = formatContextData(contextData, false);
-                    report3 = pack.processContextData(conBin, formatBytestoBin(contextData.SubArray(4, contextData.Length - 5)));
+                    System.Diagnostics.Debug.WriteLine("Entire Context Data " + contextData.Length);
+                    string restOfCon = formatBytestoBin(contextData.SubArray(4, contextData.Length - 4));
+                    report3 = pack.processContextData(conBin, restOfCon);
 
                 }
 
@@ -305,15 +307,16 @@ namespace HOUNDDOG_GUI
                 frm.updatePacketNum("# of Packets: " + pack_count, pack_count);
                 frm.updateProgress();
             }
-            catch
+            catch (Exception e)
             {
-
+                System.Diagnostics.Debug.WriteLine(e.Message);
             }
             //labPacketCnt = Convert.ToString(this.pack_count);
         }
 
         public string formatBytestoBin(byte[] bin)
         {
+            System.Diagnostics.Debug.WriteLine("Bytes to Bin " + bin.Length);
             string val = "";
             string b1 = "";
             string temp = "";

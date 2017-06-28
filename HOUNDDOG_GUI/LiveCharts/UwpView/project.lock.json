@@ -15585,10 +15585,10 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\truearrow\\Documents\\Visual Studio 2017\\Projects\\HOUNDDOG\\HOUNDDOG_GUI\\LiveCharts\\UwpView\\UwpView.csproj",
+      "projectUniqueName": "C:\\Users\\truearrow\\Documents\\Visual Studio 2017\\Projects\\HOUNDDOG\\miniature-invention\\HOUNDDOG_GUI\\LiveCharts\\UwpView\\UwpView.csproj",
       "projectName": "UwpView",
-      "projectPath": "C:\\Users\\truearrow\\Documents\\Visual Studio 2017\\Projects\\HOUNDDOG\\HOUNDDOG_GUI\\LiveCharts\\UwpView\\UwpView.csproj",
-      "projectJsonPath": "C:\\Users\\truearrow\\Documents\\Visual Studio 2017\\Projects\\HOUNDDOG\\HOUNDDOG_GUI\\LiveCharts\\UwpView\\project.json",
+      "projectPath": "C:\\Users\\truearrow\\Documents\\Visual Studio 2017\\Projects\\HOUNDDOG\\miniature-invention\\HOUNDDOG_GUI\\LiveCharts\\UwpView\\UwpView.csproj",
+      "projectJsonPath": "C:\\Users\\truearrow\\Documents\\Visual Studio 2017\\Projects\\HOUNDDOG\\miniature-invention\\HOUNDDOG_GUI\\LiveCharts\\UwpView\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {

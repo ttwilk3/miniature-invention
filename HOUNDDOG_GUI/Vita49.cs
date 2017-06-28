@@ -215,6 +215,7 @@ namespace HOUNDDOG_GUI
             if (contextPackInd.Contains(true))
             {
                 binWords = binWords.Replace(" ", string.Empty);
+                System.Diagnostics.Debug.WriteLine("Binary Length " + binWords.Length);
                 string temp = "";
                 int ind = 0;
                 for (int i = 0; i < contextPackInd.Length; i++)
@@ -229,28 +230,54 @@ namespace HOUNDDOG_GUI
                         // Words 1
                         temp = binWords.Substring(ind, 32);
                         ind += 32;
-                        // 8 13 15 21
                         if (i == 1 || i == 9 || i == 12)
                         {
-                            string val = conversionToNums(temp);
+                            string val = conversionToNums(temp, true);
                             report.Append("Context Field " + i + " Value: " + val + "\n");
                         }
                         else if (i == 7)
                         {
                             string refLevel = temp.Substring(16, 9);
-                            string val = conversionToNums(refLevel);
-                            report.Append("Reference Level Value: " + val + "\n");
+                            string refLevelFrac = temp.Substring(25);
+
+                            string val1 = conversionToNums(refLevel, true);
+                            string val2 = conversionToNums(refLevelFrac, false);
+
+                            report.Append("Reference Level Value: " + val1 + "." + val2 + " dBm\n");
                         }
                         else if (i == 8)
                         {
-                            string gainS2 = temp.Substring(0, 9);
-                            string gainS1 = temp.Substring(16, 9);
+                            string gainS2int = temp.Substring(0, 9);
+                            string gainS1int = temp.Substring(16, 9);
+                            string gainS2frac = temp.Substring(9, 7);
+                            string gainS1frac = temp.Substring(25);
 
-                            string val1 = conversionToNums(gainS2);
-                            string val2 = conversionToNums(gainS1);
+                            string val1 = conversionToNums(gainS2int, true);
+                            string val2 = conversionToNums(gainS1int, true);
 
-                            report.Append("Stage 2 Gain Value: " + val1 + "\n");
-                            report.Append("Stage 1 Gain Value: " + val2 + "\n");
+                            string val3 = conversionToNums(gainS2frac, false);
+                            string val4 = conversionToNums(gainS1frac, false);
+
+                            report.Append("Stage 2 Gain Value: " + val1 + "." + val3 + " dB\n");
+                            report.Append("Stage 1 Gain Value: " + val2 + "." + val4 + " dB\n");
+                        }
+                        else if (i == 13)
+                        {
+                            string tempInt = temp.Substring(16, 9);
+                            string tempFrac = temp.Substring(25);
+
+                            string val1 = conversionToNums(tempInt, true);
+                            string val2 = conversionToNums(tempFrac, false);
+
+                            report.Append("Temperature: " + val1 + "." + val2 + " C\n");
+                        }
+                        else if (i == 15)
+                        {
+                            // Do Later See Table 5-4
+                        }
+                        else if (i == 21)
+                        {
+                            // Do Later -- Need Documentation
                         }
                        
                     }
@@ -283,11 +310,11 @@ namespace HOUNDDOG_GUI
             return report.ToString();
         }
 
-        public string conversionToNums(string binStr)
+        public string conversionToNums(string binStr, bool checkNeg)
         {
             string temp2 = "-";
             string val = "";
-            if (binStr[0].Equals('1') == true)
+            if (binStr[0].Equals('1') == true && checkNeg == true)
             {
                 string myNum = twosComplement(binStr);
                 string num = Convert.ToInt32(myNum, 2).ToString();
