@@ -12,6 +12,7 @@ using System.Data;
 using LiveCharts;
 using LiveCharts.Configurations;
 using LiveCharts.Wpf;
+using System.Windows.Media;
 
 namespace HOUNDDOG_GUI
 {
@@ -41,44 +42,8 @@ namespace HOUNDDOG_GUI
             updateComboBox();
             BindGrid();
 
-            var mapper = Mappers.Xy<MeasureModel>()
-                .X(model => model.DateTime.Ticks)   //use DateTime.Ticks as X
-                .Y(model => model.Value);           //use the value property as Y
-
-            //lets save the mapper globally.
-            Charting.For<MeasureModel>(mapper);
-
-            //the ChartValues property will store our values array
-            ChartValues = new ChartValues<MeasureModel>();
-            cartesianChart1.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Values = ChartValues,
-                    PointGeometrySize = 8,
-                    StrokeThickness = 4
-                }
-            };
-            cartesianChart1.AxisX.Add(new Axis
-            {
-                DisableAnimations = true,
-                LabelFormatter = value => new System.DateTime((long)value).ToString("mm:ss"),
-                Separator = new Separator
-                {
-                    Step = TimeSpan.FromSeconds(1).Ticks
-                }
-            });
-
-            SetAxisLimits(System.DateTime.Now);
-
-            //The next code simulates data changes every 500 ms
-            Timer = new System.Windows.Forms.Timer
-            {
-                Interval = 500
-            };
-            Timer.Tick += TimerOnTick;
-            R = new Random();
-            Timer.Start();
+            setupPacketCountChart();
+            setupDataPayloadChart();
         }
 
         public bool getVerboseValue()
@@ -212,6 +177,85 @@ namespace HOUNDDOG_GUI
 
             //lets only use the last 30 values
             if (ChartValues.Count > 30) ChartValues.RemoveAt(0);
+        }
+
+        public void setupPacketCountChart()
+        {
+            var mapper = Mappers.Xy<MeasureModel>()
+                .X(model => model.DateTime.Ticks)   //use DateTime.Ticks as X
+                .Y(model => model.Value);           //use the value property as Y
+
+            //lets save the mapper globally.
+            Charting.For<MeasureModel>(mapper);
+
+            //the ChartValues property will store our values array
+            ChartValues = new ChartValues<MeasureModel>();
+            cartesianChart1.Series = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Values = ChartValues,
+                    PointGeometrySize = 8,
+                    StrokeThickness = 4
+                }
+            };
+            cartesianChart1.AxisX.Add(new Axis
+            {
+                DisableAnimations = true,
+                LabelFormatter = value => new System.DateTime((long)value).ToString("mm:ss"),
+                Separator = new Separator
+                {
+                    Step = TimeSpan.FromSeconds(1).Ticks
+                }
+            });
+
+            SetAxisLimits(System.DateTime.Now);
+
+            //The next code simulates data changes every 500 ms
+            Timer = new System.Windows.Forms.Timer
+            {
+                Interval = 500
+            };
+            Timer.Tick += TimerOnTick;
+            R = new Random();
+            Timer.Start();
+        }
+
+        public void setupDataPayloadChart()
+        {
+            cartesianChart2.Series = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Series 1",
+                    Values = new ChartValues<double> {4, 6, 5, 2, 7}
+                }
+            };
+
+            cartesianChart2.AxisX.Add(new Axis
+            {
+                Title = "Time"
+            });
+
+            cartesianChart2.AxisY.Add(new Axis
+            {
+                Title = "Values"
+            });
+
+            //cartesianChart2.LegendLocation = LegendLocation.Right;
+
+            //modifying the series collection will animate and update the chart
+            //cartesianChart2.Series.Add(new LineSeries
+            //{
+            //    Values = new ChartValues<double> { 5, 3, 2, 4, 5 },
+            //    LineSmoothness = 0, //straight lines, 1 really smooth lines
+            //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
+            //    PointGeometrySize = 50,
+            //    PointForeground = System.Windows.Media.Brushes.Gray
+            //});
+
+            //modifying any series values will also animate and update the chart
+            //cartesianChart2.Series[2].Values.Add(5d);
         }
     }
 }

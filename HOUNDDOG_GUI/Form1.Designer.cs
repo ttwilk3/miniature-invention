@@ -43,6 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.verboseCheck = new System.Windows.Forms.CheckBox();
             this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
+            this.cartesianChart2 = new LiveCharts.WinForms.CartesianChart();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,11 +175,20 @@
             this.cartesianChart1.TabIndex = 13;
             this.cartesianChart1.Text = "cartesianChart1";
             // 
+            // cartesianChart2
+            // 
+            this.cartesianChart2.Location = new System.Drawing.Point(14, 411);
+            this.cartesianChart2.Name = "cartesianChart2";
+            this.cartesianChart2.Size = new System.Drawing.Size(1148, 240);
+            this.cartesianChart2.TabIndex = 14;
+            this.cartesianChart2.Text = "cartesianChart2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 405);
+            this.ClientSize = new System.Drawing.Size(1174, 675);
+            this.Controls.Add(this.cartesianChart2);
             this.Controls.Add(this.cartesianChart1);
             this.Controls.Add(this.verboseCheck);
             this.Controls.Add(this.label3);
@@ -218,6 +228,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox verboseCheck;
         private LiveCharts.WinForms.CartesianChart cartesianChart1;
+        private LiveCharts.WinForms.CartesianChart cartesianChart2;
     }
 }
 

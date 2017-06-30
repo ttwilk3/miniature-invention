@@ -58,6 +58,11 @@ namespace HOUNDDOG_GUI
             }
         }
 
+        public Vita49 VPacket
+        {
+            get { return pack; }
+        }
+
         public int DeviceInd
         {
             set { SelectedIndex = value; }
@@ -240,6 +245,28 @@ namespace HOUNDDOG_GUI
 
                 }
 
+                int payloadInd = 50; // Start after Stream ID
+                byte[] dataPayload;
+                List<int> myData = new List<int>();
+                if (pack.PackType == true)
+                {
+                    payloadInd += pack.classPres ? 8 : 0; // Class ID
+                    payloadInd += 4; // Integer Timestamp
+                    payloadInd += 8; // Fractional Timestamp
+
+                    if (pack.Trailer == true)
+                    {
+                        dataPayload = s.SubArray(payloadInd, s.Length - payloadInd - 4);
+                    }
+                    else
+                    {
+                        dataPayload = s.SubArray(payloadInd, s.Length - payloadInd);
+                    }
+
+                    myData = conversionToReals(dataPayload);
+
+                }
+
                 //packets.Add(new Packet(p.Caplength, p.Length, p.TimeStamp, src, dest));
                 table.Rows.Add(table.Rows.Count, p.Caplength, p.Length, p.TimeStamp, src, dest, pack.PackType ? "Data" : "Context", srcPort, destPort, streamID, pack.valVita);
                 //Console.WriteLine(table.Rows.Count);
@@ -312,6 +339,59 @@ namespace HOUNDDOG_GUI
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
             //labPacketCnt = Convert.ToString(this.pack_count);
+        }
+
+        public List<int> conversionToReals(byte[] data)
+        {
+            List<int> realData = new List<int>();
+            int val = 0;
+            string b1 = "";
+            string b2 = "";
+            string temp = "";
+            bool neg = false;
+
+            for (int i = 0; i < data.Length; i += 2)
+            {
+                if (i == data.Length - 1)
+                {
+                    break;
+                }
+
+                b1 = Convert.ToString(data[i], 2);
+                b2 = Convert.ToString(data[i], 2);
+                temp = "";
+                for (int j = 8 - b1.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b1;
+                b1 = temp;
+
+                temp = "";
+                for (int j = 8 - b2.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b2;
+                b2 = temp;
+                b1 += b2;
+
+                b1 = b1.Replace(" ", string.Empty);
+                if (b1[0].Equals('1') == true)
+                {
+                    string myNum = pack.twosComplement(b1);
+                    int num = Convert.ToInt32(myNum, 2);
+                    num *= -1;
+                    val = num;
+                }
+                else
+                {
+                    val = Convert.ToInt32(b1, 2);
+                }
+                realData.Add(val);
+            }
+
+            return realData;
         }
 
         public string formatBytestoBin(byte[] bin)
@@ -393,9 +473,9 @@ namespace HOUNDDOG_GUI
         public string formatStreamID(byte[] s)
         {
             string b1 = s[46].ToString("X");
-            string b2 = s[46].ToString("X");
-            string b3 = s[46].ToString("X");
-            string b4 = s[46].ToString("X");
+            string b2 = s[47].ToString("X");
+            string b3 = s[48].ToString("X");
+            string b4 = s[49].ToString("X");
 
             b1 = b1.Length == 1 ? "0" + b1 : b1;
             b2 = b2.Length == 1 ? "0" + b2 : b2;

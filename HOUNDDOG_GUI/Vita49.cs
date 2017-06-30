@@ -17,12 +17,19 @@ namespace HOUNDDOG_GUI
         bool trail = false;
         bool dataPack = false;
         bool validVita = false;
+        bool classIDPres = false;
         bool[] contextPackInd = new bool[24];
+        double sampRate = 0.0;
 
         public bool Trailer
         {
             get { return trail; }
             set { trail = value; }
+        }
+
+        public double SampleRate
+        {
+            get { return sampRate; }
         }
 
         public bool PackType
@@ -36,6 +43,11 @@ namespace HOUNDDOG_GUI
             get { return validVita; }
         }
 
+        public bool classPres
+        {
+            get { return classIDPres; }
+        }
+
         public Vita49()
         {
             setupDictionaries();
@@ -45,6 +57,7 @@ namespace HOUNDDOG_GUI
         {
             PackType = false;
             validVita = false;
+            classIDPres = false;
             StringBuilder report = new StringBuilder();
             report.Append("VRT Header: \n");
             try
@@ -56,18 +69,12 @@ namespace HOUNDDOG_GUI
                     report.Append("Type: 0x" + str.ToString() + " -- " + packetType[str.ToString()] + "\n");
 
                     report.Append((bin[4].Equals('1') ? "Class: 0x1 -- Class ID present.\n" : "Class: 0x0 -- Class ID not present.\n"));
+                    classIDPres = bin[4].Equals('1') ? true : false;
 
                     report.Append((bin[5].Equals('1') ? "Trailer: 0x1 -- Trailer is present.\n" : "Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.\n"));
-                    
-                    if (bin[5].Equals('1'))
-                    {
-                        trail = true;
-                        validVita = true;
-                    }
-                    else
-                    {
-                        validVita = false;
-                    }
+                    trail = bin[5].Equals('1') ? true : false;
+
+                    validVita = (classIDPres && trail) ? true : false;
 
                     str.Clear();
                     str.Append(bin.Substring(8, 2));
@@ -169,7 +176,7 @@ namespace HOUNDDOG_GUI
             string sub = bin.Substring(25);
             report.Append("Assoicated Context Packet Count: 0x" + sub + " -- Decimal " + Convert.ToInt32(sub.ToString().Replace(" ", string.Empty), 2).ToString() + "\n");
 
-            validVita = true;
+            validVita = (classIDPres && trail) ? true : false;
             return report.ToString();
         }
 
@@ -350,6 +357,7 @@ namespace HOUNDDOG_GUI
                             }
                             else if (i == 10)
                             {
+                                sampRate = 1 / Convert.ToDouble(val1 + "." + val2);
                                 report.Append("Sample Rate: " + value);
                             }
                         }
@@ -464,6 +472,19 @@ namespace HOUNDDOG_GUI
 
         public string twosComplement(string binStr)
         {
+            string temp1 = "";
+            for(int j = 0; j < binStr.Length; j++)
+            {
+                if (binStr[j].Equals('1'))
+                {
+                    temp1 += '0';
+                }
+                else
+                {
+                    temp1 += '1';
+                }
+            }
+            binStr = temp1;
             int num1 = Convert.ToInt32(binStr, 2);
             int num2 = Convert.ToInt32("0001", 2);
 
