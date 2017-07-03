@@ -44,6 +44,8 @@
             this.verboseCheck = new System.Windows.Forms.CheckBox();
             this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
             this.cartesianChart2 = new LiveCharts.WinForms.CartesianChart();
+            this.updateChart = new System.Windows.Forms.Button();
+            this.specDisplayEnable = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,11 +185,34 @@
             this.cartesianChart2.TabIndex = 14;
             this.cartesianChart2.Text = "cartesianChart2";
             // 
+            // updateChart
+            // 
+            this.updateChart.Location = new System.Drawing.Point(298, 378);
+            this.updateChart.Name = "updateChart";
+            this.updateChart.Size = new System.Drawing.Size(75, 23);
+            this.updateChart.TabIndex = 15;
+            this.updateChart.Text = "Refresh";
+            this.updateChart.UseVisualStyleBackColor = true;
+            this.updateChart.Click += new System.EventHandler(this.updateChart_Click);
+            // 
+            // specDisplayEnable
+            // 
+            this.specDisplayEnable.AutoSize = true;
+            this.specDisplayEnable.Location = new System.Drawing.Point(154, 384);
+            this.specDisplayEnable.Name = "specDisplayEnable";
+            this.specDisplayEnable.Size = new System.Drawing.Size(138, 17);
+            this.specDisplayEnable.TabIndex = 16;
+            this.specDisplayEnable.Text = "Enable Spectral Display";
+            this.specDisplayEnable.UseVisualStyleBackColor = true;
+            this.specDisplayEnable.CheckedChanged += new System.EventHandler(this.specDisplayEnable_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1174, 675);
+            this.Controls.Add(this.specDisplayEnable);
+            this.Controls.Add(this.updateChart);
             this.Controls.Add(this.cartesianChart2);
             this.Controls.Add(this.cartesianChart1);
             this.Controls.Add(this.verboseCheck);
@@ -229,6 +254,8 @@
         private System.Windows.Forms.CheckBox verboseCheck;
         private LiveCharts.WinForms.CartesianChart cartesianChart1;
         private LiveCharts.WinForms.CartesianChart cartesianChart2;
+        private System.Windows.Forms.Button updateChart;
+        private System.Windows.Forms.CheckBox specDisplayEnable;
     }
 }
 

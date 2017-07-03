@@ -224,7 +224,7 @@ namespace HOUNDDOG_GUI
             if (contextPackInd.Contains(true))
             {
                 binWords = binWords.Replace(" ", string.Empty);
-                System.Diagnostics.Debug.WriteLine("Binary Length " + binWords.Length);
+                //System.Diagnostics.Debug.WriteLine("Binary Length " + binWords.Length);
                 string temp = "";
                 int ind = 0;
                 for (int i = 0; i < contextPackInd.Length; i++)
@@ -328,10 +328,10 @@ namespace HOUNDDOG_GUI
                         // 11 14 16
                         if (i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 10)
                         {
-                            string freqInt = temp.Substring(0, 42);
-                            string freqFrac = temp.Substring(42);
+                            string freqInt = temp.Substring(0, 44);
+                            string freqFrac = temp.Substring(44);
 
-                            string val1 = conversionToNums(freqInt, true);
+                            string val1 = conversionToNums(freqInt, false);
                             string val2 = conversionToNums(freqFrac, false);
 
                             string value = val1 + "." + val2 + " Hz\n";
@@ -459,13 +459,13 @@ namespace HOUNDDOG_GUI
             if (binStr[0].Equals('1') == true && checkNeg == true)
             {
                 string myNum = twosComplement(binStr);
-                string num = Convert.ToInt32(myNum, 2).ToString();
+                string num = Convert.ToInt64(myNum, 2).ToString();
                 temp2 += num;
                 val = temp2;
             }
             else
             {
-                val = Convert.ToInt32(binStr, 2).ToString();
+                val = Convert.ToInt64(binStr, 2).ToString();
             }
             return val;
         }
@@ -485,8 +485,8 @@ namespace HOUNDDOG_GUI
                 }
             }
             binStr = temp1;
-            int num1 = Convert.ToInt32(binStr, 2);
-            int num2 = Convert.ToInt32("0001", 2);
+            long num1 = Convert.ToInt64(binStr, 2);
+            long num2 = Convert.ToInt64("0001", 2);
 
             string twosComp = Convert.ToString(num1 + num2, 2);
             string temp = "";

@@ -37,6 +37,7 @@ namespace HOUNDDOG_GUI
         List<Packet> packets = new List<Packet>();
         DataTable table = new DataTable();
         string fileL = System.IO.Directory.GetCurrentDirectory() + @"\data.txt";
+        List<double> dataPayNormalized = new List<double>();
         //string fileL = @"C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG\bin\Debug\data.txt";
 
 
@@ -56,6 +57,12 @@ namespace HOUNDDOG_GUI
                 Source = src;
                 Destination = dest;
             }
+        }
+
+        public List<double> NormalizedPayload
+        {
+            get { return dataPayNormalized; }
+            set { dataPayNormalized = value; }
         }
 
         public Vita49 VPacket
@@ -239,7 +246,7 @@ namespace HOUNDDOG_GUI
                     contextData = s.SubArray(62, s.Length - 62);
                     contextStr = formatContextData(contextData, true);
                     string conBin = formatContextData(contextData, false);
-                    System.Diagnostics.Debug.WriteLine("Entire Context Data " + contextData.Length);
+                    //System.Diagnostics.Debug.WriteLine("Entire Context Data " + contextData.Length);
                     string restOfCon = formatBytestoBin(contextData.SubArray(4, contextData.Length - 4));
                     report3 = pack.processContextData(conBin, restOfCon);
 
@@ -265,6 +272,11 @@ namespace HOUNDDOG_GUI
 
                     myData = conversionToReals(dataPayload);
 
+                    double min = 1.0 * myData.Min();
+                    double max = 1.0 * myData.Max();
+                    dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>();
+
+                    //frm.updatePayloadChart(newList);
                 }
 
                 //packets.Add(new Packet(p.Caplength, p.Length, p.TimeStamp, src, dest));
@@ -396,7 +408,7 @@ namespace HOUNDDOG_GUI
 
         public string formatBytestoBin(byte[] bin)
         {
-            System.Diagnostics.Debug.WriteLine("Bytes to Bin " + bin.Length);
+            //System.Diagnostics.Debug.WriteLine("Bytes to Bin " + bin.Length);
             string val = "";
             string b1 = "";
             string temp = "";

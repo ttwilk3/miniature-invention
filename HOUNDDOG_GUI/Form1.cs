@@ -13,6 +13,7 @@ using LiveCharts;
 using LiveCharts.Configurations;
 using LiveCharts.Wpf;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace HOUNDDOG_GUI
 {
@@ -44,6 +45,13 @@ namespace HOUNDDOG_GUI
 
             setupPacketCountChart();
             setupDataPayloadChart();
+
+            updateChart.Visible = false;
+            cartesianChart2.Visible = false;
+            updateChart.Enabled = false;
+            cartesianChart2.Enabled = false;
+
+            Height -= 260;
         }
 
         public bool getVerboseValue()
@@ -123,6 +131,15 @@ namespace HOUNDDOG_GUI
                 running = true;
                 sock.DeviceInd = comboBox1.SelectedIndex;
                 sock.Start();
+
+                if (specDisplayEnable.Checked = true)
+                {
+                    if (sock.NormalizedPayload.Count > 0)
+                    {
+                        updatePayloadChart(sock.NormalizedPayload);
+                    }
+                    timer();
+                }
             }
         }
 
@@ -223,14 +240,14 @@ namespace HOUNDDOG_GUI
 
         public void setupDataPayloadChart()
         {
-            cartesianChart2.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Title = "Series 1",
-                    Values = new ChartValues<double> {4, 6, 5, 2, 7}
-                }
-            };
+            //cartesianChart2.Series = new SeriesCollection
+            //{
+            //    new LineSeries
+            //    {
+            //        Title = "Series 1",
+            //        Values = new ChartValues<double> {4, 6, 5, 2, 7}
+            //    }
+            //};
 
             cartesianChart2.AxisX.Add(new Axis
             {
@@ -239,9 +256,12 @@ namespace HOUNDDOG_GUI
 
             cartesianChart2.AxisY.Add(new Axis
             {
-                Title = "Values"
+                Title = "Voltage"
             });
 
+            SetAxisLimitsPayload();
+
+            cartesianChart2.DisableAnimations = true;
             //cartesianChart2.LegendLocation = LegendLocation.Right;
 
             //modifying the series collection will animate and update the chart
@@ -256,6 +276,103 @@ namespace HOUNDDOG_GUI
 
             //modifying any series values will also animate and update the chart
             //cartesianChart2.Series[2].Values.Add(5d);
+        }
+
+        public void updatePayloadChart(List<double> myData)
+        {
+            if (myData.Count > 0)
+            {
+                //cartesianChart2.AxisX[0].MaxValue = myData.Count * sock.VPacket.SampleRate;
+                //cartesianChart2.AxisX[0].MinValue = sock.VPacket.SampleRate;
+
+                if (cartesianChart2.Series.Count > 0)
+                {
+                    cartesianChart2.Series.Clear();
+                }
+
+                ChartValues<double> temp = new ChartValues<double>();
+
+                foreach (double d in myData)
+                {
+                    temp.Add(d);
+                }
+
+                cartesianChart2.Series = new SeriesCollection
+                {
+                    new LineSeries
+                    {
+                        Title = "Data",
+                        Values = temp,
+                        LineSmoothness = 1, //straight lines, 1 really smooth lines
+                        PointGeometrySize = 5
+                    }
+                };
+            }
+        }
+
+        private void SetAxisLimitsPayload()
+        {
+            cartesianChart2.AxisY[0].MaxValue = 1;
+            cartesianChart2.AxisY[0].MinValue = 0;
+        }
+
+        private void updateChart_Click(object sender, EventArgs e)
+        {
+            if (sock.NormalizedPayload.Count > 0)
+            {
+                updatePayloadChart(sock.NormalizedPayload);
+            }
+            timer();
+        }
+
+        private void InvokeUI(Action a)
+        {
+            try
+            {
+                this.BeginInvoke(new MethodInvoker(a));
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void timer()
+        {
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(function);
+            timer.Interval = 500;
+            timer.Enabled = true;
+            timer.Start();
+        }
+
+        private void function(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            InvokeUI(() => {
+                updatePayloadChart(sock.NormalizedPayload);
+            });
+        }
+
+        private void specDisplayEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (specDisplayEnable.Checked == true)
+            {
+                //updateChart.Visible = true;
+                cartesianChart2.Visible = true;
+                //updateChart.Enabled = true;
+                cartesianChart2.Enabled = true;
+
+                Height += 260;
+            }
+            else
+            {
+                //updateChart.Visible = false;
+                cartesianChart2.Visible = false;
+                //updateChart.Enabled = false;
+                cartesianChart2.Enabled = false;
+
+                Height -= 260;
+            }
         }
     }
 }
