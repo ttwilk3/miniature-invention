@@ -68,10 +68,10 @@ namespace HOUNDDOG_GUI
                 {
                     report.Append("Type: 0x" + str.ToString() + " -- " + packetType[str.ToString()] + "\n");
 
-                    report.Append((bin[4].Equals('1') ? "Class: 0x1 -- Class ID present.\n" : "Class: 0x0 -- Class ID not present.\n"));
+                    report.Append((bin[4].Equals('1') ? "Class: 0x1 -- Class ID present.\n" : "Class: 0x0 -- Class ID not present. -- CLASS ID MUST BE PRESENT IN VITA-49A\n"));
                     classIDPres = bin[4].Equals('1') ? true : false;
 
-                    report.Append((bin[5].Equals('1') ? "Trailer: 0x1 -- Trailer is present.\n" : "Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.\n"));
+                    report.Append((bin[5].Equals('1') ? "Trailer: 0x1 -- Trailer is present.\n" : "Trailer: 0x0 -- Trailer is not present. -- TRAILER MUST BE PRESENT IN VITA-49A.\n"));
                     trail = bin[5].Equals('1') ? true : false;
 
                     validVita = (classIDPres && trail) ? true : false;
