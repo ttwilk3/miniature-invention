@@ -144,6 +144,25 @@ Coming soon...
 -----------------------------------------
 
 ### Example Invalid Context Packet:
-Coming soon...
+-----------------------------------------
+	Content of packet : 
+	    Packet #: 0
+		Caplength: 47
+		Length   : 47
+		Timestamp: Wednesday, July 5, 2017 3:44:20 PM
+	    Source: 192.168.0.103
+	    Destination: 192.168.0.142
+	    Source Port: 25573
+	    Destination Port: 202
+	    VRT Header: 0x
+	    Stream ID: 
+	    Packet Type: Context
+
+
+	Context Packet Data:
+	0xh
+
+
+-----------------------------------------
 
 Credit to [beto-rodriguez](https://github.com/beto-rodriguez) for the [Live Chart Libraries](https://github.com/beto-rodriguez/Live-Charts).
