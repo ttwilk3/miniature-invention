@@ -27,6 +27,7 @@ Get more documentation for V49a format.
 # Example Parsed Packet Data:
 
 # Example Valid Data Packet:
+Coming soon...
 
 # Example Invalid Data Packet:
 -----------------------------------------
@@ -144,5 +145,6 @@ Data Packet Payload Format:
 -----------------------------------------
 
 # Example Invalid Context Packet:
+Coming soon...
 
 Credit to https://github.com/beto-rodriguez/Live-Charts for the Live Chart Libraries.
