@@ -38,3 +38,6 @@ C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-inve
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.pdb
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.Form1.resources
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\LiveCharts.Geared.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\MetroFramework.Design.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\MetroFramework.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\MetroFramework.Fonts.dll

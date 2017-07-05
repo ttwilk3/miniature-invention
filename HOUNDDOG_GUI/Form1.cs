@@ -15,10 +15,12 @@ using LiveCharts.Wpf;
 using System.Windows.Media;
 using System.Windows.Threading;
 using LiveCharts.Geared;
+using MetroFramework.Forms;
+using MetroFramework.Controls;
 
 namespace HOUNDDOG_GUI
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroForm
     {
         sockets sock;
         bool running = false;
@@ -50,15 +52,13 @@ namespace HOUNDDOG_GUI
 
             setupPacketCountChart();
             setupDataPayloadChart();
-
-            updateChart.Visible = false;
-            updateChart.Enabled = false;
+            
             cartesianChart2.Visible = false;
             cartesianChart2.Enabled = false;
             refreshRate.Visible = false;
             refreshRateSlider.Visible = false;
 
-            Height -= 260;
+            Height -= 250;
         }
 
         public int DataPack
@@ -97,22 +97,8 @@ namespace HOUNDDOG_GUI
                 dataGridView1.Refresh();
                 running = false;
                 reset = true;
-                progressBar1.Value = 100;
                 sock.CloseConnection();
             }
-        }
-
-        public void updateProgress()
-        {
-            if (progressBar1.Value >= 100)
-            {
-                //Thread.Sleep(500);
-                progressBar1.Value = 0;
-            }
-
-            if (rand.Next(0, 101) < 30)
-                progressBar1.Value += 1;
-
         }
 
         private void updateComboBox()
@@ -130,7 +116,7 @@ namespace HOUNDDOG_GUI
             dataGridView1.DataSource = sBind;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
             bool badInp = false;
             packetLimit = 0;
@@ -179,10 +165,9 @@ namespace HOUNDDOG_GUI
             dataGridView1.Refresh();
             running = false;
             sock.CloseConnection();
-            progressBar1.Value = 100;
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void clearButton_Click(object sender, EventArgs e)
         {
             //BindGrid();
             //dataGridView1.Refresh();
@@ -351,15 +336,6 @@ namespace HOUNDDOG_GUI
             cartesianChart2.AxisY[0].MinValue = 0;
         }
 
-        private void updateChart_Click(object sender, EventArgs e)
-        {
-            //if (sock.NormalizedPayload.Count > 0)
-            //{
-            //    updatePayloadChart(sock.NormalizedPayload);
-            //}
-            //timerStart();
-        }
-
         private void InvokeUI(Action a)
         {
             try
@@ -402,7 +378,7 @@ namespace HOUNDDOG_GUI
 
                 timerStart();
 
-                Height += 260;
+                Height += 250;
             }
             else
             {
@@ -415,7 +391,7 @@ namespace HOUNDDOG_GUI
 
                 timer.Stop();
 
-                Height -= 260;
+                Height -= 250;
             }
         }
 
