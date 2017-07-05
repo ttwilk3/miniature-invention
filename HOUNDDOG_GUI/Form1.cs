@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using LiveCharts.Geared;
 using MetroFramework.Forms;
 using MetroFramework.Controls;
+using MetroFramework;
 
 namespace HOUNDDOG_GUI
 {
@@ -125,14 +126,14 @@ namespace HOUNDDOG_GUI
                 bool result = Int32.TryParse(textBox1.Text, out packetLimit);
                 if (result != true)
                 {
-                    MessageBox.Show("Please enter a valid integer. Up to 1M packets.");
+                    MetroMessageBox.Show(this, "Please enter a valid integer. Up to 1M packets.");
                     badInp = true;
                 }
                 else
                 {
                     if (packetLimit > 1000000)
                     {
-                        MessageBox.Show("Please enter a valid integer. Up to 1M packets.");
+                        MetroMessageBox.Show(this, "Please enter a valid integer. Up to 1M packets.");
                         badInp = true;
                     }
                     else
@@ -399,6 +400,12 @@ namespace HOUNDDOG_GUI
         {
             timer.Interval = refreshRateSlider.Value;
             refreshRate.Text = "Refresh Rate: " + refreshRateSlider.Value + " ms";
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            running = false;
+            sock.CloseConnection();
         }
     }
 }
