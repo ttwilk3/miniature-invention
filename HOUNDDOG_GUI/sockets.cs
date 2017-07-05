@@ -255,7 +255,7 @@ namespace HOUNDDOG_GUI
                 int payloadInd = 50; // Start after Stream ID
                 byte[] dataPayload;
                 List<int> myData = new List<int>();
-                if (pack.PackType == true)
+                if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true)
                 {
                     payloadInd += pack.classPres ? 8 : 0; // Class ID
                     payloadInd += 4; // Integer Timestamp
@@ -344,7 +344,7 @@ namespace HOUNDDOG_GUI
                 //Console.Clear();
                 //Console.WriteLine("# of Packets: " + labPacketCnt);
                 frm.updatePacketNum("# of Packets: " + pack_count, pack_count);
-                frm.updateProgress();
+                //frm.updateProgress();
             }
             catch (Exception e)
             {

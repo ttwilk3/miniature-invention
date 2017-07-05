@@ -46,7 +46,10 @@
             this.cartesianChart2 = new LiveCharts.WinForms.CartesianChart();
             this.updateChart = new System.Windows.Forms.Button();
             this.specDisplayEnable = new System.Windows.Forms.CheckBox();
+            this.refreshRateSlider = new System.Windows.Forms.TrackBar();
+            this.refreshRate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshRateSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // startButton
@@ -138,10 +141,12 @@
             // 
             // progressBar1
             // 
+            this.progressBar1.Enabled = false;
             this.progressBar1.Location = new System.Drawing.Point(109, 110);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(1053, 23);
             this.progressBar1.TabIndex = 9;
+            this.progressBar1.Visible = false;
             // 
             // textBox1
             // 
@@ -187,7 +192,7 @@
             // 
             // updateChart
             // 
-            this.updateChart.Location = new System.Drawing.Point(298, 378);
+            this.updateChart.Location = new System.Drawing.Point(1087, 378);
             this.updateChart.Name = "updateChart";
             this.updateChart.Size = new System.Drawing.Size(75, 23);
             this.updateChart.TabIndex = 15;
@@ -206,11 +211,33 @@
             this.specDisplayEnable.UseVisualStyleBackColor = true;
             this.specDisplayEnable.CheckedChanged += new System.EventHandler(this.specDisplayEnable_CheckedChanged);
             // 
+            // refreshRateSlider
+            // 
+            this.refreshRateSlider.Location = new System.Drawing.Point(298, 378);
+            this.refreshRateSlider.Maximum = 5000;
+            this.refreshRateSlider.Minimum = 1;
+            this.refreshRateSlider.Name = "refreshRateSlider";
+            this.refreshRateSlider.Size = new System.Drawing.Size(272, 45);
+            this.refreshRateSlider.TabIndex = 17;
+            this.refreshRateSlider.Value = 150;
+            this.refreshRateSlider.Scroll += new System.EventHandler(this.refreshRateSlider_Scroll);
+            // 
+            // refreshRate
+            // 
+            this.refreshRate.AutoSize = true;
+            this.refreshRate.Location = new System.Drawing.Point(576, 383);
+            this.refreshRate.Name = "refreshRate";
+            this.refreshRate.Size = new System.Drawing.Size(110, 13);
+            this.refreshRate.TabIndex = 18;
+            this.refreshRate.Text = "Refresh Rate: 150 ms";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1174, 675);
+            this.Controls.Add(this.refreshRate);
+            this.Controls.Add(this.refreshRateSlider);
             this.Controls.Add(this.specDisplayEnable);
             this.Controls.Add(this.updateChart);
             this.Controls.Add(this.cartesianChart2);
@@ -231,6 +258,7 @@
             this.Name = "Form1";
             this.Text = "Vita-49 Parser";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshRateSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,6 +284,8 @@
         private LiveCharts.WinForms.CartesianChart cartesianChart2;
         private System.Windows.Forms.Button updateChart;
         private System.Windows.Forms.CheckBox specDisplayEnable;
+        private System.Windows.Forms.TrackBar refreshRateSlider;
+        private System.Windows.Forms.Label refreshRate;
     }
 }
 

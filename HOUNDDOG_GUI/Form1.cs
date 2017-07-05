@@ -14,6 +14,7 @@ using LiveCharts.Configurations;
 using LiveCharts.Wpf;
 using System.Windows.Media;
 using System.Windows.Threading;
+using LiveCharts.Geared;
 
 namespace HOUNDDOG_GUI
 {
@@ -26,6 +27,7 @@ namespace HOUNDDOG_GUI
         int packetLimit;
         Random rand = new Random();
         int prevPackCount = 0;
+        System.Timers.Timer timer = new System.Timers.Timer();
 
         public class MeasureModel
         {
@@ -50,6 +52,8 @@ namespace HOUNDDOG_GUI
             cartesianChart2.Visible = false;
             updateChart.Enabled = false;
             cartesianChart2.Enabled = false;
+            refreshRate.Visible = false;
+            refreshRateSlider.Visible = false;
 
             Height -= 260;
         }
@@ -57,6 +61,11 @@ namespace HOUNDDOG_GUI
         public bool getVerboseValue()
         {
             return verboseCheck.Checked;
+        }
+
+        public bool getSpectralDisplayEnableValue()
+        {
+            return specDisplayEnable.Checked;
         }
 
         public void updatePacketNum(string s, long num)
@@ -132,13 +141,13 @@ namespace HOUNDDOG_GUI
                 sock.DeviceInd = comboBox1.SelectedIndex;
                 sock.Start();
 
-                if (specDisplayEnable.Checked = true)
+                if (specDisplayEnable.Checked == true)
                 {
                     if (sock.NormalizedPayload.Count > 0)
                     {
                         updatePayloadChart(sock.NormalizedPayload);
                     }
-                    timer();
+                    timerStart();
                 }
             }
         }
@@ -170,7 +179,8 @@ namespace HOUNDDOG_GUI
             }
         }
 
-        public ChartValues<MeasureModel> ChartValues { get; set; }
+        public GearedValues<MeasureModel> ChartValues { get; set; }
+        //public ChartValues<MeasureModel> ChartValues { get; set; }
         public System.Windows.Forms.Timer Timer { get; set; }
         public Random R { get; set; }
 
@@ -206,7 +216,9 @@ namespace HOUNDDOG_GUI
             Charting.For<MeasureModel>(mapper);
 
             //the ChartValues property will store our values array
-            ChartValues = new ChartValues<MeasureModel>();
+            ChartValues = new GearedValues<MeasureModel>();
+            ChartValues.WithQuality(Quality.Low);
+            //ChartValues = new ChartValues<MeasureModel>();
             cartesianChart1.Series = new SeriesCollection
             {
                 new LineSeries
@@ -290,7 +302,9 @@ namespace HOUNDDOG_GUI
                     cartesianChart2.Series.Clear();
                 }
 
-                ChartValues<double> temp = new ChartValues<double>();
+                GearedValues<double> temp = new GearedValues<double>();
+                temp.WithQuality(Quality.Low);
+                //ChartValues<double> temp = new ChartValues<double>();
 
                 foreach (double d in myData)
                 {
@@ -322,7 +336,7 @@ namespace HOUNDDOG_GUI
             {
                 updatePayloadChart(sock.NormalizedPayload);
             }
-            timer();
+            timerStart();
         }
 
         private void InvokeUI(Action a)
@@ -337,13 +351,13 @@ namespace HOUNDDOG_GUI
             }
         }
 
-        private void timer()
+        private void timerStart()
         {
-            System.Timers.Timer timer = new System.Timers.Timer();
             timer.Elapsed += new System.Timers.ElapsedEventHandler(function);
-            timer.Interval = 500;
+            timer.Interval = refreshRateSlider.Value;
             timer.Enabled = true;
             timer.Start();
+            refreshRate.Text = "Refresh Rate: " + refreshRateSlider.Value + " ms";
         }
 
         private void function(object sender, System.Timers.ElapsedEventArgs e)
@@ -361,6 +375,10 @@ namespace HOUNDDOG_GUI
                 cartesianChart2.Visible = true;
                 //updateChart.Enabled = true;
                 cartesianChart2.Enabled = true;
+                refreshRate.Visible = true;
+                refreshRateSlider.Visible = true;
+
+                timerStart();
 
                 Height += 260;
             }
@@ -370,9 +388,19 @@ namespace HOUNDDOG_GUI
                 cartesianChart2.Visible = false;
                 //updateChart.Enabled = false;
                 cartesianChart2.Enabled = false;
+                refreshRate.Visible = false;
+                refreshRateSlider.Visible = false;
+
+                timer.Stop();
 
                 Height -= 260;
             }
+        }
+
+        private void refreshRateSlider_Scroll(object sender, EventArgs e)
+        {
+            timer.Interval = refreshRateSlider.Value;
+            refreshRate.Text = "Refresh Rate: " + refreshRateSlider.Value + " ms";
         }
     }
 }

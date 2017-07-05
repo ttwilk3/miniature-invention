@@ -1858,200 +1858,6 @@
             Gets or sets a function to format the label for the axis
             </summary>
         </member>
-        <member name="T:LiveCharts.Definitions.Charts.IWindowAxisView">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:LiveCharts.Definitions.Charts.IAxisView">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.UpdateTitle(LiveCharts.Charts.ChartCore,System.Double)">
-            <summary>
-            Updates the title.
-            </summary>
-            <param name="chart">The chart.</param>
-            <param name="rotationAngle">The rotation angle.</param>
-            <returns></returns>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.SetTitleTop(System.Double)">
-            <summary>
-            Sets the title top.
-            </summary>
-            <param name="value">The value.</param>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.SetTitleLeft(System.Double)">
-            <summary>
-            Sets the title left.
-            </summary>
-            <param name="value">The value.</param>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.GetTitleLeft">
-            <summary>
-            Gets the title left.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.GetTileTop">
-            <summary>
-            Gets the tile top.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.GetLabelSize">
-            <summary>
-            Gets the size of the label.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.AsCoreElement(LiveCharts.Charts.ChartCore,LiveCharts.AxisOrientation)">
-            <summary>
-            Ases the core element.
-            </summary>
-            <param name="chart">The chart.</param>
-            <param name="source">The source.</param>
-            <returns></returns>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.RenderSeparator(LiveCharts.SeparatorElementCore,LiveCharts.Charts.ChartCore)">
-            <summary>
-            Renders the separator.
-            </summary>
-            <param name="model">The model.</param>
-            <param name="chart">The chart.</param>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.Clean">
-            <summary>
-            Cleans this instance.
-            </summary>
-        </member>
-        <member name="M:LiveCharts.Definitions.Charts.IAxisView.SetRange(System.Double,System.Double)">
-            <summary>
-            Sets the range.
-            </summary>
-            <param name="min">The minimum.</param>
-            <param name="max">The maximum.</param>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.Model">
-            <summary>
-            Gets or sets the model.
-            </summary>
-            <value>
-            The model.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.DisableAnimations">
-            <summary>
-            Gets or sets a value indicating whether [disable animations].
-            </summary>
-            <value>
-              <c>true</c> if [disable animations]; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.ShowLabels">
-            <summary>
-            Gets or sets a value indicating whether [show labels].
-            </summary>
-            <value>
-              <c>true</c> if [show labels]; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.MaxValue">
-            <summary>
-            Gets or sets the maximum value.
-            </summary>
-            <value>
-            The maximum value.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.MinValue">
-            <summary>
-            Gets or sets the minimum value.
-            </summary>
-            <value>
-            The minimum value.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.MinRange">
-            <summary>
-            Gets or sets the minimum range.
-            </summary>
-            <value>
-            The minimum range.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.MaxRange">
-            <summary>
-            Gets or sets the maximum range.
-            </summary>
-            <value>
-            The maximum range.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.LabelsRotation">
-            <summary>
-            Gets or sets the labels rotation.
-            </summary>
-            <value>
-            The labels rotation.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.IsMerged">
-            <summary>
-            Gets or sets a value indicating whether this instance is merged.
-            </summary>
-            <value>
-              <c>true</c> if this instance is merged; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.Unit">
-            <summary>
-            Gets or sets the bar unit.
-            </summary>
-            <value>
-            The bar unit.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.BarUnit">
-            <summary>
-            Gets or sets the bar unit.
-            </summary>
-            <value>
-            The bar unit.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.PreviousMaxValue">
-            <summary>
-            Gets the previous maximum value.
-            </summary>
-            <value>
-            The previous maximum value.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.PreviousMinValue">
-            <summary>
-            Gets the previous minimum value.
-            </summary>
-            <value>
-            The previous minimum value.
-            </value>
-        </member>
-        <member name="P:LiveCharts.Definitions.Charts.IAxisView.AxisOrientation">
-            <summary>
-            Gets the axis orientation.
-            </summary>
-            <value>
-            The axis orientation.
-            </value>
-        </member>
-        <member name="T:LiveCharts.FinancialDelegate">
-            <summary>
-            Defines a financial coloring rule delegate
-            </summary>
-            <param name="current">The current point</param>
-            <param name="prior">The previous point</param>
-        </member>
         <member name="T:LiveCharts.DateAxisWindows">
             <summary>
             
@@ -2808,6 +2614,188 @@
               <c>true</c> if [data label]; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="T:LiveCharts.Definitions.Charts.IAxisView">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.UpdateTitle(LiveCharts.Charts.ChartCore,System.Double)">
+            <summary>
+            Updates the title.
+            </summary>
+            <param name="chart">The chart.</param>
+            <param name="rotationAngle">The rotation angle.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.SetTitleTop(System.Double)">
+            <summary>
+            Sets the title top.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.SetTitleLeft(System.Double)">
+            <summary>
+            Sets the title left.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.GetTitleLeft">
+            <summary>
+            Gets the title left.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.GetTileTop">
+            <summary>
+            Gets the tile top.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.GetLabelSize">
+            <summary>
+            Gets the size of the label.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.AsCoreElement(LiveCharts.Charts.ChartCore,LiveCharts.AxisOrientation)">
+            <summary>
+            Ases the core element.
+            </summary>
+            <param name="chart">The chart.</param>
+            <param name="source">The source.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.RenderSeparator(LiveCharts.SeparatorElementCore,LiveCharts.Charts.ChartCore)">
+            <summary>
+            Renders the separator.
+            </summary>
+            <param name="model">The model.</param>
+            <param name="chart">The chart.</param>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.Clean">
+            <summary>
+            Cleans this instance.
+            </summary>
+        </member>
+        <member name="M:LiveCharts.Definitions.Charts.IAxisView.SetRange(System.Double,System.Double)">
+            <summary>
+            Sets the range.
+            </summary>
+            <param name="min">The minimum.</param>
+            <param name="max">The maximum.</param>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.Model">
+            <summary>
+            Gets or sets the model.
+            </summary>
+            <value>
+            The model.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.DisableAnimations">
+            <summary>
+            Gets or sets a value indicating whether [disable animations].
+            </summary>
+            <value>
+              <c>true</c> if [disable animations]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.ShowLabels">
+            <summary>
+            Gets or sets a value indicating whether [show labels].
+            </summary>
+            <value>
+              <c>true</c> if [show labels]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.MaxValue">
+            <summary>
+            Gets or sets the maximum value.
+            </summary>
+            <value>
+            The maximum value.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.MinValue">
+            <summary>
+            Gets or sets the minimum value.
+            </summary>
+            <value>
+            The minimum value.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.MinRange">
+            <summary>
+            Gets or sets the minimum range.
+            </summary>
+            <value>
+            The minimum range.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.MaxRange">
+            <summary>
+            Gets or sets the maximum range.
+            </summary>
+            <value>
+            The maximum range.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.LabelsRotation">
+            <summary>
+            Gets or sets the labels rotation.
+            </summary>
+            <value>
+            The labels rotation.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.IsMerged">
+            <summary>
+            Gets or sets a value indicating whether this instance is merged.
+            </summary>
+            <value>
+              <c>true</c> if this instance is merged; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.Unit">
+            <summary>
+            Gets or sets the bar unit.
+            </summary>
+            <value>
+            The bar unit.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.BarUnit">
+            <summary>
+            Gets or sets the bar unit.
+            </summary>
+            <value>
+            The bar unit.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.PreviousMaxValue">
+            <summary>
+            Gets the previous maximum value.
+            </summary>
+            <value>
+            The previous maximum value.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.PreviousMinValue">
+            <summary>
+            Gets the previous minimum value.
+            </summary>
+            <value>
+            The previous minimum value.
+            </value>
+        </member>
+        <member name="P:LiveCharts.Definitions.Charts.IAxisView.AxisOrientation">
+            <summary>
+            Gets the axis orientation.
+            </summary>
+            <value>
+            The axis orientation.
+            </value>
+        </member>
         <member name="T:LiveCharts.Definitions.Charts.ICartesianChart">
             <summary>
             
@@ -3119,6 +3107,11 @@
             </value>
         </member>
         <member name="T:LiveCharts.Definitions.Charts.IDateAxisView">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LiveCharts.Definitions.Charts.IWindowAxisView">
             <summary>
             
             </summary>
@@ -3540,6 +3533,17 @@
             The delta y.
             </value>
         </member>
+        <member name="T:LiveCharts.Definitions.Series.IAreaPoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:LiveCharts.Definitions.Series.IAreaPoint.GetPointDiameter">
+            <summary>
+            Gets the point diameter.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LiveCharts.Definitions.Series.ICartesianSeries">
             <summary>
             
@@ -3848,17 +3852,6 @@
             The push out.
             </value>
         </member>
-        <member name="T:LiveCharts.Definitions.Series.IAreaPoint">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:LiveCharts.Definitions.Series.IAreaPoint.GetPointDiameter">
-            <summary>
-            Gets the point diameter.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:LiveCharts.Definitions.Series.IRowSeriesView">
             <summary>
             
@@ -3983,6 +3976,13 @@
             </summary>
             <seealso cref="T:LiveCharts.Definitions.Series.ILineSeriesView"/>
             <seealso cref="T:LiveCharts.Definitions.Series.IStackModelableSeriesView"/>
+        </member>
+        <member name="T:LiveCharts.FinancialDelegate">
+            <summary>
+            Defines a financial coloring rule delegate
+            </summary>
+            <param name="current">The current point</param>
+            <param name="prior">The previous point</param>
         </member>
         <member name="T:LiveCharts.Dtos.BezierData">
             <summary>
@@ -4654,11 +4654,6 @@
             <param name="oldItems">The old items.</param>
             <param name="newItems">The new items.</param>
         </member>
-        <member name="T:LiveCharts.Helpers.PeriodUnits">
-            <summary>
-            Defines the interval on which earch of the charts bars is based
-            </summary>
-        </member>
         <member name="T:LiveCharts.IObservableChartPoint">
             <summary>
             
@@ -4813,6 +4808,11 @@
         <member name="F:LiveCharts.PanningOptions.Xy">
             <summary>
             Panning in both X and Y axes
+            </summary>
+        </member>
+        <member name="T:LiveCharts.Helpers.PeriodUnits">
+            <summary>
+            Defines the interval on which earch of the charts bars is based
             </summary>
         </member>
         <member name="T:LiveCharts.PieLabelPosition">

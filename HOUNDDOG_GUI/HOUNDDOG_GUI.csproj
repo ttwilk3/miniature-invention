@@ -35,6 +35,15 @@
     <Reference Include="dotnetWinpcap">
       <HintPath>..\..\..\..\..\Desktop\dotnetWinpcap.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Geared, Version=1.2.8.2, Culture=neutral, PublicKeyToken=7292f245d14ab8bf, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.Geared.1.2.8.2\lib\net45\LiveCharts.Geared.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -76,6 +85,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -90,10 +100,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="LiveCharts\Core40\Core40.csproj">
-      <Project>{f261c3d7-6194-4625-9516-044081b06028}</Project>
-      <Name>Core40</Name>
-    </ProjectReference>
     <ProjectReference Include="LiveCharts\Core\Core.csproj">
       <Project>{d447642c-a85f-4ab0-96d9-c66cff91aada}</Project>
       <Name>Core</Name>
@@ -101,10 +107,6 @@
     <ProjectReference Include="LiveCharts\WinFormsView\WinFormsView.csproj">
       <Project>{45e67c4f-88df-4617-acb1-b54c5dbf8390}</Project>
       <Name>WinFormsView</Name>
-    </ProjectReference>
-    <ProjectReference Include="LiveCharts\WpfView\WpfView.csproj">
-      <Project>{4d253423-ae05-47f6-a59d-9162ec0bb1f2}</Project>
-      <Name>WpfView</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
