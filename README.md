@@ -1,6 +1,6 @@
 # HOUNDDOG
 
-Used for sniffing packets from Software Defined Radios and parsing the outputted the Vita 49 A packets.
+Used for sniffing packets from Software Defined Radios and parsing the outputted Vita 49A packets.
 
 You can:
 
@@ -16,7 +16,12 @@ Change the refresh rate of the Spectral Display.
 TODO:
 Look into Linux Compatibility.
 Work on IQ graph of Complex data payloads. (Current spectral display only works for Real data payloads)
+Add file input (wireshark capture) as an option, so you don't have to live capture the data when running.
 More Verbosity levels to choose from.
 Possibly more live data graphs?
 Add more fields to be parsed from data and context packets.
 Get more documentation for V49a format.
+
+
+
+Credit to https://github.com/beto-rodriguez/Live-Charts for the Live Chart Libraries.

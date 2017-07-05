@@ -28,6 +28,9 @@ namespace HOUNDDOG_GUI
         Random rand = new Random();
         int prevPackCount = 0;
         System.Timers.Timer timer = new System.Timers.Timer();
+        int dataPacks = 0;
+        int contPacks = 0;
+        int otherOrInvalidPacks = 0;
 
         public class MeasureModel
         {
@@ -49,13 +52,31 @@ namespace HOUNDDOG_GUI
             setupDataPayloadChart();
 
             updateChart.Visible = false;
-            cartesianChart2.Visible = false;
             updateChart.Enabled = false;
+            cartesianChart2.Visible = false;
             cartesianChart2.Enabled = false;
             refreshRate.Visible = false;
             refreshRateSlider.Visible = false;
 
             Height -= 260;
+        }
+
+        public int DataPack
+        {
+            get { return dataPacks; }
+            set { dataPacks = value; }
+        }
+
+        public int ContextPack
+        {
+            get { return contPacks; }
+            set { contPacks = value; }
+        }
+
+        public int OtherPacks
+        {
+            get { return otherOrInvalidPacks; }
+            set { otherOrInvalidPacks = value; }
         }
 
         public bool getVerboseValue()
@@ -332,11 +353,11 @@ namespace HOUNDDOG_GUI
 
         private void updateChart_Click(object sender, EventArgs e)
         {
-            if (sock.NormalizedPayload.Count > 0)
-            {
-                updatePayloadChart(sock.NormalizedPayload);
-            }
-            timerStart();
+            //if (sock.NormalizedPayload.Count > 0)
+            //{
+            //    updatePayloadChart(sock.NormalizedPayload);
+            //}
+            //timerStart();
         }
 
         private void InvokeUI(Action a)
@@ -345,9 +366,9 @@ namespace HOUNDDOG_GUI
             {
                 this.BeginInvoke(new MethodInvoker(a));
             }
-            catch
+            catch (Exception e)
             {
-
+                //System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
 
@@ -362,7 +383,8 @@ namespace HOUNDDOG_GUI
 
         private void function(object sender, System.Timers.ElapsedEventArgs e)
         {
-            InvokeUI(() => {
+            InvokeUI(() =>
+            {
                 updatePayloadChart(sock.NormalizedPayload);
             });
         }

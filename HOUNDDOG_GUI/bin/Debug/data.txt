@@ -1,0 +1,1018 @@
+-----------------------------------------
+Content of packet : 
+    Packet #: 0
+	Caplength: 1038
+	Length   : 1038
+	Timestamp: Wednesday, July 5, 2017 2:25:06 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10100011 00000000 11111001
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0011 : Decimal -- 3
+Size: 0x000000001111100 : Decimal -- 124
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 1
+	Caplength: 114
+	Length   : 114
+	Timestamp: Wednesday, July 5, 2017 2:25:06 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x01000001 10100100 00000000 00010010
+    Stream ID: 0x00000000h
+    Packet Type: Context
+
+VRT Header: 
+Type: 0x0100 -- Context Packet
+Class: 0x0 -- Class ID not present.
+Timestamp Mode: 0x1 -- General Event Timing.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0100 : Decimal -- 4
+Size: 0x000000000001001 : Decimal -- 9
+
+Context Packet Data:
+0x1C E0 80 00 
+00 05 A4 D1 
+0C 00 00 00 
+00 00 1C 9C 
+38 00 00 00 
+00 00 00 00 
+00 00 00 00 
+FC C0 06 00 
+00 00 00 00 
+00 00 17 70 
+00 00 00 00 
+80 00 03 CF 
+00 00 00 00 
+h
+
+Context Packet Indicators:
+Context Field Change Indicator: 0x0 -- False
+Reference Point Indicator: 0x0 -- False
+Bandwidth Indicator: 0x0 -- False
+IF Reference Frequency Indicator: 0x1 -- True
+RF Reference Frequency Indicator: 0x1 -- True
+RF Frequency Offset Indicator: 0x1 -- True
+IF Band Offset Indicator: 0x0 -- False
+Reference Level Indicator: 0x0 -- False
+Gain Indicator: 0x1 -- True
+Over-Range Count Indicator: 0x1 -- True
+Sample Rate Indicator: 0x1 -- True
+Timestamp Adjustment Indicator: 0x0 -- False
+Timestamp Calibration Time Indicator: 0x0 -- False
+Temperature Indicator: 0x0 -- False
+Device Identifier Indicator: 0x0 -- False
+State and Event Indicator: 0x0 -- False
+Data Packet Payload Format Indicator: 0x1 -- True
+Formatted GPS (Global Positioning System) Geolocation Indicator: 0x0 -- False
+Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x0 -- False
+ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x0 -- False
+Relative Ephemeris Indicator: 0x0 -- False
+Ephemeris Reference Identifier Indicator: 0x0 -- False
+GPS ASCII Indicator: 0x0 -- False
+Context Association Lists Indicator: 0x0 -- False
+
+IF Reference Frequency: 1515000000.0 Hz
+RF Reference Frequency: 30000000.0 Hz
+RF Reference Frequency Offset: 0.0 Hz
+Stage 2 Gain Value: -7.64 dB
+Stage 1 Gain Value: 12.0 dB
+Over-Range Count: 0
+Sample Rate: 24576000.0 Hz
+Data Packet Payload Format:
+     Packing Method: 1
+     Real/Complex: Real
+     Data Item Format: Signed Fixed-Point
+     Sample-Component Repeat Indicator: 0x0 False
+     Event-Tag Size: 0
+     Channel-Tag Size: 0
+     Item Packing Field Size: 15
+     Data Item Size: 15
+     Repeat Count: 0
+     Vector Size: 0
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 2
+	Caplength: 1086
+	Length   : 1086
+	Timestamp: Wednesday, July 5, 2017 2:25:06 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10100100 00000001 00000101
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0100 : Decimal -- 4
+Size: 0x000000010000010 : Decimal -- 130
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 3
+	Caplength: 1038
+	Length   : 1038
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10100101 00000000 11111001
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0101 : Decimal -- 5
+Size: 0x000000001111100 : Decimal -- 124
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 4
+	Caplength: 114
+	Length   : 114
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x01000001 10100101 00000000 00010010
+    Stream ID: 0x00000000h
+    Packet Type: Context
+
+VRT Header: 
+Type: 0x0100 -- Context Packet
+Class: 0x0 -- Class ID not present.
+Timestamp Mode: 0x1 -- General Event Timing.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0101 : Decimal -- 5
+Size: 0x000000000001001 : Decimal -- 9
+
+Context Packet Data:
+0x1C E0 80 00 
+00 05 A4 D1 
+0C 00 00 00 
+00 00 1C 9C 
+38 00 00 00 
+00 00 00 00 
+00 00 00 00 
+FC C0 06 00 
+00 00 00 00 
+00 00 17 70 
+00 00 00 00 
+80 00 03 CF 
+00 00 00 00 
+h
+
+Context Packet Indicators:
+Context Field Change Indicator: 0x0 -- False
+Reference Point Indicator: 0x0 -- False
+Bandwidth Indicator: 0x0 -- False
+IF Reference Frequency Indicator: 0x1 -- True
+RF Reference Frequency Indicator: 0x1 -- True
+RF Frequency Offset Indicator: 0x1 -- True
+IF Band Offset Indicator: 0x0 -- False
+Reference Level Indicator: 0x0 -- False
+Gain Indicator: 0x1 -- True
+Over-Range Count Indicator: 0x1 -- True
+Sample Rate Indicator: 0x1 -- True
+Timestamp Adjustment Indicator: 0x0 -- False
+Timestamp Calibration Time Indicator: 0x0 -- False
+Temperature Indicator: 0x0 -- False
+Device Identifier Indicator: 0x0 -- False
+State and Event Indicator: 0x0 -- False
+Data Packet Payload Format Indicator: 0x1 -- True
+Formatted GPS (Global Positioning System) Geolocation Indicator: 0x0 -- False
+Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x0 -- False
+ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x0 -- False
+Relative Ephemeris Indicator: 0x0 -- False
+Ephemeris Reference Identifier Indicator: 0x0 -- False
+GPS ASCII Indicator: 0x0 -- False
+Context Association Lists Indicator: 0x0 -- False
+
+IF Reference Frequency: 1515000000.0 Hz
+RF Reference Frequency: 30000000.0 Hz
+RF Reference Frequency Offset: 0.0 Hz
+Stage 2 Gain Value: -7.64 dB
+Stage 1 Gain Value: 12.0 dB
+Over-Range Count: 0
+Sample Rate: 24576000.0 Hz
+Data Packet Payload Format:
+     Packing Method: 1
+     Real/Complex: Real
+     Data Item Format: Signed Fixed-Point
+     Sample-Component Repeat Indicator: 0x0 False
+     Event-Tag Size: 0
+     Channel-Tag Size: 0
+     Item Packing Field Size: 15
+     Data Item Size: 15
+     Repeat Count: 0
+     Vector Size: 0
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 5
+	Caplength: 1086
+	Length   : 1086
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10100110 00000001 00000101
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0110 : Decimal -- 6
+Size: 0x000000010000010 : Decimal -- 130
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 6
+	Caplength: 1038
+	Length   : 1038
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10100111 00000000 11111001
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0111 : Decimal -- 7
+Size: 0x000000001111100 : Decimal -- 124
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 7
+	Caplength: 114
+	Length   : 114
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x01000001 10100110 00000000 00010010
+    Stream ID: 0x00000000h
+    Packet Type: Context
+
+VRT Header: 
+Type: 0x0100 -- Context Packet
+Class: 0x0 -- Class ID not present.
+Timestamp Mode: 0x1 -- General Event Timing.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0110 : Decimal -- 6
+Size: 0x000000000001001 : Decimal -- 9
+
+Context Packet Data:
+0x1C E0 80 00 
+00 05 A4 D1 
+0C 00 00 00 
+00 00 1C 9C 
+38 00 00 00 
+00 00 00 00 
+00 00 00 00 
+FC C0 06 00 
+00 00 00 00 
+00 00 17 70 
+00 00 00 00 
+80 00 03 CF 
+00 00 00 00 
+h
+
+Context Packet Indicators:
+Context Field Change Indicator: 0x0 -- False
+Reference Point Indicator: 0x0 -- False
+Bandwidth Indicator: 0x0 -- False
+IF Reference Frequency Indicator: 0x1 -- True
+RF Reference Frequency Indicator: 0x1 -- True
+RF Frequency Offset Indicator: 0x1 -- True
+IF Band Offset Indicator: 0x0 -- False
+Reference Level Indicator: 0x0 -- False
+Gain Indicator: 0x1 -- True
+Over-Range Count Indicator: 0x1 -- True
+Sample Rate Indicator: 0x1 -- True
+Timestamp Adjustment Indicator: 0x0 -- False
+Timestamp Calibration Time Indicator: 0x0 -- False
+Temperature Indicator: 0x0 -- False
+Device Identifier Indicator: 0x0 -- False
+State and Event Indicator: 0x0 -- False
+Data Packet Payload Format Indicator: 0x1 -- True
+Formatted GPS (Global Positioning System) Geolocation Indicator: 0x0 -- False
+Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x0 -- False
+ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x0 -- False
+Relative Ephemeris Indicator: 0x0 -- False
+Ephemeris Reference Identifier Indicator: 0x0 -- False
+GPS ASCII Indicator: 0x0 -- False
+Context Association Lists Indicator: 0x0 -- False
+
+IF Reference Frequency: 1515000000.0 Hz
+RF Reference Frequency: 30000000.0 Hz
+RF Reference Frequency Offset: 0.0 Hz
+Stage 2 Gain Value: -7.64 dB
+Stage 1 Gain Value: 12.0 dB
+Over-Range Count: 0
+Sample Rate: 24576000.0 Hz
+Data Packet Payload Format:
+     Packing Method: 1
+     Real/Complex: Real
+     Data Item Format: Signed Fixed-Point
+     Sample-Component Repeat Indicator: 0x0 False
+     Event-Tag Size: 0
+     Channel-Tag Size: 0
+     Item Packing Field Size: 15
+     Data Item Size: 15
+     Repeat Count: 0
+     Vector Size: 0
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 8
+	Caplength: 1086
+	Length   : 1086
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10101000 00000001 00000101
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1000 : Decimal -- 8
+Size: 0x000000010000010 : Decimal -- 130
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 9
+	Caplength: 1038
+	Length   : 1038
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10101001 00000000 11111001
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1001 : Decimal -- 9
+Size: 0x000000001111100 : Decimal -- 124
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 10
+	Caplength: 114
+	Length   : 114
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x01000001 10100111 00000000 00010010
+    Stream ID: 0x00000000h
+    Packet Type: Context
+
+VRT Header: 
+Type: 0x0100 -- Context Packet
+Class: 0x0 -- Class ID not present.
+Timestamp Mode: 0x1 -- General Event Timing.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0111 : Decimal -- 7
+Size: 0x000000000001001 : Decimal -- 9
+
+Context Packet Data:
+0x1C E0 80 00 
+00 05 A4 D1 
+0C 00 00 00 
+00 00 1C 9C 
+38 00 00 00 
+00 00 00 00 
+00 00 00 00 
+FC C0 06 00 
+00 00 00 00 
+00 00 17 70 
+00 00 00 00 
+80 00 03 CF 
+00 00 00 00 
+h
+
+Context Packet Indicators:
+Context Field Change Indicator: 0x0 -- False
+Reference Point Indicator: 0x0 -- False
+Bandwidth Indicator: 0x0 -- False
+IF Reference Frequency Indicator: 0x1 -- True
+RF Reference Frequency Indicator: 0x1 -- True
+RF Frequency Offset Indicator: 0x1 -- True
+IF Band Offset Indicator: 0x0 -- False
+Reference Level Indicator: 0x0 -- False
+Gain Indicator: 0x1 -- True
+Over-Range Count Indicator: 0x1 -- True
+Sample Rate Indicator: 0x1 -- True
+Timestamp Adjustment Indicator: 0x0 -- False
+Timestamp Calibration Time Indicator: 0x0 -- False
+Temperature Indicator: 0x0 -- False
+Device Identifier Indicator: 0x0 -- False
+State and Event Indicator: 0x0 -- False
+Data Packet Payload Format Indicator: 0x1 -- True
+Formatted GPS (Global Positioning System) Geolocation Indicator: 0x0 -- False
+Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x0 -- False
+ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x0 -- False
+Relative Ephemeris Indicator: 0x0 -- False
+Ephemeris Reference Identifier Indicator: 0x0 -- False
+GPS ASCII Indicator: 0x0 -- False
+Context Association Lists Indicator: 0x0 -- False
+
+IF Reference Frequency: 1515000000.0 Hz
+RF Reference Frequency: 30000000.0 Hz
+RF Reference Frequency Offset: 0.0 Hz
+Stage 2 Gain Value: -7.64 dB
+Stage 1 Gain Value: 12.0 dB
+Over-Range Count: 0
+Sample Rate: 24576000.0 Hz
+Data Packet Payload Format:
+     Packing Method: 1
+     Real/Complex: Real
+     Data Item Format: Signed Fixed-Point
+     Sample-Component Repeat Indicator: 0x0 False
+     Event-Tag Size: 0
+     Channel-Tag Size: 0
+     Item Packing Field Size: 15
+     Data Item Size: 15
+     Repeat Count: 0
+     Vector Size: 0
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 11
+	Caplength: 1086
+	Length   : 1086
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10101010 00000001 00000101
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1010 : Decimal -- 10
+Size: 0x000000010000010 : Decimal -- 130
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 12
+	Caplength: 1038
+	Length   : 1038
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10101011 00000000 11111001
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1011 : Decimal -- 11
+Size: 0x000000001111100 : Decimal -- 124
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 13
+	Caplength: 114
+	Length   : 114
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x01000001 10101000 00000000 00010010
+    Stream ID: 0x00000000h
+    Packet Type: Context
+
+VRT Header: 
+Type: 0x0100 -- Context Packet
+Class: 0x0 -- Class ID not present.
+Timestamp Mode: 0x1 -- General Event Timing.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1000 : Decimal -- 8
+Size: 0x000000000001001 : Decimal -- 9
+
+Context Packet Data:
+0x1C E0 80 00 
+00 05 A4 D1 
+0C 00 00 00 
+00 00 1C 9C 
+38 00 00 00 
+00 00 00 00 
+00 00 00 00 
+FC C0 06 00 
+00 00 00 00 
+00 00 17 70 
+00 00 00 00 
+80 00 03 CF 
+00 00 00 00 
+h
+
+Context Packet Indicators:
+Context Field Change Indicator: 0x0 -- False
+Reference Point Indicator: 0x0 -- False
+Bandwidth Indicator: 0x0 -- False
+IF Reference Frequency Indicator: 0x1 -- True
+RF Reference Frequency Indicator: 0x1 -- True
+RF Frequency Offset Indicator: 0x1 -- True
+IF Band Offset Indicator: 0x0 -- False
+Reference Level Indicator: 0x0 -- False
+Gain Indicator: 0x1 -- True
+Over-Range Count Indicator: 0x1 -- True
+Sample Rate Indicator: 0x1 -- True
+Timestamp Adjustment Indicator: 0x0 -- False
+Timestamp Calibration Time Indicator: 0x0 -- False
+Temperature Indicator: 0x0 -- False
+Device Identifier Indicator: 0x0 -- False
+State and Event Indicator: 0x0 -- False
+Data Packet Payload Format Indicator: 0x1 -- True
+Formatted GPS (Global Positioning System) Geolocation Indicator: 0x0 -- False
+Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x0 -- False
+ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x0 -- False
+Relative Ephemeris Indicator: 0x0 -- False
+Ephemeris Reference Identifier Indicator: 0x0 -- False
+GPS ASCII Indicator: 0x0 -- False
+Context Association Lists Indicator: 0x0 -- False
+
+IF Reference Frequency: 1515000000.0 Hz
+RF Reference Frequency: 30000000.0 Hz
+RF Reference Frequency Offset: 0.0 Hz
+Stage 2 Gain Value: -4.64 dB
+Stage 1 Gain Value: 6.0 dB
+Over-Range Count: 0
+Sample Rate: 24576000.0 Hz
+Data Packet Payload Format:
+     Packing Method: 1
+     Real/Complex: Real
+     Data Item Format: Signed Fixed-Point
+     Sample-Component Repeat Indicator: 0x0 False
+     Event-Tag Size: 0
+     Channel-Tag Size: 0
+     Item Packing Field Size: 15
+     Data Item Size: 15
+     Repeat Count: 0
+     Vector Size: 0
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 14
+	Caplength: 1086
+	Length   : 1086
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10101100 00000001 00000101
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1100 : Decimal -- 12
+Size: 0x000000010000010 : Decimal -- 130
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 15
+	Caplength: 1038
+	Length   : 1038
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10101101 00000000 11111001
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1101 : Decimal -- 13
+Size: 0x000000001111100 : Decimal -- 124
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 16
+	Caplength: 114
+	Length   : 114
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x01000001 10101001 00000000 00010010
+    Stream ID: 0x00000000h
+    Packet Type: Context
+
+VRT Header: 
+Type: 0x0100 -- Context Packet
+Class: 0x0 -- Class ID not present.
+Timestamp Mode: 0x1 -- General Event Timing.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1001 : Decimal -- 9
+Size: 0x000000000001001 : Decimal -- 9
+
+Context Packet Data:
+0x1C E0 80 00 
+00 05 A4 D1 
+0C 00 00 00 
+00 00 1C 9C 
+38 00 00 00 
+00 00 00 00 
+00 00 00 00 
+FC C0 06 00 
+00 00 00 00 
+00 00 17 70 
+00 00 00 00 
+80 00 03 CF 
+00 00 00 00 
+h
+
+Context Packet Indicators:
+Context Field Change Indicator: 0x0 -- False
+Reference Point Indicator: 0x0 -- False
+Bandwidth Indicator: 0x0 -- False
+IF Reference Frequency Indicator: 0x1 -- True
+RF Reference Frequency Indicator: 0x1 -- True
+RF Frequency Offset Indicator: 0x1 -- True
+IF Band Offset Indicator: 0x0 -- False
+Reference Level Indicator: 0x0 -- False
+Gain Indicator: 0x1 -- True
+Over-Range Count Indicator: 0x1 -- True
+Sample Rate Indicator: 0x1 -- True
+Timestamp Adjustment Indicator: 0x0 -- False
+Timestamp Calibration Time Indicator: 0x0 -- False
+Temperature Indicator: 0x0 -- False
+Device Identifier Indicator: 0x0 -- False
+State and Event Indicator: 0x0 -- False
+Data Packet Payload Format Indicator: 0x1 -- True
+Formatted GPS (Global Positioning System) Geolocation Indicator: 0x0 -- False
+Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x0 -- False
+ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x0 -- False
+Relative Ephemeris Indicator: 0x0 -- False
+Ephemeris Reference Identifier Indicator: 0x0 -- False
+GPS ASCII Indicator: 0x0 -- False
+Context Association Lists Indicator: 0x0 -- False
+
+IF Reference Frequency: 1515000000.0 Hz
+RF Reference Frequency: 30000000.0 Hz
+RF Reference Frequency Offset: 0.0 Hz
+Stage 2 Gain Value: -4.64 dB
+Stage 1 Gain Value: 6.0 dB
+Over-Range Count: 0
+Sample Rate: 24576000.0 Hz
+Data Packet Payload Format:
+     Packing Method: 1
+     Real/Complex: Real
+     Data Item Format: Signed Fixed-Point
+     Sample-Component Repeat Indicator: 0x0 False
+     Event-Tag Size: 0
+     Channel-Tag Size: 0
+     Item Packing Field Size: 15
+     Data Item Size: 15
+     Repeat Count: 0
+     Vector Size: 0
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 17
+	Caplength: 47
+	Length   : 47
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.103
+    Destination: 192.168.0.142
+    Source Port: 25573
+    Destination Port: 202
+    VRT Header: 0x
+    Stream ID: 
+    Packet Type: Context
+
+
+Context Packet Data:
+0xh
+
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 18
+	Caplength: 60
+	Length   : 60
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 23
+    Destination Port: 6087
+    VRT Header: 0x01000011 01010000 01001100 00100000
+    Stream ID: 0x34372E30h
+    Packet Type: Context
+
+VRT Header: 
+Type: 0x0100 -- Context Packet
+Class: 0x0 -- Class ID not present.
+Timestamp Mode: 0x1 -- General Event Timing.
+TSI: 0x01 -- UTC
+TSF: 0x01 -- Sample Count Timestamp
+Count: 0x0000 : Decimal -- 0
+Size: 0x010011000010000 : Decimal -- 9744
+
+Context Packet Data:
+0xh
+
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 19
+	Caplength: 1086
+	Length   : 1086
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10101110 00000001 00000101
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1110 : Decimal -- 14
+Size: 0x000000010000010 : Decimal -- 130
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 20
+	Caplength: 1038
+	Length   : 1038
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10101111 00000000 11111001
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1111 : Decimal -- 15
+Size: 0x000000001111100 : Decimal -- 124
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 21
+	Caplength: 114
+	Length   : 114
+	Timestamp: Wednesday, July 5, 2017 2:25:07 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x01000001 10101010 00000000 00010010
+    Stream ID: 0x00000000h
+    Packet Type: Context
+
+VRT Header: 
+Type: 0x0100 -- Context Packet
+Class: 0x0 -- Class ID not present.
+Timestamp Mode: 0x1 -- General Event Timing.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x1010 : Decimal -- 10
+Size: 0x000000000001001 : Decimal -- 9
+
+Context Packet Data:
+0x1C E0 80 00 
+00 05 A4 D1 
+0C 00 00 00 
+00 00 1C 9C 
+38 00 00 00 
+00 00 00 00 
+00 00 00 00 
+FC C0 06 00 
+00 00 00 00 
+00 00 17 70 
+00 00 00 00 
+80 00 03 CF 
+00 00 00 00 
+h
+
+Context Packet Indicators:
+Context Field Change Indicator: 0x0 -- False
+Reference Point Indicator: 0x0 -- False
+Bandwidth Indicator: 0x0 -- False
+IF Reference Frequency Indicator: 0x1 -- True
+RF Reference Frequency Indicator: 0x1 -- True
+RF Frequency Offset Indicator: 0x1 -- True
+IF Band Offset Indicator: 0x0 -- False
+Reference Level Indicator: 0x0 -- False
+Gain Indicator: 0x1 -- True
+Over-Range Count Indicator: 0x1 -- True
+Sample Rate Indicator: 0x1 -- True
+Timestamp Adjustment Indicator: 0x0 -- False
+Timestamp Calibration Time Indicator: 0x0 -- False
+Temperature Indicator: 0x0 -- False
+Device Identifier Indicator: 0x0 -- False
+State and Event Indicator: 0x0 -- False
+Data Packet Payload Format Indicator: 0x1 -- True
+Formatted GPS (Global Positioning System) Geolocation Indicator: 0x0 -- False
+Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x0 -- False
+ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x0 -- False
+Relative Ephemeris Indicator: 0x0 -- False
+Ephemeris Reference Identifier Indicator: 0x0 -- False
+GPS ASCII Indicator: 0x0 -- False
+Context Association Lists Indicator: 0x0 -- False
+
+IF Reference Frequency: 1515000000.0 Hz
+RF Reference Frequency: 30000000.0 Hz
+RF Reference Frequency Offset: 0.0 Hz
+Stage 2 Gain Value: -4.64 dB
+Stage 1 Gain Value: 6.0 dB
+Over-Range Count: 0
+Sample Rate: 24576000.0 Hz
+Data Packet Payload Format:
+     Packing Method: 1
+     Real/Complex: Real
+     Data Item Format: Signed Fixed-Point
+     Sample-Component Repeat Indicator: 0x0 False
+     Event-Tag Size: 0
+     Channel-Tag Size: 0
+     Item Packing Field Size: 15
+     Data Item Size: 15
+     Repeat Count: 0
+     Vector Size: 0
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 22
+	Caplength: 1086
+	Length   : 1086
+	Timestamp: Wednesday, July 5, 2017 2:25:08 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10100000 00000001 00000101
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0000 : Decimal -- 0
+Size: 0x000000010000010 : Decimal -- 130
+Not Vita-49 compliant.
+
+-----------------------------------------
+-----------------------------------------
+Content of packet : 
+    Packet #: 23
+	Caplength: 1038
+	Length   : 1038
+	Timestamp: Wednesday, July 5, 2017 2:25:08 PM
+    Source: 192.168.0.142
+    Destination: 192.168.0.103
+    Source Port: 1266
+    Destination Port: 4800
+    VRT Header: 0x00110000 10100001 00000000 11111001
+    Stream ID: 0x00000000h
+    Packet Type: Data
+
+VRT Header: 
+Type: 0x0011 -- Extension Data Packet with Stream Identifier
+Class: 0x0 -- Class ID not present.
+Trailer: 0x0 -- TRAILER MUST BE PRESENT IN VITA-49A.
+TSI: 0x10 -- GPS Time
+TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+Count: 0x0001 : Decimal -- 1
+Size: 0x000000001111100 : Decimal -- 124
+Not Vita-49 compliant.
+
+-----------------------------------------

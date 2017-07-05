@@ -137,7 +137,6 @@ namespace HOUNDDOG_GUI
 
         public string parseTrailer(string bin)
         {
-            //throw new NotImplementedException("Oops");
             bin = bin.Replace(" ", string.Empty);
             StringBuilder report = new StringBuilder();
             report.Append("VRT Trailer: \n");

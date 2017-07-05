@@ -199,7 +199,11 @@ namespace HOUNDDOG_GUI
             {
                 this.pack_count++;
                 StringBuilder rtb = new StringBuilder();
-                string binary = formatHeader(s);
+                string binary = "";
+                if (s.Length > 50)
+                {
+                    binary = formatHeader(s);
+                }
                 // 26-29 Source
                 string src = s[26] + "." + s[27] + "." + s[28] + "." + s[29];
                 // 30-33 Destination
@@ -210,8 +214,12 @@ namespace HOUNDDOG_GUI
                 // 36-37 Destination Port
                 string destPort = Convert.ToString(s[35], 2) + Convert.ToString(s[36], 2);
                 destPort = Convert.ToInt32(destPort, 2).ToString();
-                //rtb.Focus();
-                string streamID = formatStreamID(s);
+                //rtb.Focus
+                string streamID = "";
+                if (s.Length > 50)
+                {
+                    streamID = formatStreamID(s);
+                }
 
                 rtb.Append("Content of packet : \n");
                 rtb.Append("    Packet #: " + table.Rows.Count + "\n");
@@ -226,7 +234,11 @@ namespace HOUNDDOG_GUI
                 rtb.Append("    Stream ID: " + streamID + "\n"); // Mandatory in Vita-49
 
                 binary.Replace(" ", string.Empty);
-                string report = pack.parseHeader(binary);
+                string report = "";
+                if (s.Length > 50)
+                {
+                    report = pack.parseHeader(binary);
+                }
 
                 string report2 = string.Empty;
                 if (pack.Trailer == true)
@@ -243,17 +255,20 @@ namespace HOUNDDOG_GUI
                 string report3 = string.Empty;
                 if (pack.PackType == false)
                 {
-                    contextData = s.SubArray(62, s.Length - 62);
-                    contextStr = formatContextData(contextData, true);
-                    string conBin = formatContextData(contextData, false);
-                    //System.Diagnostics.Debug.WriteLine("Entire Context Data " + contextData.Length);
-                    string restOfCon = formatBytestoBin(contextData.SubArray(4, contextData.Length - 4));
-                    report3 = pack.processContextData(conBin, restOfCon);
-
+                    int length = s.Length - 62;
+                    if (length > 0)
+                    {
+                        contextData = s.SubArray(62, length);
+                        contextStr = formatContextData(contextData, true);
+                        string conBin = formatContextData(contextData, false);
+                        //System.Diagnostics.Debug.WriteLine("Entire Context Data " + contextData.Length);
+                        string restOfCon = formatBytestoBin(contextData.SubArray(4, contextData.Length - 4));
+                        report3 = pack.processContextData(conBin, restOfCon);
+                    }
                 }
 
                 int payloadInd = 50; // Start after Stream ID
-                byte[] dataPayload;
+                byte[] dataPayload = new byte[1];
                 List<int> myData = new List<int>();
                 if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true)
                 {
@@ -263,19 +278,25 @@ namespace HOUNDDOG_GUI
 
                     if (pack.Trailer == true)
                     {
-                        dataPayload = s.SubArray(payloadInd, s.Length - payloadInd - 4);
+                        int length = s.Length - payloadInd - 4;
+                        if (length > 0)
+                            dataPayload = s.SubArray(payloadInd, length);
                     }
                     else
                     {
-                        dataPayload = s.SubArray(payloadInd, s.Length - payloadInd);
+                        int length = s.Length - payloadInd;
+                        if (length > 0)
+                            dataPayload = s.SubArray(payloadInd, length);
                     }
 
-                    myData = conversionToReals(dataPayload);
+                    if (dataPayload.Length > 1)
+                    {
+                        myData = conversionToReals(dataPayload);
 
-                    double min = 1.0 * myData.Min();
-                    double max = 1.0 * myData.Max();
-                    dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>();
-
+                        double min = 1.0 * myData.Min();
+                        double max = 1.0 * myData.Max();
+                        dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>();
+                    }
                     //frm.updatePayloadChart(newList);
                 }
 
@@ -344,6 +365,12 @@ namespace HOUNDDOG_GUI
                 //Console.Clear();
                 //Console.WriteLine("# of Packets: " + labPacketCnt);
                 frm.updatePacketNum("# of Packets: " + pack_count, pack_count);
+                if (pack.PackType == true && pack.valVita == true)
+                    frm.DataPack++;
+                else if (pack.PackType == false && pack.valVita == true)
+                    frm.ContextPack++;
+                else
+                    frm.OtherPacks++;
                 //frm.updateProgress();
             }
             catch (Exception e)

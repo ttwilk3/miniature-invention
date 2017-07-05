@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.startButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -167,6 +168,8 @@
             // verboseCheck
             // 
             this.verboseCheck.AutoSize = true;
+            this.verboseCheck.Checked = true;
+            this.verboseCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.verboseCheck.Location = new System.Drawing.Point(716, 59);
             this.verboseCheck.Name = "verboseCheck";
             this.verboseCheck.Size = new System.Drawing.Size(65, 17);
@@ -235,12 +238,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 675);
+            this.ClientSize = new System.Drawing.Size(1173, 675);
+            this.Controls.Add(this.cartesianChart2);
             this.Controls.Add(this.refreshRate);
             this.Controls.Add(this.refreshRateSlider);
             this.Controls.Add(this.specDisplayEnable);
             this.Controls.Add(this.updateChart);
-            this.Controls.Add(this.cartesianChart2);
             this.Controls.Add(this.cartesianChart1);
             this.Controls.Add(this.verboseCheck);
             this.Controls.Add(this.label3);
@@ -255,8 +258,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.startButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Vita-49 Parser";
+            this.Text = "HOUNDDOG";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshRateSlider)).EndInit();
             this.ResumeLayout(false);
