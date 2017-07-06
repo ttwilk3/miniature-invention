@@ -26,7 +26,9 @@
 
 
 ## Example Parsed Packet Data:
+[Example Packets Gathered from a MMS MSDD-3000-1](https://www.mms-rf.com/products/msdd-3000-pps)
 
+Ran in SCAN mode, outputting VITA-49.
 ### Example Valid Data Packet:
 Coming soon...
 
