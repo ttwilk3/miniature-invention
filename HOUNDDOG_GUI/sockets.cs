@@ -36,7 +36,6 @@ namespace HOUNDDOG_GUI
         DataTable table = new DataTable(); // Populated with parsed packet data for display in GUI
         string fileL = System.IO.Directory.GetCurrentDirectory() + @"\data.txt"; // Save Location
         List<double> dataPayNormalized = new List<double>(); // Normalized data payload data, currently just Reals
-        bool[] dataPayloadType = new bool[3]; // 0 - Real 1 - Complex, Cartesian 2 - Complex, Polar
         //string fileL = @"C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG\bin\Debug\data.txt";
 
         //List<Packet> packets = new List<Packet>(); // Other option instead of using the table
@@ -253,10 +252,15 @@ namespace HOUNDDOG_GUI
                 string report3 = string.Empty;
                 if (pack.PackType == false) // If the packet is a context packet, parse out the context data payload
                 {
-                    int length = s.Length - 62;
+                    int ind = 50; // Start Right after Stream ID
+                    ind += pack.classPres ? 8 : 0; // Class ID
+                    ind += pack.IntegerTimestamp ? 4 : 0; // Integer Timestamp
+                    ind += pack.FractionalTimestamp ? 8 : 0; // Fractional Timestamp
+
+                    int length = s.Length - ind;
                     if (length > 0)
                     {
-                        contextData = s.SubArray(62, length);
+                        contextData = s.SubArray(ind, length);
                         contextStr = formatContextData(contextData, true);
                         string conBin = formatContextData(contextData, false);
                         //System.Diagnostics.Debug.WriteLine("Entire Context Data " + contextData.Length);
@@ -268,11 +272,14 @@ namespace HOUNDDOG_GUI
                 int payloadInd = 50; // Start after Stream ID
                 byte[] dataPayload = new byte[1];
                 List<int> myData = new List<int>();
-                if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true) // If it is a data packet, and the spectal display is enabled
+                // If it is a data packet, and the spectal display is enabled
+                // Temporarily just checking that the Payload Type has been set to Real, this only processes Real Data Payloads currently
+                // TODO -- Add IQ Complex Data Payload parsing and graphing
+                if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true && pack.PayloadType[0] == true)
                 {
                     payloadInd += pack.classPres ? 8 : 0; // Class ID
-                    payloadInd += 4; // Integer Timestamp
-                    payloadInd += 8; // Fractional Timestamp
+                    payloadInd += pack.IntegerTimestamp ? 4 : 0; // Integer Timestamp
+                    payloadInd += pack.FractionalTimestamp ? 8 : 0; // Fractional Timestamp
 
                     if (pack.Trailer == true)
                     {
@@ -380,6 +387,7 @@ namespace HOUNDDOG_GUI
             }
         }
 
+        // TODO -- Refactor All of the Functions below this comment
         public List<int> conversionToReals(byte[] data)
         {
             List<int> realData = new List<int>();

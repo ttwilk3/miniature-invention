@@ -20,13 +20,26 @@ namespace HOUNDDOG_GUI
         bool dataPack = false; // If it is a Data packet
         bool validVita = false; // Valid V49A or not
         bool classIDPres = false; // If there is a Class ID present
+        bool intTimestamp = false; // If there is an Integer-seconds Timestamp present
+        bool fracTimestamp = false; // If there is a Fractional-seconds Timestamp present
         bool[] contextPackInd = new bool[24]; // For the Context Packet Indicator Fields
+        bool[] dataPayloadType = new bool[3]; // 0 - Real 1 - Complex, Cartesian 2 - Complex, Polar
         double sampRate = 0.0;
 
         public bool Trailer
         {
             get { return trail; }
             set { trail = value; }
+        }
+
+        public bool IntegerTimestamp
+        {
+            get { return intTimestamp; }
+        }
+
+        public bool FractionalTimestamp
+        {
+            get { return fracTimestamp; }
         }
 
         public double SampleRate
@@ -51,9 +64,18 @@ namespace HOUNDDOG_GUI
             get { return classIDPres; }
         }
 
+        public bool[] PayloadType
+        {
+            get { return dataPayloadType; }
+        }
+
         public Vita49()
         {
             setupDictionaries(); // Initialize
+            for (int i = 0; i < dataPayloadType.Length; i++)
+            {
+                dataPayloadType[i] = false;
+            }
         }
 
         public string parseHeader(string bin)
@@ -61,6 +83,8 @@ namespace HOUNDDOG_GUI
             PackType = false;
             validVita = false;
             classIDPres = false;
+            intTimestamp = false;
+            fracTimestamp = false;
             StringBuilder report = new StringBuilder();
             report.Append("VRT Header: \n");
             try
@@ -82,10 +106,12 @@ namespace HOUNDDOG_GUI
                     str.Clear();
                     str.Append(bin.Substring(8, 2));
                     report.Append("TSI: 0x" + str.ToString() + " -- " + TSI[str.ToString()] + "\n");
+                    intTimestamp = setTimestampBools(bin.Substring(8, 2));
 
                     str.Clear();
                     str.Append(bin.Substring(10, 2));
                     report.Append("TSF: 0x" + str.ToString() + " -- " + TSF[str.ToString()] + "\n");
+                    fracTimestamp = setTimestampBools(bin.Substring(10, 2));
 
                     str.Clear();
                     str.Append(bin.Substring(12, 4));
@@ -113,10 +139,12 @@ namespace HOUNDDOG_GUI
                     str.Clear();
                     str.Append(bin.Substring(8, 2));
                     report.Append("TSI: 0x" + str.ToString() + " -- " + TSI[str.ToString()] + "\n");
+                    intTimestamp = setTimestampBools(bin.Substring(8, 2));
 
                     str.Clear();
                     str.Append(bin.Substring(10, 2));
                     report.Append("TSF: 0x" + str.ToString() + " -- " + TSF[str.ToString()] + "\n");
+                    fracTimestamp = setTimestampBools(bin.Substring(10, 2));
 
                     str.Clear();
                     str.Append(bin.Substring(12, 4));
@@ -380,6 +408,7 @@ namespace HOUNDDOG_GUI
 
                             temp2 = temp.Substring(1, 2);
                             report.Append("     Real/Complex: " + dataSampleType[temp2] + "\n");
+                            assignDataPayloadType(temp2);
 
                             temp2 = temp.Substring(3, 5);
                             report.Append("     Data Item Format: " + dataItemFormat[temp2] + "\n");
@@ -454,6 +483,12 @@ namespace HOUNDDOG_GUI
             return report.ToString();
         }
 
+        public string processClassID(byte[] classID)
+        {
+            throw new NotImplementedException("TODO -- Implement Parsing of Class IDs");
+            return "";
+        }
+
         public string conversionToNums(string binStr, bool checkNeg) // Convert Binary to Decimal
         {
             string temp2 = "-";
@@ -498,6 +533,24 @@ namespace HOUNDDOG_GUI
             }
             temp += twosComp;
             return temp;
+        }
+
+        public void assignDataPayloadType(string type)
+        {
+            for (int i = 0; i < dataPayloadType.Length; i++)
+                dataPayloadType[i] = false;
+
+            if (type.Equals("00")) // Real
+                dataPayloadType[0] = true;
+            else if (type.Equals("01")) // Complex, Cartesian
+                dataPayloadType[1] = true;
+            else if (type.Equals("10")) // Complex, Polar
+                dataPayloadType[2] = true;
+        }
+
+        public bool setTimestampBools(string timeField)
+        {
+            return timeField.Equals("00") ? false : true;
         }
 
         public void setupDictionaries() // According to V49A Spec Sheet
