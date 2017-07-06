@@ -8,17 +8,19 @@ namespace HOUNDDOG_GUI
 {
     class Vita49
     {
+        // All the dictionaries for lookup
         Dictionary<string, string> packetType = new Dictionary<string, string>();
         Dictionary<string, string> TSI = new Dictionary<string, string>();
         Dictionary<string, string> TSF = new Dictionary<string, string>();
         Dictionary<string, string> dataFormatCodes = new Dictionary<string, string>();
         Dictionary<string, string> dataSampleType = new Dictionary<string, string>();
         Dictionary<string, string> dataItemFormat = new Dictionary<string, string>();
-        bool trail = false;
-        bool dataPack = false;
-        bool validVita = false;
-        bool classIDPres = false;
-        bool[] contextPackInd = new bool[24];
+
+        bool trail = false; // Trailer
+        bool dataPack = false; // If it is a Data packet
+        bool validVita = false; // Valid V49A or not
+        bool classIDPres = false; // If there is a Class ID present
+        bool[] contextPackInd = new bool[24]; // For the Context Packet Indicator Fields
         double sampRate = 0.0;
 
         public bool Trailer
@@ -41,6 +43,7 @@ namespace HOUNDDOG_GUI
         public bool valVita
         {
             get { return validVita; }
+            set { validVita = value; }
         }
 
         public bool classPres
@@ -50,7 +53,7 @@ namespace HOUNDDOG_GUI
 
         public Vita49()
         {
-            setupDictionaries();
+            setupDictionaries(); // Initialize
         }
 
         public string parseHeader(string bin)
@@ -434,7 +437,7 @@ namespace HOUNDDOG_GUI
                     }
                     else if ((i == 22 || i == 23) && contextPackInd[i] == true)
                     {
-                        // Words Variable
+                        // Words Variable 
                         if (i == 22)
                         {
                             // TODO -- Need Documentation
@@ -451,7 +454,7 @@ namespace HOUNDDOG_GUI
             return report.ToString();
         }
 
-        public string conversionToNums(string binStr, bool checkNeg)
+        public string conversionToNums(string binStr, bool checkNeg) // Convert Binary to Decimal
         {
             string temp2 = "-";
             string val = "";
@@ -497,7 +500,7 @@ namespace HOUNDDOG_GUI
             return temp;
         }
 
-        public void setupDictionaries()
+        public void setupDictionaries() // According to V49A Spec Sheet
         {
             packetType.Add("0000", "Signal Data Packet without Stream Identifier");
             packetType.Add("0001", "Signal Data Packet with Stream Identifier");
