@@ -58,6 +58,7 @@ namespace HOUNDDOG_GUI
             cartesianChart2.Enabled = false;
             refreshRate.Visible = false;
             refreshRateSlider.Visible = false;
+            dataFormat.Visible = false;
 
             Height -= 250;
         }
@@ -88,6 +89,11 @@ namespace HOUNDDOG_GUI
         public bool getSpectralDisplayEnableValue()
         {
             return specDisplayEnable.Checked;
+        }
+
+        public void updateDataFormat(string format)
+        {
+            dataFormat.Text = "Data Format: " + format;
         }
 
         public void updatePacketNum(string s, long num)
@@ -166,6 +172,7 @@ namespace HOUNDDOG_GUI
             dataGridView1.Refresh();
             running = false;
             sock.CloseConnection();
+            timer.Stop();
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -231,7 +238,7 @@ namespace HOUNDDOG_GUI
                 new LineSeries
                 {
                     Values = ChartValues,
-                    PointGeometrySize = 8,
+                    PointGeometrySize = 0,
                     StrokeThickness = 4
                 }
             };
@@ -376,6 +383,7 @@ namespace HOUNDDOG_GUI
                 cartesianChart2.Enabled = true;
                 refreshRate.Visible = true;
                 refreshRateSlider.Visible = true;
+                dataFormat.Visible = true;
 
                 timerStart();
 
@@ -389,6 +397,7 @@ namespace HOUNDDOG_GUI
                 cartesianChart2.Enabled = false;
                 refreshRate.Visible = false;
                 refreshRateSlider.Visible = false;
+                dataFormat.Visible = false;
 
                 timer.Stop();
 

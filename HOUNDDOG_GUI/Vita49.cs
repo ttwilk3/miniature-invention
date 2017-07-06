@@ -19,6 +19,7 @@ namespace HOUNDDOG_GUI
         bool trail = false; // Trailer
         bool dataPack = false; // If it is a Data packet
         bool validVita = false; // Valid V49A or not
+        bool streamIDPres = false; // If there is a Stream ID Present *There must be one in Vita-49A*
         bool classIDPres = false; // If there is a Class ID present
         bool intTimestamp = false; // If there is an Integer-seconds Timestamp present
         bool fracTimestamp = false; // If there is a Fractional-seconds Timestamp present
@@ -59,6 +60,11 @@ namespace HOUNDDOG_GUI
             set { validVita = value; }
         }
 
+        public bool StreamID
+        {
+            get { return streamIDPres; }
+        }
+
         public bool classPres
         {
             get { return classIDPres; }
@@ -82,6 +88,7 @@ namespace HOUNDDOG_GUI
         {
             PackType = false;
             validVita = false;
+            streamIDPres = false;
             classIDPres = false;
             intTimestamp = false;
             fracTimestamp = false;
@@ -93,6 +100,13 @@ namespace HOUNDDOG_GUI
                 StringBuilder str = new StringBuilder(bin.Substring(0, 4));
                 if (str.ToString().Equals("0100") != true && str.ToString().Equals("0101") != true) // Data Packet
                 {
+                    // "Signal Data Packet without Stream ID" and
+                    // "Extension Data PAcket without Stream ID"
+                    if (str.ToString().Equals("0000") == true || str.ToString().Equals("0010"))
+                        streamIDPres = false;
+                    else
+                        streamIDPres = true;
+
                     report.Append("Type: 0x" + str.ToString() + " -- " + packetType[str.ToString()] + "\n");
 
                     report.Append((bin[4].Equals('1') ? "Class: 0x1 -- Class ID present.\n" : "Class: 0x0 -- Class ID not present. -- CLASS ID MUST BE PRESENT IN VITA-49A\n"));
@@ -101,7 +115,7 @@ namespace HOUNDDOG_GUI
                     report.Append((bin[5].Equals('1') ? "Trailer: 0x1 -- Trailer is present.\n" : "Trailer: 0x0 -- Trailer is not present. -- TRAILER MUST BE PRESENT IN VITA-49A.\n"));
                     trail = bin[5].Equals('1') ? true : false;
 
-                    validVita = (classIDPres && trail) ? true : false;
+                    validVita = (streamIDPres && classIDPres && trail) ? true : false;
 
                     str.Clear();
                     str.Append(bin.Substring(8, 2));
@@ -130,9 +144,12 @@ namespace HOUNDDOG_GUI
                 }
                 else if (str.ToString().Equals("0100") == true || str.ToString().Equals("0101") == true) // Context Packet
                 {
+                    streamIDPres = true;
+
                     report.Append("Type: 0x" + str.ToString() + " -- " + packetType[str.ToString()] + "\n");
 
                     report.Append((bin[4].Equals('1') ? "Class: 0x1 -- Class ID present.\n" : "Class: 0x0 -- Class ID not present.\n"));
+                    classIDPres = bin[4].Equals('1') ? true : false;
 
                     report.Append((bin[7].Equals('1') ? "Timestamp Mode: 0x1 -- General Event Timing.\n" :"Timestamp Mode: 0x0 -- Precise Event Timing\n"));
 
@@ -153,8 +170,8 @@ namespace HOUNDDOG_GUI
                     str.Clear();
                     str.Append(bin.Substring(16, bin.Length - 17));
                     report.Append("Size: 0x" + str.ToString().Replace(" ", string.Empty) + " : Decimal -- " + Convert.ToInt32(str.ToString().Replace(" ", string.Empty), 2).ToString() + "\n");
-
-                    validVita = true;
+                    
+                    validVita = classIDPres == true ? true : false;
                     return report.ToString();
                 }
             }

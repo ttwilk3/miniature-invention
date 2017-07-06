@@ -50,6 +50,7 @@
             this.refreshRateSlider = new MetroFramework.Controls.MetroTrackBar();
             this.refreshRate = new MetroFramework.Controls.MetroLabel();
             this.dataGridView1 = new MetroFramework.Controls.MetroGrid();
+            this.dataFormat = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -275,11 +276,21 @@
             this.dataGridView1.Size = new System.Drawing.Size(1149, 236);
             this.dataGridView1.TabIndex = 33;
             // 
+            // dataFormat
+            // 
+            this.dataFormat.AutoSize = true;
+            this.dataFormat.Location = new System.Drawing.Point(864, 401);
+            this.dataFormat.Name = "dataFormat";
+            this.dataFormat.Size = new System.Drawing.Size(86, 19);
+            this.dataFormat.TabIndex = 34;
+            this.dataFormat.Text = "Data Format:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 676);
+            this.Controls.Add(this.dataFormat);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.refreshRate);
             this.Controls.Add(this.refreshRateSlider);
@@ -326,6 +337,7 @@
         private MetroFramework.Controls.MetroTrackBar refreshRateSlider;
         private MetroFramework.Controls.MetroLabel refreshRate;
         private MetroFramework.Controls.MetroGrid dataGridView1;
+        private MetroFramework.Controls.MetroLabel dataFormat;
     }
 }
 

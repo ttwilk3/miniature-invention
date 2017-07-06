@@ -211,11 +211,7 @@ namespace HOUNDDOG_GUI
                 string destPort = Convert.ToString(s[35], 2) + Convert.ToString(s[36], 2);
                 destPort = Convert.ToInt32(destPort, 2).ToString();
                 //rtb.Focus
-                string streamID = "";
-                if (s.Length > 50)
-                {
-                    streamID = formatStreamID(s);
-                }
+                
 
                 rtb.Append("Content of packet : \n");
                 rtb.Append("    Packet #: " + table.Rows.Count + "\n");
@@ -227,7 +223,7 @@ namespace HOUNDDOG_GUI
                 rtb.Append("    Source Port: " + srcPort + "\n");
                 rtb.Append("    Destination Port: " + destPort + "\n");
                 rtb.Append("    VRT Header: 0x" + binary + "\n");
-                rtb.Append("    Stream ID: " + streamID + "\n"); // Mandatory in Vita-49
+                
                 //rtb.Append("    Class ID: " + classID + "\n"); // Mandatory in Vita-49
 
                 binary.Replace(" ", string.Empty);
@@ -236,6 +232,13 @@ namespace HOUNDDOG_GUI
                 {
                     report = pack.parseHeader(binary); // Parse out the VRT Header from the packet
                 }
+
+                string streamID = "";
+                if (pack.StreamID == true &&  s.Length > 50)
+                {
+                    streamID = formatStreamID(s);
+                }
+                rtb.Append("    Stream ID: " + streamID + "\n"); // Mandatory in Vita-49
 
                 string report2 = string.Empty;
                 if (pack.Trailer == true)
@@ -269,7 +272,7 @@ namespace HOUNDDOG_GUI
                     }
                 }
 
-                int payloadInd = 50; // Start after Stream ID
+                int payloadInd = pack.StreamID == true ? 50 : 46; // Start after Stream ID if true, if it isn't present start at 46
                 byte[] dataPayload = new byte[1];
                 List<int> myData = new List<int>();
                 // If it is a data packet, and the spectal display is enabled
@@ -277,6 +280,7 @@ namespace HOUNDDOG_GUI
                 // TODO -- Add IQ Complex Data Payload parsing and graphing
                 if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true && pack.PayloadType[0] == true)
                 {
+                    frm.updateDataFormat("Real");
                     payloadInd += pack.classPres ? 8 : 0; // Class ID
                     payloadInd += pack.IntegerTimestamp ? 4 : 0; // Integer Timestamp
                     payloadInd += pack.FractionalTimestamp ? 8 : 0; // Fractional Timestamp
