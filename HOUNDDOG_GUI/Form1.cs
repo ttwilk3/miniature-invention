@@ -34,6 +34,9 @@ namespace HOUNDDOG_GUI
         int dataPacks = 0;
         int contPacks = 0;
         int otherOrInvalidPacks = 0;
+        string fileLoadLocation = @"";
+        PcapReader pRead;
+        System.Drawing.Point pt = new System.Drawing.Point();
 
         public class MeasureModel
         {
@@ -47,6 +50,7 @@ namespace HOUNDDOG_GUI
             InitializeComponent();
             sock = new sockets(this);
             saveLoc.Text = sock.FileLoc;
+            loadLoc.Text = fileLoadLocation;
             verboseCheck.Checked = true;
             updateComboBox();
             BindGrid();
@@ -125,44 +129,56 @@ namespace HOUNDDOG_GUI
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            bool badInp = false;
-            packetLimit = 0;
-            if (textBox1.Text.Length > 0)
+            if (fromFile.Checked != true)
             {
-                bool result = Int32.TryParse(textBox1.Text, out packetLimit);
-                if (result != true)
+                bool badInp = false;
+                packetLimit = 0;
+                if (textBox1.Text.Length > 0)
                 {
-                    MetroMessageBox.Show(this, "Please enter a valid integer. Up to 1M packets.");
-                    badInp = true;
-                }
-                else
-                {
-                    if (packetLimit > 1000000)
+                    bool result = Int32.TryParse(textBox1.Text, out packetLimit);
+                    if (result != true)
                     {
                         MetroMessageBox.Show(this, "Please enter a valid integer. Up to 1M packets.");
                         badInp = true;
                     }
                     else
                     {
-                        limitSet = true;
-                        badInp = false;
+                        if (packetLimit > 1000000)
+                        {
+                            MetroMessageBox.Show(this, "Please enter a valid integer. Up to 1M packets.");
+                            badInp = true;
+                        }
+                        else
+                        {
+                            limitSet = true;
+                            badInp = false;
+                        }
+                    }
+                }
+                if (badInp == false)
+                {
+                    running = true;
+                    sock.DeviceInd = comboBox1.SelectedIndex;
+                    sock.Start();
+
+                    if (specDisplayEnable.Checked == true)
+                    {
+                        if (sock.NormalizedPayload.Count > 0)
+                        {
+                            updatePayloadChart(sock.NormalizedPayload);
+                        }
+                        timerStart();
                     }
                 }
             }
-            if (badInp == false)
+            else
             {
-                running = true;
-                sock.DeviceInd = comboBox1.SelectedIndex;
-                sock.Start();
-
-                if (specDisplayEnable.Checked == true)
+                if (fileLoadLocation.Length == 0)
                 {
-                    if (sock.NormalizedPayload.Count > 0)
-                    {
-                        updatePayloadChart(sock.NormalizedPayload);
-                    }
-                    timerStart();
+                    MetroMessageBox.Show(this, "Please choose a Pcap file to load.");
                 }
+                else
+                    pRead = new PcapReader(fileLoadLocation, sock, this);
             }
         }
 
@@ -415,6 +431,53 @@ namespace HOUNDDOG_GUI
         {
             running = false;
             sock.CloseConnection();
+        }
+
+        private void fromFile_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fromFile.Checked == true)
+            {
+                pt = new Point(verboseCheck.Location.X, verboseCheck.Location.Y);
+                verboseCheck.Location = new Point(startButton.Location.X + startButton.Width + 25, startButton.Location.Y);
+                fileLoadChoose.Visible = true;
+                loadLoc.Visible = true;
+
+                cartesianChart1.Visible = false;
+                cartesianChart1.Enabled = false;
+                stopButton.Visible = false;
+                clearButton.Visible = false;
+                comboBox1.Visible = false;
+                label3.Visible = false;
+                label2.Visible = false;
+                textBox1.Visible = false;
+                specDisplayEnable.Visible = false;
+            }
+            else
+            {
+                verboseCheck.Location = pt;
+                fileLoadChoose.Visible = false;
+                loadLoc.Visible = false;
+
+                cartesianChart1.Visible = true;
+                cartesianChart1.Enabled = true;
+                stopButton.Visible = true;
+                clearButton.Visible = true;
+                comboBox1.Visible = true;
+                label3.Visible = true;
+                label2.Visible = true;
+                textBox1.Visible = true;
+                specDisplayEnable.Visible = true;
+            }
+        }
+
+        private void fileLoadChoose_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                fileLoadLocation = openFileDialog1.FileName;
+                loadLoc.Text = openFileDialog1.FileName;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace HOUNDDOG_GUI
         ICaptureDevice device;
         sockets sock;
 
-        public PcapReader(string capFile, sockets sock_)
+        public PcapReader(string capFile, sockets sock_, Form1 frm)
         {
             sock = sock_;
             try
@@ -27,8 +27,9 @@ namespace HOUNDDOG_GUI
             }
             catch (Exception e)
             {
-                Console.WriteLine("Caught exception when opening file" + e.ToString());
-                Console.ReadKey();
+                MetroFramework.MetroMessageBox.Show(frm, "Caught exception when opening file" + e.ToString());
+                //Console.WriteLine("Caught exception when opening file" + e.ToString());
+                //Console.ReadKey();
                 return;
             }
 
@@ -36,10 +37,10 @@ namespace HOUNDDOG_GUI
             device.OnPacketArrival +=
                 new PacketArrivalEventHandler(device_OnPacketArrival);
 
-            Console.WriteLine();
-            Console.WriteLine
-                ("-- Capturing from '{0}', hit 'Ctrl-C' to exit...",
-                capFile);
+            //Console.WriteLine();
+            //Console.WriteLine
+            //    ("-- Capturing from '{0}', hit 'Ctrl-C' to exit...",
+            //    capFile);
 
             // Start capture 'INFINTE' number of packets
             // This method will return when EOF reached.
@@ -47,9 +48,9 @@ namespace HOUNDDOG_GUI
 
             // Close the pcap device
             device.Close();
-            Console.WriteLine("-- End of file reached.");
-            Console.Write("Hit 'Enter' to exit...");
-            Console.ReadLine();
+            //Console.WriteLine("-- End of file reached.");
+            //Console.Write("Hit 'Enter' to exit...");
+            //Console.ReadLine();
         }
         
         /// <summary>

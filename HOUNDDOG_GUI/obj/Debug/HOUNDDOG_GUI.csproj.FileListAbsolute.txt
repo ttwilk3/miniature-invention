@@ -41,3 +41,5 @@ C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-inve
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\MetroFramework.Design.dll
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\MetroFramework.dll
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\PacketDotNet.xml
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\SharpPcap.xml

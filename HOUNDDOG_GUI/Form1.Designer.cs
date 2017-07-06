@@ -51,6 +51,10 @@
             this.refreshRate = new MetroFramework.Controls.MetroLabel();
             this.dataGridView1 = new MetroFramework.Controls.MetroGrid();
             this.dataFormat = new MetroFramework.Controls.MetroLabel();
+            this.fromFile = new MetroFramework.Controls.MetroCheckBox();
+            this.fileLoadChoose = new MetroFramework.Controls.MetroButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.loadLoc = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -285,11 +289,50 @@
             this.dataFormat.TabIndex = 34;
             this.dataFormat.Text = "Data Format:";
             // 
+            // fromFile
+            // 
+            this.fromFile.AutoSize = true;
+            this.fromFile.Location = new System.Drawing.Point(106, 135);
+            this.fromFile.Name = "fromFile";
+            this.fromFile.Size = new System.Drawing.Size(103, 15);
+            this.fromFile.TabIndex = 35;
+            this.fromFile.Text = "Parse From File";
+            this.fromFile.UseSelectable = true;
+            this.fromFile.CheckedChanged += new System.EventHandler(this.fromFile_CheckedChanged);
+            // 
+            // fileLoadChoose
+            // 
+            this.fileLoadChoose.Location = new System.Drawing.Point(215, 126);
+            this.fileLoadChoose.Name = "fileLoadChoose";
+            this.fileLoadChoose.Size = new System.Drawing.Size(108, 24);
+            this.fileLoadChoose.TabIndex = 36;
+            this.fileLoadChoose.Text = "Choose Pcap File";
+            this.fileLoadChoose.UseSelectable = true;
+            this.fileLoadChoose.Visible = false;
+            this.fileLoadChoose.Click += new System.EventHandler(this.fileLoadChoose_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // loadLoc
+            // 
+            this.loadLoc.AutoSize = true;
+            this.loadLoc.Location = new System.Drawing.Point(330, 131);
+            this.loadLoc.Name = "loadLoc";
+            this.loadLoc.Size = new System.Drawing.Size(26, 19);
+            this.loadLoc.TabIndex = 37;
+            this.loadLoc.Text = "C:\\";
+            this.loadLoc.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 676);
+            this.Controls.Add(this.loadLoc);
+            this.Controls.Add(this.fileLoadChoose);
+            this.Controls.Add(this.fromFile);
             this.Controls.Add(this.dataFormat);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.refreshRate);
@@ -338,6 +381,10 @@
         private MetroFramework.Controls.MetroLabel refreshRate;
         private MetroFramework.Controls.MetroGrid dataGridView1;
         private MetroFramework.Controls.MetroLabel dataFormat;
+        private MetroFramework.Controls.MetroCheckBox fromFile;
+        private MetroFramework.Controls.MetroButton fileLoadChoose;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private MetroFramework.Controls.MetroLabel loadLoc;
     }
 }
 
