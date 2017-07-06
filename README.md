@@ -24,7 +24,7 @@
 
 ##### In Progress:
 * Add file input (wireshark capture, pcap file) as an option, so you don't have to live capture the data when running. 
-* Add more fields to be parsed from data and context packets.
+* ~~Add more fields to be parsed from data and context packets.~~
 
 
 ## Example Parsed Packet Data:
