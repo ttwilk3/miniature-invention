@@ -17,12 +17,14 @@
 ##### TODO:
 * Look into Linux Compatibility.
 * Work on IQ graph of Complex data payloads. (Current spectral display only works for Real data payloads)
-* Add file input (wireshark capture) as an option, so you don't have to live capture the data when running.
 * More Verbosity levels to choose from.
 * Possibly more live data graphs?
-* Add more fields to be parsed from data and context packets.
 * Get more documentation for V49a format and complete the missing TODO fields for the packets.
 * Eventually add VITA 49.0, 49B, and 49.2 support.
+
+##### In Progress:
+* Add file input (wireshark capture, pcap file) as an option, so you don't have to live capture the data when running. 
+* Add more fields to be parsed from data and context packets.
 
 
 ## Example Parsed Packet Data:
