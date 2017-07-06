@@ -2,6 +2,8 @@
 
 #### Used for sniffing packets from Software Defined Radios and parsing the outputted Vita 49A packets.
 
+##### [Winpcap dependency](https://www.winpcap.org/)
+
 ##### You can currently:
 * Change the save location of the parsed data.
 * Choose different interfaces of your computer to use as a capture point.
