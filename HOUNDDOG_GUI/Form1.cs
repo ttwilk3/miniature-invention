@@ -24,9 +24,7 @@ namespace HOUNDDOG_GUI
     public partial class Form1 : MetroForm
     {
         sockets sock;
-        bool running = false;
         bool limitSet = false;
-        bool reset = false;
         int packetLimit;
         Random rand = new Random();
         int prevPackCount = 0;
@@ -36,7 +34,7 @@ namespace HOUNDDOG_GUI
         int otherOrInvalidPacks = 0;
         string fileLoadLocation = @"";
         PcapReader pRead;
-        System.Drawing.Point pt = new System.Drawing.Point();
+        Point pt = new Point();
 
         public class MeasureModel
         {
@@ -106,8 +104,6 @@ namespace HOUNDDOG_GUI
             if (limitSet == true && num >= packetLimit)
             {
                 dataGridView1.Refresh();
-                running = false;
-                reset = true;
                 sock.CloseConnection();
             }
         }
@@ -157,7 +153,6 @@ namespace HOUNDDOG_GUI
                 }
                 if (badInp == false)
                 {
-                    running = true;
                     sock.DeviceInd = comboBox1.SelectedIndex;
                     sock.Start();
 
@@ -173,20 +168,30 @@ namespace HOUNDDOG_GUI
             }
             else
             {
+                metroProgressSpinner1.Spinning = true;
                 if (fileLoadLocation.Length == 0)
                 {
                     MetroMessageBox.Show(this, "Please choose a Pcap file to load.");
                 }
                 else
-                    pRead = new PcapReader(fileLoadLocation, sock, this);
+                {
+                    BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                    backgroundWorker1.RunWorkerAsync();
+                    backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+                    backgroundWorker1.WorkerReportsProgress = true;
+                }
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            pRead = new PcapReader(fileLoadLocation, sock, this);
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
             BindGrid();
             dataGridView1.Refresh();
-            running = false;
             sock.CloseConnection();
             timer.Stop();
         }
@@ -385,7 +390,13 @@ namespace HOUNDDOG_GUI
         {
             InvokeUI(() =>
             {
-                updatePayloadChart(sock.NormalizedPayload);
+                if (sock.VPacket.PayloadType.Contains(true)) // Check that Payload Type has been set
+                {
+                    if (sock.VPacket.PayloadType[0] == true) // Check that the Data Payload is set to Reals
+                        updatePayloadChart(sock.NormalizedPayload);
+                    else
+                        timer.Stop();
+                }
             });
         }
 
@@ -429,7 +440,6 @@ namespace HOUNDDOG_GUI
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            running = false;
             sock.CloseConnection();
         }
 
@@ -441,32 +451,34 @@ namespace HOUNDDOG_GUI
                 verboseCheck.Location = new Point(startButton.Location.X + startButton.Width + 25, startButton.Location.Y);
                 fileLoadChoose.Visible = true;
                 loadLoc.Visible = true;
+                metroProgressSpinner1.Visible = true;
 
-                cartesianChart1.Visible = false;
-                cartesianChart1.Enabled = false;
+                //cartesianChart1.Visible = false;
+                //cartesianChart1.Enabled = false;
                 stopButton.Visible = false;
                 clearButton.Visible = false;
                 comboBox1.Visible = false;
                 label3.Visible = false;
                 label2.Visible = false;
                 textBox1.Visible = false;
-                specDisplayEnable.Visible = false;
+                //specDisplayEnable.Visible = false;
             }
             else
             {
                 verboseCheck.Location = pt;
                 fileLoadChoose.Visible = false;
                 loadLoc.Visible = false;
+                metroProgressSpinner1.Visible = false;
 
-                cartesianChart1.Visible = true;
-                cartesianChart1.Enabled = true;
+                //cartesianChart1.Visible = true;
+                //cartesianChart1.Enabled = true;
                 stopButton.Visible = true;
                 clearButton.Visible = true;
                 comboBox1.Visible = true;
                 label3.Visible = true;
                 label2.Visible = true;
                 textBox1.Visible = true;
-                specDisplayEnable.Visible = true;
+                //specDisplayEnable.Visible = true;
             }
         }
 

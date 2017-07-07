@@ -48,6 +48,8 @@ namespace HOUNDDOG_GUI
 
             // Close the pcap device
             device.Close();
+
+            return;
             //Console.WriteLine("-- End of file reached.");
             //Console.Write("Hit 'Enter' to exit...");
             //Console.ReadLine();

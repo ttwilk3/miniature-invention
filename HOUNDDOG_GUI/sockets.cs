@@ -278,9 +278,17 @@ namespace HOUNDDOG_GUI
                 // If it is a data packet, and the spectal display is enabled
                 // Temporarily just checking that the Payload Type has been set to Real, this only processes Real Data Payloads currently
                 // TODO -- Add IQ Complex Data Payload parsing and graphing
+                if (pack.PayloadType.Contains(true))
+                {
+                    if (pack.PayloadType[0])
+                        frm.updateDataFormat("Real");
+                    else if (pack.PayloadType[1])
+                        frm.updateDataFormat("Complex, Cartesian");
+                    else if (pack.PayloadType[2])
+                        frm.updateDataFormat("Complex, Polar");
+                }
                 if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true && pack.PayloadType[0] == true)
                 {
-                    frm.updateDataFormat("Real");
                     payloadInd += pack.classPres ? 8 : 0; // Class ID
                     payloadInd += pack.IntegerTimestamp ? 4 : 0; // Integer Timestamp
                     payloadInd += pack.FractionalTimestamp ? 8 : 0; // Fractional Timestamp
@@ -477,7 +485,7 @@ namespace HOUNDDOG_GUI
                     temp = con[i].ToString("X");
                     temp = temp.Length == 1 ? "0" + temp : temp;
                     val += temp + " ";
-                    if ((i + 1) % 4 == 0)
+                    if ((i + 1) % 8 == 0)
                         val += "\n";
                     temp = "";
                 }
