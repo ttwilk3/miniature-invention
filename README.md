@@ -23,8 +23,8 @@
 * Eventually add VITA 49.0, 49B, and 49.2 support.
 
 ##### In Progress:
-* Add file input (wireshark capture, pcap file) as an option, so you don't have to live capture the data when running. 
-* ~~Add more fields to be parsed from data and context packets.~~
+* ~~Add file input (wireshark capture, pcap file) as an option, so you don't have to live capture the data when running.~~ 
+* Add more fields to be parsed from data and context packets.
 
 
 ## Example Parsed Packet Data:
