@@ -36,6 +36,7 @@ namespace HOUNDDOG_GUI
         DataTable table = new DataTable(); // Populated with parsed packet data for display in GUI
         string fileL = System.IO.Directory.GetCurrentDirectory() + @"\data.txt"; // Save Location
         List<double> dataPayNormalized = new List<double>(); // Normalized data payload data, currently just Reals
+        DateTime dt = new DateTime();
         //string fileL = @"C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG\bin\Debug\data.txt";
 
         //List<Packet> packets = new List<Packet>(); // Other option instead of using the table
@@ -103,6 +104,7 @@ namespace HOUNDDOG_GUI
         Form1 frm = null;
         public sockets(Form1 frm_)
         {
+            dt = DateTime.Now;
             frm = frm_;
             table.Columns.Add("Packet #", typeof(int));
             table.Columns.Add("CapLength", typeof(int));
@@ -545,7 +547,8 @@ namespace HOUNDDOG_GUI
                 {
                     val = Convert.ToInt32(b1, 2);
                 }
-                realData.Add(val);
+                double valSquared = val * val;
+                realData.Add(valSquared);
             }
 
             return realData;

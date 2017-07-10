@@ -28,6 +28,7 @@ namespace HOUNDDOG_GUI
         Random rand = new Random();
         int prevPackCount = 0;
         System.Timers.Timer timer = new System.Timers.Timer();
+        System.Timers.Timer timer2 = new System.Timers.Timer();
         int dataPacks = 0;
         int contPacks = 0;
         int otherOrInvalidPacks = 0;
@@ -154,6 +155,7 @@ namespace HOUNDDOG_GUI
                 {
                     sock.DeviceInd = comboBox1.SelectedIndex;
                     sock.Start();
+                    startButton.Enabled = false;
 
                     if (specDisplayEnable.Checked == true)
                     {
@@ -173,6 +175,9 @@ namespace HOUNDDOG_GUI
                 }
                 else
                 {
+                    fromFile.Enabled = false;
+                    fileLoadChoose.Enabled = false;
+                    startButton.Enabled = false;
                     BackgroundWorker backgroundWorker1 = new BackgroundWorker();
                     backgroundWorker1.RunWorkerAsync();
                     backgroundWorker1.DoWork += backgroundWorker1_DoWork;
@@ -184,6 +189,10 @@ namespace HOUNDDOG_GUI
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             pRead = new PcapReader(fileLoadLocation, sock, this);
+            fromFile.Enabled = true;
+            fileLoadChoose.Enabled = true;
+            startButton.Enabled = true;
+            timer2.Stop();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
@@ -192,6 +201,7 @@ namespace HOUNDDOG_GUI
             dataGridView1.Refresh();
             sock.CloseConnection();
             timer.Stop();
+            startButton.Enabled = true;
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -486,6 +496,41 @@ namespace HOUNDDOG_GUI
                 fileLoadLocation = openFileDialog1.FileName;
                 loadLoc.Text = openFileDialog1.FileName;
             }
+        }
+
+        private void discoOpt_CheckedChanged(object sender, EventArgs e)
+        {
+            if (discoOpt.Checked == true)
+            {
+                startDisco();
+            }
+            else if (discoOpt.Checked == false)
+            {
+                timer2.Stop();
+                this.Style = MetroColorStyle.Blue;
+                this.dataGridView1.Style = MetroColorStyle.Blue;
+                this.Update();
+                this.Refresh();
+            }
+        }
+
+        private void startDisco()
+        {
+            timer2.Elapsed += new System.Timers.ElapsedEventHandler(discoFunc);
+            timer2.Interval = 200;
+            timer2.Enabled = true;
+            timer2.Start();
+        }
+        bool opc = false;
+        private void discoFunc(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            InvokeUI(() =>
+            {
+                this.Style = (MetroColorStyle)rand.Next(0, 15);
+                this.dataGridView1.Style = (MetroColorStyle)rand.Next(0, 15);
+                this.Update();
+                this.Refresh();
+            });
         }
     }
 }
