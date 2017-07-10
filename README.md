@@ -16,6 +16,7 @@
 
 ##### TODO:
 * More Verbosity levels to choose from.
+* Refactor all the conversion functions in sockets.cs, many could be consolidated.
 * Possibly more live data graphs? (There already are packet counters for Data, Context, and Other)
 * Get more documentation for V49a format and complete the missing TODO fields for the packets.
 * Eventually add VITA 49.0, 49B, and 49.2 support.
