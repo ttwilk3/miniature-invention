@@ -10,20 +10,20 @@
 * Turn on or off full Verbosity in the report.
 * Cap how many packets are captured.
 * Look at the live packet count graph to monitor performance.
-* Look at the Spectral Display showing the data payloads from the packets.
+* Look at the Spectral Display showing the data payloads from the packets. Currently supports Real and Complex, Cartesian payloads.
 * Change the refresh rate of the Spectral Display.
 * Look at the output file "invalidPackets.txt" in the directory HOUNDDOG is run in for a file of all the invalid Vita 49A packets.
 
 ##### TODO:
-* Look into Linux Compatibility.
-* Work on IQ graph of Complex data payloads. (Current spectral display only works for Real data payloads)
 * More Verbosity levels to choose from.
-* Possibly more live data graphs?
+* Possibly more live data graphs? (There already are packet counters for Data, Context, and Other)
 * Get more documentation for V49a format and complete the missing TODO fields for the packets.
 * Eventually add VITA 49.0, 49B, and 49.2 support.
 
 ##### In Progress:
-* ~~Add file input (wireshark capture, pcap file) as an option, so you don't have to live capture the data when running.~~ 
+* ~~Add file input (wireshark capture, pcap file) as an option, so you don't have to live capture the data when running.~~
+* ~~Work on IQ graph of Complex data payloads. (Current spectral display only works for Real data payloads)~~
+* ~~Look into Linux Compatibility.~~ [(Use Wine)](https://www.winehq.org/)
 * Add more fields to be parsed from data and context packets.
 
 
