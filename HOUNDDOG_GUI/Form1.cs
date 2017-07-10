@@ -167,7 +167,6 @@ namespace HOUNDDOG_GUI
             }
             else
             {
-                metroProgressSpinner1.Spinning = true;
                 if (fileLoadLocation.Length == 0)
                 {
                     MetroMessageBox.Show(this, "Please choose a Pcap file to load.");
@@ -450,7 +449,6 @@ namespace HOUNDDOG_GUI
                 verboseCheck.Location = new Point(startButton.Location.X + startButton.Width + 25, startButton.Location.Y);
                 fileLoadChoose.Visible = true;
                 loadLoc.Visible = true;
-                metroProgressSpinner1.Visible = true;
 
                 //cartesianChart1.Visible = false;
                 //cartesianChart1.Enabled = false;
@@ -467,7 +465,6 @@ namespace HOUNDDOG_GUI
                 verboseCheck.Location = pt;
                 fileLoadChoose.Visible = false;
                 loadLoc.Visible = false;
-                metroProgressSpinner1.Visible = false;
 
                 //cartesianChart1.Visible = true;
                 //cartesianChart1.Enabled = true;

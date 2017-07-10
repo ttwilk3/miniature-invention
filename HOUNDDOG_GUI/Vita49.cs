@@ -82,7 +82,11 @@ namespace HOUNDDOG_GUI
             {
                 dataPayloadType[i] = false;
             }
-            dataPayloadType[1] = true;
+            
+            // For testing purposes
+            //dataPayloadType[0] = true;
+            //dataPayloadType[1] = true;
+            //dataPayloadType[2] = true;
         }
 
         public string parseHeader(string bin)

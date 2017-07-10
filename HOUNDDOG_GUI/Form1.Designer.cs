@@ -55,7 +55,6 @@
             this.fileLoadChoose = new MetroFramework.Controls.MetroButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.loadLoc = new MetroFramework.Controls.MetroLabel();
-            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -326,24 +325,11 @@
             this.loadLoc.Text = "C:\\";
             this.loadLoc.Visible = false;
             // 
-            // metroProgressSpinner1
-            // 
-            this.metroProgressSpinner1.Location = new System.Drawing.Point(27, 94);
-            this.metroProgressSpinner1.Maximum = 100;
-            this.metroProgressSpinner1.Name = "metroProgressSpinner1";
-            this.metroProgressSpinner1.Size = new System.Drawing.Size(73, 56);
-            this.metroProgressSpinner1.Spinning = false;
-            this.metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroProgressSpinner1.TabIndex = 38;
-            this.metroProgressSpinner1.UseSelectable = true;
-            this.metroProgressSpinner1.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 676);
-            this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.loadLoc);
             this.Controls.Add(this.fileLoadChoose);
             this.Controls.Add(this.fromFile);
@@ -400,7 +386,6 @@
         private MetroFramework.Controls.MetroButton fileLoadChoose;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private MetroFramework.Controls.MetroLabel loadLoc;
-        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
     }
 }
 
