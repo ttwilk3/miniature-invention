@@ -33,7 +33,47 @@
 
 Ran in SCAN mode, outputting VITA-49.
 ### Example Valid Data Packet:
-Coming soon...
+-----------------------------------------
+	Content of packet : 
+	    Packet #: 0
+		Caplength: 8266
+		Length   : 8266
+		Timestamp: Thursday, January 1, 1970 12:00:00 AM
+	    Source: 192.168.128.103
+	    Destination: 255.255.255.255
+	    Source Port: 5603
+	    Destination Port: 7285
+	    VRT Header: 0x00011100 01101011 00001000 00001000
+	    Stream ID: 0x731C0029h
+	    VRT Trailer: 0x11110100 00000100 00000000 00000000
+	    Packet Type: Data
+
+	VRT Header: 
+	Type: 0x0001 -- Signal Data Packet with Stream Identifier
+	Class: 0x1 -- Class ID present.
+	Trailer: 0x1 -- Trailer is present.
+	TSI: 0x01 -- UTC
+	TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
+	Count: 0x1011 : Decimal -- 11
+	Size: 0x000010000000100 : Decimal -- 1028
+
+	VRT Trailer: 
+	Calibrated Time Indicator Enable: 0x1 -- True
+	Valid Signal Indicator Enable: 0x1 -- True
+	Reference Lock Indicator Enable: 0x1 -- True
+	AGC/MGC Indicator Enable: 0x1 -- True
+	Spectral Inversion Indicator Enable: 0x1 -- True
+	Overrange Indicator Enable: 0x0 -- False
+	Calibrated Time Indicator: 0x0 -- False
+	Valid Signal Indicator: 0x1 -- True
+	Reference Lock Indicator: 0x0 -- False
+	AGC/MGC Indicator: 0x0 -- False
+	Spectral Inversion Indicator: 0x0 -- False
+	Overrange Indicator: 0x0 -- False
+	Assoicated Context Packet Enabled: 0x0 -- False
+	Assoicated Context Packet Count: 0x0000000 -- Decimal 0
+
+-----------------------------------------
 
 ### Example Invalid Data Packet:
 -----------------------------------------
