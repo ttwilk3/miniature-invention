@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
 using LiveCharts;
 using LiveCharts.Configurations;
 using LiveCharts.Wpf;
@@ -298,12 +297,12 @@ namespace HOUNDDOG_GUI
 
             cartesianChart2.AxisX.Add(new Axis
             {
-                Title = "Time"
+                //Title = "Time"
             });
 
             cartesianChart2.AxisY.Add(new Axis
             {
-                Title = "Voltage"
+                //Title = "Voltage"
             });
 
             SetAxisLimitsPayload();
@@ -392,7 +391,7 @@ namespace HOUNDDOG_GUI
             {
                 if (sock.VPacket.PayloadType.Contains(true)) // Check that Payload Type has been set
                 {
-                    if (sock.VPacket.PayloadType[0] == true) // Check that the Data Payload is set to Reals
+                    if (sock.VPacket.PayloadType[0] == true || sock.VPacket.PayloadType[1] == true) // Check that the Data Payload is set to Reals or Complex, Cartesian
                         updatePayloadChart(sock.NormalizedPayload);
                     else
                         timer.Stop();

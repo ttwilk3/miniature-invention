@@ -82,6 +82,7 @@ namespace HOUNDDOG_GUI
             {
                 dataPayloadType[i] = false;
             }
+            dataPayloadType[1] = true;
         }
 
         public string parseHeader(string bin)

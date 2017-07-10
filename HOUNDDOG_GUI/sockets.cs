@@ -274,7 +274,7 @@ namespace HOUNDDOG_GUI
 
                 int payloadInd = pack.StreamID == true ? 50 : 46; // Start after Stream ID if true, if it isn't present start at 46
                 byte[] dataPayload = new byte[1];
-                List<int> myData = new List<int>();
+                List<double> myData = new List<double>();
                 // If it is a data packet, and the spectal display is enabled
                 // Temporarily just checking that the Payload Type has been set to Real, this only processes Real Data Payloads currently
                 // TODO -- Add IQ Complex Data Payload parsing and graphing
@@ -287,7 +287,7 @@ namespace HOUNDDOG_GUI
                     else if (pack.PayloadType[2])
                         frm.updateDataFormat("Complex, Polar");
                 }
-                if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true && pack.PayloadType[0] == true)
+                if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true && pack.PayloadType.Contains(true))
                 {
                     payloadInd += pack.classPres ? 8 : 0; // Class ID
                     payloadInd += pack.IntegerTimestamp ? 4 : 0; // Integer Timestamp
@@ -306,7 +306,7 @@ namespace HOUNDDOG_GUI
                             dataPayload = s.SubArray(payloadInd, length);
                     }
 
-                    if (dataPayload.Length > 1)
+                    if (pack.PayloadType[0] == true && dataPayload.Length > 1) // For Reals
                     {
                         myData = conversionToReals(dataPayload); // Literal Real Values
 
@@ -314,7 +314,15 @@ namespace HOUNDDOG_GUI
                         double max = 1.0 * myData.Max();
                         dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>(); // Real Values Normalized for plotting
                     }
-                    //frm.updatePayloadChart(newList);
+                    else if (pack.PayloadType[1] == true && dataPayload.Length > 1) // For Complex, Cartesian
+                    {
+                        myData = complexToReals(dataPayload);
+
+                        double min = 1.0 * myData.Min();
+                        double max = 1.0 * myData.Max();
+                        dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>(); // Real Values Normalized for plotting
+                    }
+                    
                 }
 
                 //packets.Add(new Packet(p.Caplength, p.Length, p.TimeStamp, src, dest));
@@ -400,24 +408,114 @@ namespace HOUNDDOG_GUI
         }
 
         // TODO -- Refactor All of the Functions below this comment
-        public List<int> conversionToReals(byte[] data)
+        public List<double> complexToReals(byte[] data)
         {
-            List<int> realData = new List<int>();
-            int val = 0;
+            List<double> realData = new List<double>();
+            double val1 = 0;
+            double val2 = 0;
             string b1 = "";
             string b2 = "";
+            string b3 = "";
+            string b4 = "";
             string temp = "";
-            bool neg = false;
 
-            for (int i = 0; i < data.Length; i += 2)
+            for (int i = 0; i < data.Length; i += 4)
             {
-                if (i == data.Length - 1)
+                if (i >= data.Length - 3)
                 {
                     break;
                 }
 
                 b1 = Convert.ToString(data[i], 2);
-                b2 = Convert.ToString(data[i], 2);
+                b2 = Convert.ToString(data[i + 1], 2);
+                b3 = Convert.ToString(data[i + 2], 2);
+                b4 = Convert.ToString(data[i + 3], 2);
+
+                temp = "";
+                for (int j = 8 - b1.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b1;
+                b1 = temp;
+
+                temp = "";
+                for (int j = 8 - b2.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b2;
+                b2 = temp;
+
+                temp = "";
+                for (int j = 8 - b3.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b3;
+                b3 = temp;
+
+                temp = "";
+                for (int j = 8 - b4.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b4;
+                b4 = temp;
+
+                b1 += b2;
+                b3 += b4;
+                b1 = b1.Replace(" ", string.Empty);
+                b3 = b3.Replace(" ", string.Empty);
+
+                if (b1[0].Equals('1') == true)
+                {
+                    string myNum = pack.twosComplement(b1);
+                    long num = Convert.ToInt64(myNum, 2);
+                    num *= -1;
+                    val1 = num;
+                }
+                else
+                {
+                    val1 = Convert.ToInt32(b1, 2);
+                }
+
+                if (b3[0].Equals('1') == true)
+                {
+                    string myNum = pack.twosComplement(b3);
+                    long num = Convert.ToInt64(myNum, 2);
+                    num *= -1;
+                    val2 = num;
+                }
+                else
+                {
+                    val2 = Convert.ToInt64(b3, 2);
+                }
+
+                double tempVal = Math.Sqrt((val1 * val1) + (val2 * val2));
+                realData.Add(tempVal);
+            }
+
+            return realData;
+        }
+
+        public List<double> conversionToReals(byte[] data)
+        {
+            List<double> realData = new List<double>();
+            int val = 0;
+            string b1 = "";
+            string b2 = "";
+            string temp = "";
+
+            for (int i = 0; i < data.Length; i += 2)
+            {
+                if (i >= data.Length - 1)
+                {
+                    break;
+                }
+
+                b1 = Convert.ToString(data[i], 2);
+                b2 = Convert.ToString(data[i+1], 2);
                 temp = "";
                 for (int j = 8 - b1.Length; j > 0; j--)
                 {
