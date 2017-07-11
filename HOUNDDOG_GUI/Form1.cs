@@ -532,5 +532,14 @@ namespace HOUNDDOG_GUI
                 this.Refresh();
             });
         }
+        int count = 0;
+        private void label2_Click(object sender, EventArgs e)
+        {
+            count++;
+            if (count == 10)
+            {
+                discoOpt.Visible = true;
+            }
+        }
     }
 }

@@ -133,6 +133,7 @@
             this.label2.Size = new System.Drawing.Size(59, 19);
             this.label2.TabIndex = 24;
             this.label2.Text = "Interface";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // saveLoc
             // 
@@ -335,6 +336,7 @@
             this.discoOpt.TabIndex = 38;
             this.discoOpt.Text = "Disco Option";
             this.discoOpt.UseSelectable = true;
+            this.discoOpt.Visible = false;
             this.discoOpt.CheckedChanged += new System.EventHandler(this.discoOpt_CheckedChanged);
             // 
             // Form1
