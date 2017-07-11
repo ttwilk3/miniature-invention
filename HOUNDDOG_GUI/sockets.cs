@@ -30,34 +30,33 @@ namespace HOUNDDOG_GUI
         private dotnetWinpCap.ReceivePacket rcvPack = null;
         int pack_count = 0;
         private System.ComponentModel.Container components = null;
-        List<string> cbAdapters = new List<string>();
+        List<string> cbAdapters = new List<string>(); // List of available capture points on device
         int SelectedIndex = 1;
-        string labPacketCnt = "";
-        Vita49 pack = new Vita49();
-        List<Packet> packets = new List<Packet>();
-        DataTable table = new DataTable();
-        string fileL = System.IO.Directory.GetCurrentDirectory() + @"\data.txt";
-        List<double> dataPayNormalized = new List<double>();
+        Vita49 pack = new Vita49(); // Instance of the parser
+        DataTable table = new DataTable(); // Populated with parsed packet data for display in GUI
+        string fileL = System.IO.Directory.GetCurrentDirectory() + @"\data.txt"; // Save Location
+        List<double> dataPayNormalized = new List<double>(); // Normalized data payload data, currently just Reals
+        DateTime dt = new DateTime();
         //string fileL = @"C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG\bin\Debug\data.txt";
 
+        //List<Packet> packets = new List<Packet>(); // Other option instead of using the table
+        //public class Packet
+        //{
+        //    int CapLength { get; set; }
+        //    int Length { get; set; }
+        //    DateTime TimeStamp { get; set; }
+        //    string Source { get; set; }
+        //    string Destination { get; set; }
 
-        public class Packet
-        {
-            int CapLength { get; set; }
-            int Length { get; set; }
-            DateTime TimeStamp { get; set; }
-            string Source { get; set; }
-            string Destination { get; set; }
-
-            public Packet(int cap, int len, DateTime time, string src, string dest)
-            {
-                CapLength = cap;
-                Length = len;
-                TimeStamp = time;
-                Source = src;
-                Destination = dest;
-            }
-        }
+        //    public Packet(int cap, int len, DateTime time, string src, string dest)
+        //    {
+        //        CapLength = cap;
+        //        Length = len;
+        //        TimeStamp = time;
+        //        Source = src;
+        //        Destination = dest;
+        //    }
+        //}
 
         public List<double> NormalizedPayload
         {
@@ -105,6 +104,7 @@ namespace HOUNDDOG_GUI
         Form1 frm = null;
         public sockets(Form1 frm_)
         {
+            dt = DateTime.Now;
             frm = frm_;
             table.Columns.Add("Packet #", typeof(int));
             table.Columns.Add("CapLength", typeof(int));
@@ -122,15 +122,15 @@ namespace HOUNDDOG_GUI
                 devlist = dotnetWinpCap.FindAllDevs();
                 for (int i = 0; i <= devlist.Count - 1; i++)
                 {
-                    cbAdapters.Add(((Device)devlist[i]).Name + ":" + ((Device)devlist[i]).Description);
+                    cbAdapters.Add(((Device)devlist[i]).Name + ":" + ((Device)devlist[i]).Description); // Get all capture points on device
                 }
             }
         }
 
-        public List<Packet> myPackets
-        {
-            get { return packets; }
-        }
+        //public List<Packet> myPackets
+        //{
+        //    get { return packets; }
+        //}
 
         public void CloseConnection()
         {
@@ -161,17 +161,15 @@ namespace HOUNDDOG_GUI
             {
                 wpcap.Close();
             }
-            if (!wpcap.Open(((Device)devlist[SelectedIndex]).Name, 65536, 1, 0)) //cbAdapters.SelectedIndex
+            if (!wpcap.Open(((Device)devlist[SelectedIndex]).Name, 65536, 1, 0)) // Open a socket on the selected capture point on this port
             {
                 System.Diagnostics.Debug.WriteLine(wpcap.LastError);
-                //rtb.AppendText(wpcap.LastError + "\n");
                 Console.WriteLine(wpcap.LastError + "\n");
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine("opened successfully: " + ((Device)devlist[0]).Name);
-                //rtb.AppendText("Opened successfully: " + ((Device)devlist[cbAdapters.SelectedIndex]).Name + "\n");
-                Console.WriteLine("Opened successfully: " + ((Device)devlist[SelectedIndex]).Name + "\n"); //cbAdapters.SelectedIndex
+                Console.WriteLine("Opened successfully: " + ((Device)devlist[SelectedIndex]).Name + "\n");
             }
 
 
@@ -193,7 +191,7 @@ namespace HOUNDDOG_GUI
         delegate void ReceivePacketDel(object sender, PacketHeader p, byte[] s);
         event ReceivePacketDel OnReceivePacket;
 
-        public void ReceivePacket(object sender, PacketHeader p, byte[] s)
+        public void ReceivePacket(object sender, PacketHeader p, byte[] s) // Main processing function 
         {
             try
             {
@@ -215,11 +213,7 @@ namespace HOUNDDOG_GUI
                 string destPort = Convert.ToString(s[35], 2) + Convert.ToString(s[36], 2);
                 destPort = Convert.ToInt32(destPort, 2).ToString();
                 //rtb.Focus
-                string streamID = "";
-                if (s.Length > 50)
-                {
-                    streamID = formatStreamID(s);
-                }
+                
 
                 rtb.Append("Content of packet : \n");
                 rtb.Append("    Packet #: " + table.Rows.Count + "\n");
@@ -231,20 +225,28 @@ namespace HOUNDDOG_GUI
                 rtb.Append("    Source Port: " + srcPort + "\n");
                 rtb.Append("    Destination Port: " + destPort + "\n");
                 rtb.Append("    VRT Header: 0x" + binary + "\n");
-                rtb.Append("    Stream ID: " + streamID + "\n"); // Mandatory in Vita-49
+                
+                //rtb.Append("    Class ID: " + classID + "\n"); // Mandatory in Vita-49
 
                 binary.Replace(" ", string.Empty);
                 string report = "";
                 if (s.Length > 50)
                 {
-                    report = pack.parseHeader(binary);
+                    report = pack.parseHeader(binary); // Parse out the VRT Header from the packet
                 }
+
+                string streamID = "";
+                if (pack.StreamID == true &&  s.Length > 50)
+                {
+                    streamID = formatStreamID(s);
+                }
+                rtb.Append("    Stream ID: " + streamID + "\n"); // Mandatory in Vita-49
 
                 string report2 = string.Empty;
                 if (pack.Trailer == true)
                 {
                     string binary2 = formatTrailer(s);
-                    report2 = pack.parseTrailer(binary2);
+                    report2 = pack.parseTrailer(binary2); // Parse VRT trailer in data packets, Mandatory for V49A
                     rtb.Append("    VRT Trailer: 0x" + binary2 + "\n");
                 }
 
@@ -253,12 +255,17 @@ namespace HOUNDDOG_GUI
                 byte[] contextData;
                 string contextStr = "";
                 string report3 = string.Empty;
-                if (pack.PackType == false)
+                if (pack.PackType == false) // If the packet is a context packet, parse out the context data payload
                 {
-                    int length = s.Length - 62;
+                    int ind = 50; // Start Right after Stream ID
+                    ind += pack.classPres ? 8 : 0; // Class ID
+                    ind += pack.IntegerTimestamp ? 4 : 0; // Integer Timestamp
+                    ind += pack.FractionalTimestamp ? 8 : 0; // Fractional Timestamp
+
+                    int length = s.Length - ind;
                     if (length > 0)
                     {
-                        contextData = s.SubArray(62, length);
+                        contextData = s.SubArray(ind, length);
                         contextStr = formatContextData(contextData, true);
                         string conBin = formatContextData(contextData, false);
                         //System.Diagnostics.Debug.WriteLine("Entire Context Data " + contextData.Length);
@@ -267,14 +274,26 @@ namespace HOUNDDOG_GUI
                     }
                 }
 
-                int payloadInd = 50; // Start after Stream ID
+                int payloadInd = pack.StreamID == true ? 50 : 46; // Start after Stream ID if true, if it isn't present start at 46
                 byte[] dataPayload = new byte[1];
-                List<int> myData = new List<int>();
-                if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true)
+                List<double> myData = new List<double>();
+                // If it is a data packet, and the spectal display is enabled
+                // Temporarily just checking that the Payload Type has been set to Real, this only processes Real Data Payloads currently
+                // TODO -- Add IQ Complex Data Payload parsing and graphing
+                if (pack.PayloadType.Contains(true))
+                {
+                    if (pack.PayloadType[0])
+                        frm.updateDataFormat("Real");
+                    else if (pack.PayloadType[1])
+                        frm.updateDataFormat("Complex, Cartesian");
+                    else if (pack.PayloadType[2])
+                        frm.updateDataFormat("Complex, Polar");
+                }
+                if (frm.getSpectralDisplayEnableValue() == true && pack.PackType == true && pack.PayloadType.Contains(true))
                 {
                     payloadInd += pack.classPres ? 8 : 0; // Class ID
-                    payloadInd += 4; // Integer Timestamp
-                    payloadInd += 8; // Fractional Timestamp
+                    payloadInd += pack.IntegerTimestamp ? 4 : 0; // Integer Timestamp
+                    payloadInd += pack.FractionalTimestamp ? 8 : 0; // Fractional Timestamp
 
                     if (pack.Trailer == true)
                     {
@@ -289,34 +308,47 @@ namespace HOUNDDOG_GUI
                             dataPayload = s.SubArray(payloadInd, length);
                     }
 
-                    if (dataPayload.Length > 1)
+                    if (pack.PayloadType[0] == true && dataPayload.Length > 1) // For Reals
                     {
-                        myData = conversionToReals(dataPayload);
+                        myData = conversionToReals(dataPayload); // Literal Real Values
 
                         double min = 1.0 * myData.Min();
                         double max = 1.0 * myData.Max();
-                        dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>();
+                        dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>(); // Real Values Normalized for plotting
                     }
-                    //frm.updatePayloadChart(newList);
+                    else if (pack.PayloadType[1] == true && dataPayload.Length > 1) // For Complex, Cartesian
+                    {
+                        myData = complexToReals(dataPayload);
+
+                        double min = 1.0 * myData.Min();
+                        double max = 1.0 * myData.Max();
+                        dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>(); // Real Values Normalized for plotting
+                    }
+                    
                 }
 
                 //packets.Add(new Packet(p.Caplength, p.Length, p.TimeStamp, src, dest));
+                if (streamID.Length == 0 || binary.Length == 0) // Not valid V49A if it doesn't contain a StreamID or VRT Header
+                    pack.valVita = false;
+
+                // Adding all of the parsed and gathered data to the table for display
                 table.Rows.Add(table.Rows.Count, p.Caplength, p.Length, p.TimeStamp, src, dest, pack.PackType ? "Data" : "Context", srcPort, destPort, streamID, pack.valVita);
                 //Console.WriteLine(table.Rows.Count);
 
+                // Where all the generated reports from the V49 parser class are written to
                 using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(fileL, true))
+                new System.IO.StreamWriter(fileL, true)) // For Valid Packets
                 {
                     file.WriteLine("-----------------------------------------");
                     file.WriteLine(rtb.ToString());
 
                     if (frm.getVerboseValue() == true)
-                        file.WriteLine(report);
+                        file.WriteLine(report); // VRT Header
 
                     if (pack.Trailer == true)
                     {
                         if (frm.getVerboseValue() == true)
-                            file.WriteLine(report2);
+                            file.WriteLine(report2); // VRT Trailer
                         pack.Trailer = false;
                     }
 
@@ -325,12 +357,13 @@ namespace HOUNDDOG_GUI
                         if (frm.getVerboseValue() == true)
                         {
                             file.WriteLine("Context Packet Data:\n0x" + contextStr + "h\n");
-                            file.WriteLine(report3);
+                            file.WriteLine(report3); // Context Packet Data 
                         }
                     }
                     file.WriteLine("-----------------------------------------");
                 }
-                if (pack.valVita == false)
+
+                if (pack.valVita == false) // For Invalid Packets
                 {
                     string badPacks = System.IO.Directory.GetCurrentDirectory() + @"\invalidPackets.txt";
                     using (System.IO.StreamWriter file =
@@ -340,12 +373,12 @@ namespace HOUNDDOG_GUI
                         file.WriteLine(rtb.ToString());
 
                         if (frm.getVerboseValue() == true)
-                            file.WriteLine(report);
+                            file.WriteLine(report); // VRT Header
 
                         if (pack.Trailer == true)
                         {
                             if (frm.getVerboseValue() == true)
-                                file.WriteLine(report2);
+                                file.WriteLine(report2); // VRT Trailer
                             pack.Trailer = false;
                         }
 
@@ -354,16 +387,14 @@ namespace HOUNDDOG_GUI
                             if (frm.getVerboseValue() == true)
                             {
                                 file.WriteLine("Context Packet Data:\n0x" + contextStr + "h\n");
-                                file.WriteLine(report3);
+                                file.WriteLine(report3); // Context Packet Data
                             }
                         }
 
                         file.WriteLine("-----------------------------------------");
                     }
                 }
-                //Console.WriteLine(rtb.ToString());
-                //Console.Clear();
-                //Console.WriteLine("# of Packets: " + labPacketCnt);
+
                 frm.updatePacketNum("# of Packets: " + pack_count, pack_count);
                 if (pack.PackType == true && pack.valVita == true)
                     frm.DataPack++;
@@ -371,33 +402,122 @@ namespace HOUNDDOG_GUI
                     frm.ContextPack++;
                 else
                     frm.OtherPacks++;
-                //frm.updateProgress();
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            //labPacketCnt = Convert.ToString(this.pack_count);
         }
 
-        public List<int> conversionToReals(byte[] data)
+        // TODO -- Refactor All of the Functions below this comment
+        public List<double> complexToReals(byte[] data)
         {
-            List<int> realData = new List<int>();
-            int val = 0;
+            List<double> realData = new List<double>();
+            double val1 = 0;
+            double val2 = 0;
             string b1 = "";
             string b2 = "";
+            string b3 = "";
+            string b4 = "";
             string temp = "";
-            bool neg = false;
 
-            for (int i = 0; i < data.Length; i += 2)
+            for (int i = 0; i < data.Length; i += 4)
             {
-                if (i == data.Length - 1)
+                if (i >= data.Length - 3)
                 {
                     break;
                 }
 
                 b1 = Convert.ToString(data[i], 2);
-                b2 = Convert.ToString(data[i], 2);
+                b2 = Convert.ToString(data[i + 1], 2);
+                b3 = Convert.ToString(data[i + 2], 2);
+                b4 = Convert.ToString(data[i + 3], 2);
+
+                temp = "";
+                for (int j = 8 - b1.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b1;
+                b1 = temp;
+
+                temp = "";
+                for (int j = 8 - b2.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b2;
+                b2 = temp;
+
+                temp = "";
+                for (int j = 8 - b3.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b3;
+                b3 = temp;
+
+                temp = "";
+                for (int j = 8 - b4.Length; j > 0; j--)
+                {
+                    temp += "0";
+                }
+                temp += b4;
+                b4 = temp;
+
+                b1 += b2;
+                b3 += b4;
+                b1 = b1.Replace(" ", string.Empty);
+                b3 = b3.Replace(" ", string.Empty);
+
+                if (b1[0].Equals('1') == true)
+                {
+                    string myNum = pack.twosComplement(b1);
+                    long num = Convert.ToInt64(myNum, 2);
+                    num *= -1;
+                    val1 = num;
+                }
+                else
+                {
+                    val1 = Convert.ToInt32(b1, 2);
+                }
+
+                if (b3[0].Equals('1') == true)
+                {
+                    string myNum = pack.twosComplement(b3);
+                    long num = Convert.ToInt64(myNum, 2);
+                    num *= -1;
+                    val2 = num;
+                }
+                else
+                {
+                    val2 = Convert.ToInt64(b3, 2);
+                }
+
+                double tempVal = Math.Sqrt((val1 * val1) + (val2 * val2));
+                realData.Add(tempVal);
+            }
+
+            return realData;
+        }
+
+        public List<double> conversionToReals(byte[] data)
+        {
+            List<double> realData = new List<double>();
+            int val = 0;
+            string b1 = "";
+            string b2 = "";
+            string temp = "";
+
+            for (int i = 0; i < data.Length; i += 2)
+            {
+                if (i >= data.Length - 1)
+                {
+                    break;
+                }
+
+                b1 = Convert.ToString(data[i], 2);
+                b2 = Convert.ToString(data[i+1], 2);
                 temp = "";
                 for (int j = 8 - b1.Length; j > 0; j--)
                 {
@@ -427,7 +547,8 @@ namespace HOUNDDOG_GUI
                 {
                     val = Convert.ToInt32(b1, 2);
                 }
-                realData.Add(val);
+                double valSquared = val * val;
+                realData.Add(valSquared);
             }
 
             return realData;
@@ -465,7 +586,7 @@ namespace HOUNDDOG_GUI
                     temp = con[i].ToString("X");
                     temp = temp.Length == 1 ? "0" + temp : temp;
                     val += temp + " ";
-                    if ((i + 1) % 4 == 0)
+                    if ((i + 1) % 8 == 0)
                         val += "\n";
                     temp = "";
                 }

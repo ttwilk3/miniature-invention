@@ -8,29 +8,33 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
 using LiveCharts;
 using LiveCharts.Configurations;
 using LiveCharts.Wpf;
 using System.Windows.Media;
 using System.Windows.Threading;
 using LiveCharts.Geared;
+using MetroFramework.Forms;
+using MetroFramework.Controls;
+using MetroFramework;
 
 namespace HOUNDDOG_GUI
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroForm
     {
         sockets sock;
-        bool running = false;
         bool limitSet = false;
-        bool reset = false;
         int packetLimit;
         Random rand = new Random();
         int prevPackCount = 0;
         System.Timers.Timer timer = new System.Timers.Timer();
+        System.Timers.Timer timer2 = new System.Timers.Timer();
         int dataPacks = 0;
         int contPacks = 0;
         int otherOrInvalidPacks = 0;
+        string fileLoadLocation = @"";
+        PcapReader pRead;
+        Point pt = new Point();
 
         public class MeasureModel
         {
@@ -44,21 +48,21 @@ namespace HOUNDDOG_GUI
             InitializeComponent();
             sock = new sockets(this);
             saveLoc.Text = sock.FileLoc;
+            loadLoc.Text = fileLoadLocation;
             verboseCheck.Checked = true;
             updateComboBox();
             BindGrid();
 
             setupPacketCountChart();
             setupDataPayloadChart();
-
-            updateChart.Visible = false;
-            updateChart.Enabled = false;
+            
             cartesianChart2.Visible = false;
             cartesianChart2.Enabled = false;
             refreshRate.Visible = false;
             refreshRateSlider.Visible = false;
+            dataFormat.Visible = false;
 
-            Height -= 260;
+            Height -= 250;
         }
 
         public int DataPack
@@ -89,30 +93,19 @@ namespace HOUNDDOG_GUI
             return specDisplayEnable.Checked;
         }
 
+        public void updateDataFormat(string format)
+        {
+            dataFormat.Text = "Data Format: " + format;
+        }
+
         public void updatePacketNum(string s, long num)
         {
             label1.Text = s;
             if (limitSet == true && num >= packetLimit)
             {
                 dataGridView1.Refresh();
-                running = false;
-                reset = true;
-                progressBar1.Value = 100;
                 sock.CloseConnection();
             }
-        }
-
-        public void updateProgress()
-        {
-            if (progressBar1.Value >= 100)
-            {
-                //Thread.Sleep(500);
-                progressBar1.Value = 0;
-            }
-
-            if (rand.Next(0, 101) < 30)
-                progressBar1.Value += 1;
-
         }
 
         private void updateComboBox()
@@ -130,59 +123,88 @@ namespace HOUNDDOG_GUI
             dataGridView1.DataSource = sBind;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
-            bool badInp = false;
-            packetLimit = 0;
-            if (textBox1.Text.Length > 0)
+            if (fromFile.Checked != true)
             {
-                bool result = Int32.TryParse(textBox1.Text, out packetLimit);
-                if (result != true)
+                bool badInp = false;
+                packetLimit = 0;
+                if (textBox1.Text.Length > 0)
                 {
-                    MessageBox.Show("Please enter a valid integer. Up to 1M packets.");
-                    badInp = true;
-                }
-                else
-                {
-                    if (packetLimit > 1000000)
+                    bool result = Int32.TryParse(textBox1.Text, out packetLimit);
+                    if (result != true)
                     {
-                        MessageBox.Show("Please enter a valid integer. Up to 1M packets.");
+                        MetroMessageBox.Show(this, "Please enter a valid integer. Up to 1M packets.");
                         badInp = true;
                     }
                     else
                     {
-                        limitSet = true;
-                        badInp = false;
+                        if (packetLimit > 1000000)
+                        {
+                            MetroMessageBox.Show(this, "Please enter a valid integer. Up to 1M packets.");
+                            badInp = true;
+                        }
+                        else
+                        {
+                            limitSet = true;
+                            badInp = false;
+                        }
                     }
                 }
-            }
-            if (badInp == false)
-            {
-                running = true;
-                sock.DeviceInd = comboBox1.SelectedIndex;
-                sock.Start();
-
-                if (specDisplayEnable.Checked == true)
+                if (badInp == false)
                 {
-                    if (sock.NormalizedPayload.Count > 0)
+                    sock.DeviceInd = comboBox1.SelectedIndex;
+                    sock.Start();
+                    startButton.Enabled = false;
+
+                    if (specDisplayEnable.Checked == true)
                     {
-                        updatePayloadChart(sock.NormalizedPayload);
+                        if (sock.NormalizedPayload.Count > 0)
+                        {
+                            updatePayloadChart(sock.NormalizedPayload);
+                        }
+                        timerStart();
                     }
-                    timerStart();
                 }
             }
+            else
+            {
+                if (fileLoadLocation.Length == 0)
+                {
+                    MetroMessageBox.Show(this, "Please choose a Pcap file to load.");
+                }
+                else
+                {
+                    fromFile.Enabled = false;
+                    fileLoadChoose.Enabled = false;
+                    startButton.Enabled = false;
+                    BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+                    backgroundWorker1.RunWorkerAsync();
+                    backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+                    backgroundWorker1.WorkerReportsProgress = true;
+                }
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            pRead = new PcapReader(fileLoadLocation, sock, this);
+            fromFile.Enabled = true;
+            fileLoadChoose.Enabled = true;
+            startButton.Enabled = true;
+            timer2.Stop();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
             BindGrid();
             dataGridView1.Refresh();
-            running = false;
             sock.CloseConnection();
-            progressBar1.Value = 100;
+            timer.Stop();
+            startButton.Enabled = true;
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+        private void clearButton_Click(object sender, EventArgs e)
         {
             //BindGrid();
             //dataGridView1.Refresh();
@@ -245,7 +267,7 @@ namespace HOUNDDOG_GUI
                 new LineSeries
                 {
                     Values = ChartValues,
-                    PointGeometrySize = 8,
+                    PointGeometrySize = 0,
                     StrokeThickness = 4
                 }
             };
@@ -284,12 +306,12 @@ namespace HOUNDDOG_GUI
 
             cartesianChart2.AxisX.Add(new Axis
             {
-                Title = "Time"
+                //Title = "Time"
             });
 
             cartesianChart2.AxisY.Add(new Axis
             {
-                Title = "Voltage"
+                //Title = "Voltage"
             });
 
             SetAxisLimitsPayload();
@@ -351,15 +373,6 @@ namespace HOUNDDOG_GUI
             cartesianChart2.AxisY[0].MinValue = 0;
         }
 
-        private void updateChart_Click(object sender, EventArgs e)
-        {
-            //if (sock.NormalizedPayload.Count > 0)
-            //{
-            //    updatePayloadChart(sock.NormalizedPayload);
-            //}
-            //timerStart();
-        }
-
         private void InvokeUI(Action a)
         {
             try
@@ -385,7 +398,13 @@ namespace HOUNDDOG_GUI
         {
             InvokeUI(() =>
             {
-                updatePayloadChart(sock.NormalizedPayload);
+                if (sock.VPacket.PayloadType.Contains(true)) // Check that Payload Type has been set
+                {
+                    if (sock.VPacket.PayloadType[0] == true || sock.VPacket.PayloadType[1] == true) // Check that the Data Payload is set to Reals or Complex, Cartesian
+                        updatePayloadChart(sock.NormalizedPayload);
+                    else
+                        timer.Stop();
+                }
             });
         }
 
@@ -399,10 +418,11 @@ namespace HOUNDDOG_GUI
                 cartesianChart2.Enabled = true;
                 refreshRate.Visible = true;
                 refreshRateSlider.Visible = true;
+                dataFormat.Visible = true;
 
                 timerStart();
 
-                Height += 260;
+                Height += 250;
             }
             else
             {
@@ -412,10 +432,11 @@ namespace HOUNDDOG_GUI
                 cartesianChart2.Enabled = false;
                 refreshRate.Visible = false;
                 refreshRateSlider.Visible = false;
+                dataFormat.Visible = false;
 
                 timer.Stop();
 
-                Height -= 260;
+                Height -= 250;
             }
         }
 
@@ -423,6 +444,102 @@ namespace HOUNDDOG_GUI
         {
             timer.Interval = refreshRateSlider.Value;
             refreshRate.Text = "Refresh Rate: " + refreshRateSlider.Value + " ms";
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            sock.CloseConnection();
+        }
+
+        private void fromFile_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fromFile.Checked == true)
+            {
+                pt = new Point(verboseCheck.Location.X, verboseCheck.Location.Y);
+                verboseCheck.Location = new Point(startButton.Location.X + startButton.Width + 25, startButton.Location.Y);
+                fileLoadChoose.Visible = true;
+                loadLoc.Visible = true;
+
+                //cartesianChart1.Visible = false;
+                //cartesianChart1.Enabled = false;
+                stopButton.Visible = false;
+                clearButton.Visible = false;
+                comboBox1.Visible = false;
+                label3.Visible = false;
+                label2.Visible = false;
+                textBox1.Visible = false;
+                //specDisplayEnable.Visible = false;
+            }
+            else
+            {
+                verboseCheck.Location = pt;
+                fileLoadChoose.Visible = false;
+                loadLoc.Visible = false;
+
+                //cartesianChart1.Visible = true;
+                //cartesianChart1.Enabled = true;
+                stopButton.Visible = true;
+                clearButton.Visible = true;
+                comboBox1.Visible = true;
+                label3.Visible = true;
+                label2.Visible = true;
+                textBox1.Visible = true;
+                //specDisplayEnable.Visible = true;
+            }
+        }
+
+        private void fileLoadChoose_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                fileLoadLocation = openFileDialog1.FileName;
+                loadLoc.Text = openFileDialog1.FileName;
+            }
+        }
+
+        private void discoOpt_CheckedChanged(object sender, EventArgs e)
+        {
+            if (discoOpt.Checked == true)
+            {
+                startDisco();
+            }
+            else if (discoOpt.Checked == false)
+            {
+                timer2.Stop();
+                this.Style = MetroColorStyle.Blue;
+                this.dataGridView1.Style = MetroColorStyle.Blue;
+                this.Update();
+                this.Refresh();
+            }
+        }
+
+        private void startDisco()
+        {
+            timer2.Elapsed += new System.Timers.ElapsedEventHandler(discoFunc);
+            timer2.Interval = 200;
+            timer2.Enabled = true;
+            timer2.Start();
+        }
+        bool opc = false;
+        private void discoFunc(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            InvokeUI(() =>
+            {
+                this.Style = (MetroColorStyle)rand.Next(0, 15);
+                this.dataGridView1.Style = (MetroColorStyle)rand.Next(0, 15);
+                this.Update();
+                this.Refresh();
+            });
+        }
+        int count = 0;
+        private void label2_Click(object sender, EventArgs e)
+        {
+            count++;
+            if (count == 10)
+            {
+                discoOpt.Visible = true;
+            }
         }
     }
 }
