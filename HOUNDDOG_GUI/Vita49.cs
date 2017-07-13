@@ -19,10 +19,21 @@ namespace HOUNDDOG_GUI
         bool trail = false; // Trailer
         bool dataPack = false; // If it is a Data packet
         bool validVita = false; // Valid V49A or not
+
         bool streamIDPres = false; // If there is a Stream ID Present *There must be one in Vita-49A*
         bool classIDPres = false; // If there is a Class ID present
         bool intTimestamp = false; // If there is an Integer-seconds Timestamp present
         bool fracTimestamp = false; // If there is a Fractional-seconds Timestamp present
+
+        // Booleans for Data Packet Payload Format Field in IF Context Packets
+        bool dataPacketPayloadFormat = false; // IF Context Packets SHALL include a Data Payload Format Field
+        bool procEfficientPack = false; // IF Data packet SHALL use Processing-Efficient Packing
+        bool sampleComponentRep = false; // IF Data packet SHALL NOT use Sample-Component Repeating
+        bool eventTags = false; // Item Packing Field SHALL NOT include any bits for Event Tags
+        bool channelTags = false; // Item Packing Field SHALL NOT include any bits for Channel Tags4
+
+        bool dataFormat = false; // IF Data Packet SHALL use one of the following Data Item Formats 6.1.6-12
+
         bool[] contextPackInd = new bool[24]; // For the Context Packet Indicator Fields
         bool[] dataPayloadType = new bool[3]; // 0 - Real 1 - Complex, Cartesian 2 - Complex, Polar
         double sampRate = 0.0;
@@ -63,6 +74,7 @@ namespace HOUNDDOG_GUI
         public bool StreamID
         {
             get { return streamIDPres; }
+            set { streamIDPres = value; }
         }
 
         public bool classPres
@@ -108,7 +120,10 @@ namespace HOUNDDOG_GUI
                     // "Signal Data Packet without Stream ID" and
                     // "Extension Data PAcket without Stream ID"
                     if (str.ToString().Equals("0000") == true || str.ToString().Equals("0010"))
+                    {
                         streamIDPres = false;
+                        // The Packet Type Code "0000" SHALL NOT be used
+                    }
                     else
                         streamIDPres = true;
 
@@ -120,7 +135,7 @@ namespace HOUNDDOG_GUI
                     report.Append((bin[5].Equals('1') ? "Trailer: 0x1 -- Trailer is present.\n" : "Trailer: 0x0 -- Trailer is not present. -- TRAILER MUST BE PRESENT IN VITA-49A.\n"));
                     trail = bin[5].Equals('1') ? true : false;
 
-                    validVita = (streamIDPres && classIDPres && trail) ? true : false;
+                    validVita = (streamIDPres && classIDPres && trail && (dataPayloadType[0] || dataPayloadType[1])) ? true : false;
 
                     str.Clear();
                     str.Append(bin.Substring(8, 2));
@@ -228,7 +243,7 @@ namespace HOUNDDOG_GUI
             string sub = bin.Substring(25);
             report.Append("Assoicated Context Packet Count: 0x" + sub + " -- Decimal " + Convert.ToInt32(sub.ToString().Replace(" ", string.Empty), 2).ToString() + "\n");
 
-            validVita = (classIDPres && trail) ? true : false;
+            validVita = (streamIDPres && classIDPres && trail && (dataPayloadType[0] || dataPayloadType[1])) ? true : false;
             return report.ToString();
         }
 
@@ -423,10 +438,12 @@ namespace HOUNDDOG_GUI
                         }
                         else if (i == 16)
                         {
+                            dataPacketPayloadFormat = true;
                             string temp2 = "";
                             report.Append("Data Packet Payload Format:\n");
 
                             report.Append("     Packing Method: " + temp[0] + "\n");
+                            procEfficientPack = temp[0].Equals('0') ? true : false;
 
                             temp2 = temp.Substring(1, 2);
                             report.Append("     Real/Complex: " + dataSampleType[temp2] + "\n");
@@ -436,12 +453,15 @@ namespace HOUNDDOG_GUI
                             report.Append("     Data Item Format: " + dataItemFormat[temp2] + "\n");
 
                             report.Append("     Sample-Component Repeat Indicator: " + (temp[8].Equals('1') ? "0x1 True" : "0x0 False") + "\n");
+                            sampleComponentRep = temp[8].Equals('0') ? true : false;
 
                             temp2 = temp.Substring(9, 3);
                             report.Append("     Event-Tag Size: " + Convert.ToInt32(temp2, 2) + "\n");
+                            eventTags = temp2.Equals("000") ? true : false;
 
                             temp2 = temp.Substring(12, 4);
                             report.Append("     Channel-Tag Size: " + Convert.ToInt32(temp2, 2) + "\n");
+                            channelTags = temp2.Equals("0000") ? true : false;
 
                             temp2 = temp.Substring(20, 6);
                             report.Append("     Item Packing Field Size: " + Convert.ToInt32(temp2, 2) + "\n");
@@ -501,14 +521,66 @@ namespace HOUNDDOG_GUI
                     temp = "";
                 }
             }
-
+            validVita = (dataPacketPayloadFormat && procEfficientPack && sampleComponentRep && eventTags && channelTags) ? true : false;
             return report.ToString();
         }
 
-        public string processClassID(byte[] classID)
+        public string processClassID(string classID)
         {
-            throw new NotImplementedException("TODO -- Implement Parsing of Class IDs");
-            return "";
+            StringBuilder report = new StringBuilder();
+            report.Append("VRT Class ID:\n");
+            string temp = "";
+
+            // Bits 0-4 Set Per VRT
+            temp = classID.Substring(0, 5);
+            report.Append("Pad Bit Count: " + Convert.ToInt32(temp, 2) + "\n");
+
+            // Bits 5-7 Reserved (set to 0 by default)
+
+            // Bits 8-31 OUI
+            temp = classID.Substring(8, 24);
+            string OUI = Convert.ToInt32(temp).ToString("X");
+            string temp2 = "";
+            for (int i = OUI.Length - 8; i > 0; i--)
+                temp2 += "0";
+            temp2 += OUI;
+            report.Append("OUI: 0x" + temp2 + "\n");
+
+            // Bits 32-39 Fixed Value
+            temp = classID.Substring(32, 8);
+            report.Append("Fixed Value: " + Convert.ToInt32(temp, 2) + "\n");
+
+            // Bits 40-41 Reserved (set to 0 by default)
+
+            // Bits 42-43 Real or Complex, Cartesian
+            temp = classID.Substring(42, 2);
+            assignDataPayloadType(temp);
+            if (dataPayloadType[0])
+                report.Append("R/C: Real Data Payload Type \n");
+            else if (dataPayloadType[1])
+                report.Append("R/C: Complex, Cartesian Data Payload Type \n");
+            else if (dataPayloadType[2])
+                report.Append("R/C: Complex, Polar Data Payload Type \n");
+            
+            // Bits 44-47 Data Type
+            temp = classID.Substring(44, 4);
+            try
+            {
+                report.Append("Data Type: " + dataFormatCodes[temp] + "\n");
+                dataFormat = true;
+            }
+            catch
+            {
+                dataFormat = false;
+            }
+
+            // Bits 48-63 Vector Size
+            temp = classID.Substring(48);
+            report.Append("Vector Size: " + Convert.ToInt32(temp, 2) + "\n");
+
+            validVita = (streamIDPres && classIDPres && trail && (dataPayloadType[0] || dataPayloadType[1]) && dataFormat) ? true : false;
+
+            return report.ToString();
         }
 
         public string conversionToNums(string binStr, bool checkNeg) // Convert Binary to Decimal

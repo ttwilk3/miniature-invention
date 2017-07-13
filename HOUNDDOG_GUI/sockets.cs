@@ -642,7 +642,16 @@ namespace HOUNDDOG_GUI
             b3 = b3.Length == 1 ? "0" + b3 : b3;
             b4 = b4.Length == 1 ? "0" + b4 : b4;
 
-            return "0x" + b1 + b2 + b3 + b4 + "h";
+            string check = b1 + b2 + b3 + b4;
+            long valStream = Convert.ToInt64(check, 16);
+            if (valStream >= 1 && valStream <= int.MaxValue)
+            {
+                pack.StreamID = true;
+            }
+            else
+                pack.StreamID = false;
+
+            return "0x" + check + "h";
         }
 
         public string formatHeader(byte[] s)
