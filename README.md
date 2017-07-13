@@ -22,10 +22,10 @@
 * Eventually add VITA 49.0, 49B, and 49.2 support.
 
 ##### In Progress:
+* Look into Linux Compatibility. [(Try Using Wine)](https://www.winehq.org/)
 * ~~Add file input (wireshark capture, pcap file) as an option, so you don't have to live capture the data when running.~~
 * ~~Work on IQ graph of Complex data payloads. (Current spectral display only works for Real data payloads)~~
-* ~~Look into Linux Compatibility.~~ [(Use Wine)](https://www.winehq.org/)
-* Add more fields to be parsed from data and context packets.
+* ~~Add more fields to be parsed from data and context packets.~~
 
 
 ## Example Parsed Packet Data:
