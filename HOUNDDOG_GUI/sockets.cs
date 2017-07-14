@@ -239,8 +239,16 @@ namespace HOUNDDOG_GUI
                 if (pack.StreamID == true &&  s.Length > 50)
                 {
                     streamID = formatStreamID(s);
+                    rtb.Append("    Stream ID: " + streamID + "\n"); // Mandatory in Vita-49
                 }
-                rtb.Append("    Stream ID: " + streamID + "\n"); // Mandatory in Vita-49
+
+                //string classID = "";
+                //string report4 = "";
+                //if (pack.classPres == true && s.Length > 57)
+                //{
+                //    classID = formatClassID(s);
+                //    report4 = pack.processClassID(classID);
+                //}
 
                 string report2 = string.Empty;
                 if (pack.Trailer == true)
@@ -552,6 +560,12 @@ namespace HOUNDDOG_GUI
             }
 
             return realData;
+        }
+
+        public string formatClassID(byte[] bin)
+        {
+            throw new NotImplementedException("TODO -- Implement a Byte to Bin Class ID Func");
+            return "";
         }
 
         public string formatBytestoBin(byte[] bin)

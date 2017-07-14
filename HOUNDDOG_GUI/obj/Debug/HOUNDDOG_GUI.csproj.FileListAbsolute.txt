@@ -34,9 +34,9 @@ C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-inve
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\LiveCharts.WinForms.dll.config
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\LiveCharts.Wpf.pdb
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.csprojResolveAssemblyReference.cache
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.Form1.resources
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.Properties.Resources.resources
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.csproj.GenerateResource.Cache
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.exe
 C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.pdb
-C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\obj\Debug\HOUNDDOG_GUI.csprojResolveAssemblyReference.cache
