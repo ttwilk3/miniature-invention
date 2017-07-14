@@ -1,0 +1,6 @@
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\Core\bin\Release\LiveCharts.XML
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\Core\bin\Release\LiveCharts.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\Core\bin\Release\LiveCharts.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\Core\obj\Release\Core.csprojResolveAssemblyReference.cache
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\Core\obj\Release\LiveCharts.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\Core\obj\Release\LiveCharts.pdb

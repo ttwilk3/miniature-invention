@@ -235,6 +235,8 @@ namespace HOUNDDOG_GUI
                     report = pack.parseHeader(binary); // Parse out the VRT Header from the packet
                 }
 
+                int payloadInd = pack.StreamID == true ? 50 : 46; // Start after Stream ID if true, if it isn't present start at 46
+
                 string streamID = "";
                 if (pack.StreamID == true &&  s.Length > 50)
                 {
@@ -282,7 +284,6 @@ namespace HOUNDDOG_GUI
                     }
                 }
 
-                int payloadInd = pack.StreamID == true ? 50 : 46; // Start after Stream ID if true, if it isn't present start at 46
                 byte[] dataPayload = new byte[1];
                 List<double> myData = new List<double>();
                 // If it is a data packet, and the spectal display is enabled
@@ -555,8 +556,8 @@ namespace HOUNDDOG_GUI
                 {
                     val = Convert.ToInt32(b1, 2);
                 }
-                double valSquared = val * val;
-                realData.Add(valSquared);
+                //double valSquared = val * val;
+                realData.Add(val);
             }
 
             return realData;

@@ -1,0 +1,13 @@
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.WinForms.dll.config
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.WinForms.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.WinForms.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.WinForms.XML
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.Wpf.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.xml
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.Wpf.pdb
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\bin\Release\LiveCharts.Wpf.xml
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\obj\Release\WinFormsView.csprojResolveAssemblyReference.cache
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\obj\Release\LiveCharts.WinForms.dll
+C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\miniature-invention\HOUNDDOG_GUI\LiveCharts\WinFormsView\obj\Release\LiveCharts.WinForms.pdb
