@@ -107,7 +107,7 @@ namespace HOUNDDOG_GUI
             dt = DateTime.Now;
             frm = frm_;
             table.Columns.Add("Packet #", typeof(int));
-            table.Columns.Add("CapLength", typeof(int));
+            //table.Columns.Add("CapLength", typeof(int));
             table.Columns.Add("Length", typeof(int));
             table.Columns.Add("TimeStamp", typeof(DateTime));
             table.Columns.Add("Source", typeof(string));
@@ -217,7 +217,7 @@ namespace HOUNDDOG_GUI
 
                 rtb.Append("Content of packet : \n");
                 rtb.Append("    Packet #: " + table.Rows.Count + "\n");
-                rtb.Append("	Caplength: " + p.Caplength + "\n");
+                //rtb.Append("	Caplength: " + p.Caplength + "\n");
                 rtb.Append("	Length   : " + p.Length + "\n");
                 rtb.Append("	Timestamp: " + p.TimeStamp.ToLongDateString() + " " + p.TimeStamp.ToLongTimeString() + "\n");
                 rtb.Append("    Source: " + src + "\n");
@@ -340,8 +340,11 @@ namespace HOUNDDOG_GUI
                 if (streamID.Length == 0 || binary.Length == 0) // Not valid V49A if it doesn't contain a StreamID or VRT Header
                     pack.valVita = false;
 
+                if (pack.VRTLen > p.Caplength)
+                    pack.valVita = false;
+
                 // Adding all of the parsed and gathered data to the table for display
-                table.Rows.Add(table.Rows.Count, p.Caplength, p.Length, p.TimeStamp, src, dest, pack.PackType ? "Data" : "Context", srcPort, destPort, streamID, pack.valVita);
+                table.Rows.Add(table.Rows.Count, p.Length, p.TimeStamp, src, dest, pack.PackType ? "Data" : "Context", srcPort, destPort, streamID, pack.valVita);
                 //Console.WriteLine(table.Rows.Count);
 
                 // Where all the generated reports from the V49 parser class are written to
@@ -349,6 +352,9 @@ namespace HOUNDDOG_GUI
                 new System.IO.StreamWriter(fileL, true)) // For Valid Packets
                 {
                     file.WriteLine("-----------------------------------------");
+                    if (pack.valVita == false)
+                        file.WriteLine("Not Vita-49 A compliant.\n");
+
                     file.WriteLine(rtb.ToString());
 
                     if (frm.getVerboseValue() == true)
@@ -379,6 +385,9 @@ namespace HOUNDDOG_GUI
                 new System.IO.StreamWriter(badPacks, true))
                     {
                         file.WriteLine("-----------------------------------------");
+                        if (pack.valVita == false)
+                            file.WriteLine("Not Vita-49 A compliant.\n");
+
                         file.WriteLine(rtb.ToString());
 
                         if (frm.getVerboseValue() == true)

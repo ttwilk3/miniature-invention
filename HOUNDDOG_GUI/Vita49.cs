@@ -37,6 +37,12 @@ namespace HOUNDDOG_GUI
         bool[] contextPackInd = new bool[24]; // For the Context Packet Indicator Fields
         bool[] dataPayloadType = new bool[3]; // 0 - Real 1 - Complex, Cartesian 2 - Complex, Polar
         double sampRate = 0.0;
+        int packLen = 0;
+
+        public int VRTLen
+        {
+            get { return packLen; }
+        }
 
         public bool Trailer
         {
@@ -109,6 +115,7 @@ namespace HOUNDDOG_GUI
             classIDPres = false;
             intTimestamp = false;
             fracTimestamp = false;
+            packLen = 0;
             StringBuilder report = new StringBuilder();
             report.Append("VRT Header: \n");
             try
@@ -154,11 +161,12 @@ namespace HOUNDDOG_GUI
                     str.Clear();
                     str.Append(bin.Substring(16, bin.Length - 17));
                     report.Append("Size: 0x" + str.ToString().Replace(" ", string.Empty) + " : Decimal -- " + Convert.ToInt32(str.ToString().Replace(" ", string.Empty), 2).ToString() + "\n");
+                    packLen = 4 * Convert.ToInt32(str.ToString().Replace(" ", string.Empty), 2);
 
-                    if (validVita != true)
-                    {
-                        report.Append("Not Vita-49 compliant.\n");
-                    }
+                    //if (validVita != true)
+                    //{
+                    //    report.Append("Not Vita-49 compliant.\n");
+                    //}
                     PackType = true;
                     return report.ToString();
                 }
@@ -198,7 +206,7 @@ namespace HOUNDDOG_GUI
             catch
             {
                 validVita = false;
-                return report.ToString() + "Not Vita-49 compliant.\n";
+                return report.ToString();// + "Not Vita-49 compliant.\n";
             }
             return "";
         }

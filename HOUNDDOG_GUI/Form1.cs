@@ -463,7 +463,7 @@ namespace HOUNDDOG_GUI
                 //cartesianChart1.Visible = false;
                 //cartesianChart1.Enabled = false;
                 stopButton.Visible = false;
-                clearButton.Visible = false;
+                //clearButton.Visible = false;
                 comboBox1.Visible = false;
                 label3.Visible = false;
                 label2.Visible = false;
@@ -479,7 +479,7 @@ namespace HOUNDDOG_GUI
                 //cartesianChart1.Visible = true;
                 //cartesianChart1.Enabled = true;
                 stopButton.Visible = true;
-                clearButton.Visible = true;
+                //clearButton.Visible = true;
                 comboBox1.Visible = true;
                 label3.Visible = true;
                 label2.Visible = true;
