@@ -176,10 +176,10 @@ namespace HOUNDDOG_GUI
 
                     report.Append("    Type: 0x" + str.ToString() + " -- " + packetType[str.ToString()] + "\n");
 
-                    report.Append((bin[4].Equals('1') ? "    Class: 0x1 -- Class ID present.\n" : "     Class: 0x0 -- Class ID not present.\n"));
+                    report.Append((bin[4].Equals('1') ? "    Class: 0x1 -- Class ID present.\n" : "    Class: 0x0 -- Class ID not present.\n"));
                     classIDPres = bin[4].Equals('1') ? true : false;
 
-                    report.Append((bin[7].Equals('1') ? "     Timestamp Mode: 0x1 -- General Event Timing.\n" :"     Timestamp Mode: 0x0 -- Precise Event Timing\n"));
+                    report.Append((bin[7].Equals('1') ? "    Timestamp Mode: 0x1 -- General Event Timing.\n" :"    Timestamp Mode: 0x0 -- Precise Event Timing\n"));
 
                     str.Clear();
                     str.Append(bin.Substring(8, 2));
@@ -261,35 +261,35 @@ namespace HOUNDDOG_GUI
             StringBuilder report = new StringBuilder();
             report.Append("Context Packet Indicators:\n");
 
-            report.Append("     Context Field Change Indicator: 0x" + bin[0] + " -- " + (bin[0].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Reference Point Indicator: 0x" + bin[1] + " -- " + (bin[1].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Bandwidth Indicator: 0x" + bin[2] + " -- " + (bin[2].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     IF Reference Frequency Indicator: 0x" + bin[3] + " -- " + (bin[3].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Context Field Change Indicator: 0x" + bin[0] + " -- " + (bin[0].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Reference Point Indicator: 0x" + bin[1] + " -- " + (bin[1].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Bandwidth Indicator: 0x" + bin[2] + " -- " + (bin[2].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    IF Reference Frequency Indicator: 0x" + bin[3] + " -- " + (bin[3].Equals('1') ? "True" : "False") + "\n");
 
-            report.Append("     RF Reference Frequency Indicator: 0x" + bin[4] + " -- " + (bin[4].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     RF Frequency Offset Indicator: 0x" + bin[5] + " -- " + (bin[5].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     IF Band Offset Indicator: 0x" + bin[6] + " -- " + (bin[6].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Reference Level Indicator: 0x" + bin[7] + " -- " + (bin[7].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    RF Reference Frequency Indicator: 0x" + bin[4] + " -- " + (bin[4].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    RF Frequency Offset Indicator: 0x" + bin[5] + " -- " + (bin[5].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    IF Band Offset Indicator: 0x" + bin[6] + " -- " + (bin[6].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Reference Level Indicator: 0x" + bin[7] + " -- " + (bin[7].Equals('1') ? "True" : "False") + "\n");
 
-            report.Append("     Gain Indicator: 0x" + bin[8] + " -- " + (bin[8].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Over-Range Count Indicator: 0x" + bin[9] + " -- " + (bin[9].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Sample Rate Indicator: 0x" + bin[10] + " -- " + (bin[10].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Timestamp Adjustment Indicator: 0x" + bin[11] + " -- " + (bin[11].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Gain Indicator: 0x" + bin[8] + " -- " + (bin[8].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Over-Range Count Indicator: 0x" + bin[9] + " -- " + (bin[9].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Sample Rate Indicator: 0x" + bin[10] + " -- " + (bin[10].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Timestamp Adjustment Indicator: 0x" + bin[11] + " -- " + (bin[11].Equals('1') ? "True" : "False") + "\n");
 
-            report.Append("     Timestamp Calibration Time Indicator: 0x" + bin[12] + " -- " + (bin[12].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Temperature Indicator: 0x" + bin[13] + " -- " + (bin[13].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Device Identifier Indicator: 0x" + bin[14] + " -- " + (bin[14].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     State and Event Indicator: 0x" + bin[15] + " -- " + (bin[15].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Timestamp Calibration Time Indicator: 0x" + bin[12] + " -- " + (bin[12].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Temperature Indicator: 0x" + bin[13] + " -- " + (bin[13].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Device Identifier Indicator: 0x" + bin[14] + " -- " + (bin[14].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    State and Event Indicator: 0x" + bin[15] + " -- " + (bin[15].Equals('1') ? "True" : "False") + "\n");
 
-            report.Append("     Data Packet Payload Format Indicator: 0x" + bin[16] + " -- " + (bin[16].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Formatted GPS (Global Positioning System) Geolocation Indicator: 0x" + bin[17] + " -- " + (bin[17].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x" + bin[18] + " -- " + (bin[18].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x" + bin[19] + " -- " + (bin[19].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Data Packet Payload Format Indicator: 0x" + bin[16] + " -- " + (bin[16].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Formatted GPS (Global Positioning System) Geolocation Indicator: 0x" + bin[17] + " -- " + (bin[17].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Formatted INS (Intertial Navigation System) Geolocation Indicator: 0x" + bin[18] + " -- " + (bin[18].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    ECEF (Earth-Centered, Earth-Fixed) Ephemeris Indicator: 0x" + bin[19] + " -- " + (bin[19].Equals('1') ? "True" : "False") + "\n");
 
-            report.Append("     Relative Ephemeris Indicator: 0x" + bin[20] + " -- " + (bin[20].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Ephemeris Reference Identifier Indicator: 0x" + bin[21] + " -- " + (bin[21].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     GPS ASCII Indicator: 0x" + bin[22] + " -- " + (bin[22].Equals('1') ? "True" : "False") + "\n");
-            report.Append("     Context Association Lists Indicator: 0x" + bin[23] + " -- " + (bin[23].Equals('1') ? "True" : "False") + "\n\n");
+            report.Append("    Relative Ephemeris Indicator: 0x" + bin[20] + " -- " + (bin[20].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Ephemeris Reference Identifier Indicator: 0x" + bin[21] + " -- " + (bin[21].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    GPS ASCII Indicator: 0x" + bin[22] + " -- " + (bin[22].Equals('1') ? "True" : "False") + "\n");
+            report.Append("    Context Association Lists Indicator: 0x" + bin[23] + " -- " + (bin[23].Equals('1') ? "True" : "False") + "\n\n");
 
             for (int i = 0; i < contextPackInd.Length; i++)
             {
@@ -324,15 +324,17 @@ namespace HOUNDDOG_GUI
                             }
                             else if (i == 9)
                             {
-                                report.Append("     Over-Range Count: " + val + "\n");
+                                report.Append("    Over-Range Count: " + val + "\n");
                             }
                             else if (i == 12)
                             {
-                                report.Append("     Timestamp Calibration Time: " + val + "\n");
+                                report.Append("    Timestamp Calibration Time: " + val + "\n");
                             }
                         }
                         else if (i == 7)
                         {
+                            temp = twosComplement(temp.Substring(16));
+
                             string refLevel = temp.Substring(16, 9);
                             string refLevelFrac = temp.Substring(25);
 
@@ -343,10 +345,14 @@ namespace HOUNDDOG_GUI
                         }
                         else if (i == 8)
                         {
-                            string gainS2int = temp.Substring(0, 9);
-                            string gainS1int = temp.Substring(16, 9);
-                            string gainS2frac = temp.Substring(9, 7);
-                            string gainS1frac = temp.Substring(25);
+                            string gainTemp1 = twosComplement(temp.Substring(0, 16));
+                            string gainTemp2 = twosComplement(temp.Substring(16));
+                            string temp2 = gainTemp1 + gainTemp2;
+
+                            string gainS2int = temp2.Substring(0, 9);
+                            string gainS2frac = temp2.Substring(9, 7);
+                            string gainS1int = temp2.Substring(16, 9);
+                            string gainS1frac = temp2.Substring(25);
 
                             string val1 = conversionToNums(gainS2int, true);
                             string val2 = conversionToNums(gainS1int, true);
@@ -354,8 +360,8 @@ namespace HOUNDDOG_GUI
                             string val3 = conversionToNums(gainS2frac, false);
                             string val4 = conversionToNums(gainS1frac, false);
 
-                            report.Append("     Stage 2 Gain Value: " + val1 + "." + val3 + " dB\n");
-                            report.Append("     Stage 1 Gain Value: " + val2 + "." + val4 + " dB\n");
+                            report.Append("    Stage 2 Gain Value: " + val1 + "." + val3 + " dB\n");
+                            report.Append("    Stage 1 Gain Value: " + val2 + "." + val4 + " dB\n");
                         }
                         else if (i == 13)
                         {
@@ -412,28 +418,28 @@ namespace HOUNDDOG_GUI
                             string value = val1 + "." + val2 + " Hz\n";
                             if (i == 2)
                             {
-                                report.Append("     Bandwidth: " + value);
+                                report.Append("    Bandwidth: " + value);
                             }
                             else if (i == 3)
                             {
-                                report.Append("     IF Reference Frequency: " + value);
+                                report.Append("    IF Reference Frequency: " + value);
                             }
                             else if (i == 4)
                             {
-                                report.Append("     RF Reference Frequency: " + value);
+                                report.Append("    RF Reference Frequency: " + value);
                             }
                             else if (i == 5)
                             {
-                                report.Append("     RF Reference Frequency Offset: " + value);
+                                report.Append("    RF Reference Frequency Offset: " + value);
                             }
                             else if (i == 6)
                             {
-                                report.Append("     IF Band Offset: " + value);
+                                report.Append("    IF Band Offset: " + value);
                             }
                             else if (i == 10)
                             {
                                 sampRate = 1 / Convert.ToDouble(val1 + "." + val2);
-                                report.Append("     Sample Rate: " + value);
+                                report.Append("    Sample Rate: " + value);
                             }
                         }
                         else if (i == 11)
@@ -448,40 +454,40 @@ namespace HOUNDDOG_GUI
                         {
                             dataPacketPayloadFormat = true;
                             string temp2 = "";
-                            report.Append("Data Packet Payload Format:\n");
+                            report.Append("\nData Packet Payload Format:\n");
 
-                            report.Append("     Packing Method: " + temp[0] + "\n");
+                            report.Append("    Packing Method: " + temp[0] + "\n");
                             procEfficientPack = temp[0].Equals('0') ? true : false;
 
                             temp2 = temp.Substring(1, 2);
-                            report.Append("     Real/Complex: " + dataSampleType[temp2] + "\n");
+                            report.Append("    Real/Complex: " + dataSampleType[temp2] + "\n");
                             assignDataPayloadType(temp2);
 
                             temp2 = temp.Substring(3, 5);
-                            report.Append("     Data Item Format: " + dataItemFormat[temp2] + "\n");
+                            report.Append("    Data Item Format: " + dataItemFormat[temp2] + "\n");
 
-                            report.Append("     Sample-Component Repeat Indicator: " + (temp[8].Equals('1') ? "0x1 True" : "0x0 False") + "\n");
+                            report.Append("    Sample-Component Repeat Indicator: " + (temp[8].Equals('1') ? "0x1 True" : "0x0 False") + "\n");
                             sampleComponentRep = temp[8].Equals('0') ? true : false;
 
                             temp2 = temp.Substring(9, 3);
-                            report.Append("     Event-Tag Size: " + Convert.ToInt32(temp2, 2) + "\n");
+                            report.Append("    Event-Tag Size: " + Convert.ToInt32(temp2, 2) + "\n");
                             eventTags = temp2.Equals("000") ? true : false;
 
                             temp2 = temp.Substring(12, 4);
-                            report.Append("     Channel-Tag Size: " + Convert.ToInt32(temp2, 2) + "\n");
+                            report.Append("    Channel-Tag Size: " + Convert.ToInt32(temp2, 2) + "\n");
                             channelTags = temp2.Equals("0000") ? true : false;
 
                             temp2 = temp.Substring(20, 6);
-                            report.Append("     Item Packing Field Size: " + Convert.ToInt32(temp2, 2) + "\n");
+                            report.Append("    Item Packing Field Size: " + Convert.ToInt32(temp2, 2) + "\n");
 
                             temp2 = temp.Substring(26, 6);
-                            report.Append("     Data Item Size: " + Convert.ToInt32(temp2, 2) + "\n");
+                            report.Append("    Data Item Size: " + Convert.ToInt32(temp2, 2) + "\n");
 
                             temp2 = temp.Substring(32, 16);
-                            report.Append("     Repeat Count: " + Convert.ToInt32(temp2, 2) + "\n");
+                            report.Append("    Repeat Count: " + Convert.ToInt32(temp2, 2) + "\n");
 
                             temp2 = temp.Substring(48);
-                            report.Append("     Vector Size: " + Convert.ToInt32(temp2, 2) + "\n");
+                            report.Append("    Vector Size: " + Convert.ToInt32(temp2, 2) + "\n");
                         }
                     }
                     else if ((i == 17 || i == 18) && contextPackInd[i] == true)
