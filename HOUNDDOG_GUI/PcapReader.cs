@@ -63,9 +63,11 @@ namespace HOUNDDOG_GUI
             if (e.Packet.LinkLayerType == PacketDotNet.LinkLayers.Ethernet)
             {
                 var packet = PacketDotNet.Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
+                dotnetWinpCap.timeval time = new dotnetWinpCap.timeval();
+                time.tv_sec = (uint)e.Packet.Timeval.Seconds;
                 byte[] s = packet.Bytes;
 
-                PacketHeader p = new PacketHeader(new dotnetWinpCap.timeval(), s.Length, s.Length);
+                PacketHeader p = new PacketHeader(time, s.Length, s.Length);
 
                 sock.ReceivePacket(null, p, s);
             }
