@@ -170,6 +170,31 @@ namespace HOUNDDOG_GUI
             {
                 System.Diagnostics.Debug.WriteLine("opened successfully: " + ((Device)devlist[0]).Name);
                 Console.WriteLine("Opened successfully: " + ((Device)devlist[SelectedIndex]).Name + "\n");
+                using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(fileL, true)) // For Valid Packets
+                {
+                    if (frm.getFileorLive() == true)
+                    {
+                        file.WriteLine("*****THESE PACKETS ARE PARSED FROM: " + frm.getFileLoadLoc() + "*****\n");
+                    }
+                    else
+                    {
+                        file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
+                    }
+                }
+                string badPacks = System.IO.Directory.GetCurrentDirectory() + @"\invalidPackets.txt";
+                using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(badPacks, true)) // For Valid Packets
+                {
+                    if (frm.getFileorLive() == true)
+                    {
+                        file.WriteLine("*****THESE PACKETS ARE PARSED FROM: " + frm.getFileLoadLoc() + "*****\n");
+                    }
+                    else
+                    {
+                        file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
+                    }
+                }
             }
 
 
@@ -244,20 +269,21 @@ namespace HOUNDDOG_GUI
                     rtb.Append("    Stream ID: " + streamID + "\n"); // Mandatory in Vita-49
                 }
 
-                //string classID = "";
-                //string report4 = "";
-                //if (pack.classPres == true && s.Length > 57)
-                //{
-                //    classID = formatClassID(s);
-                //    report4 = pack.processClassID(classID);
-                //}
-
                 string report2 = string.Empty;
                 if (pack.Trailer == true)
                 {
                     string binary2 = formatTrailer(s);
                     report2 = pack.parseTrailer(binary2); // Parse VRT trailer in data packets, Mandatory for V49A
                     rtb.Append("    VRT Trailer: 0x" + binary2 + "\n");
+                }
+
+                string classID = "";
+                string report4 = "";
+                if (pack.classPres == true && s.Length > 57)
+                {
+                    byte[] classIDByte = s.SubArray(payloadInd, 8);
+                    classID = formatBytestoBin(classIDByte);
+                    report4 = pack.processClassID(classID);
                 }
 
                 rtb.Append("    Packet Type: " + (pack.PackType ? "Data" : "Context") + "\n");
@@ -360,6 +386,9 @@ namespace HOUNDDOG_GUI
                     if (frm.getVerboseValue() == true)
                         file.WriteLine(report); // VRT Header
 
+                    if (frm.getVerboseValue() == true && pack.classPres == true)
+                        file.WriteLine(report4); // Class ID
+
                     if (pack.Trailer == true)
                     {
                         if (frm.getVerboseValue() == true)
@@ -393,6 +422,9 @@ namespace HOUNDDOG_GUI
                         if (frm.getVerboseValue() == true)
                             file.WriteLine(report); // VRT Header
 
+                        if (frm.getVerboseValue() == true && pack.classPres == true)
+                            file.WriteLine(report4); // Class ID
+
                         if (pack.Trailer == true)
                         {
                             if (frm.getVerboseValue() == true)
@@ -423,7 +455,7 @@ namespace HOUNDDOG_GUI
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(e.Message);
+                //System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
 

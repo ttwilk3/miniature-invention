@@ -538,6 +538,10 @@ namespace HOUNDDOG_GUI
             StringBuilder report = new StringBuilder();
             report.Append("VRT Class ID:\n");
             string temp = "";
+            string infoCode = "";
+            string pktCode = "";
+            //bool OUIeq = false;
+            bool res = false;
 
             // Bits 0-4 Set Per VRT
             temp = classID.Substring(0, 5);
@@ -549,20 +553,23 @@ namespace HOUNDDOG_GUI
             temp = classID.Substring(8, 24);
             string OUI = Convert.ToInt32(temp).ToString("X");
             string temp2 = "";
-            for (int i = OUI.Length - 8; i > 0; i--)
+            for (int i = 8 - OUI.Length; i > 0; i--)
                 temp2 += "0";
             temp2 += OUI;
-            report.Append("OUI: 0x" + temp2 + "\n");
-
+            report.Append("OUI: 0x" + temp2 + "h\n");
+            //OUIeq = temp2.Equals("FFFFFA") ? true : false;
+            
             // Bits 32-39 Fixed Value
             temp = classID.Substring(32, 8);
             report.Append("Fixed Value: " + Convert.ToInt32(temp, 2) + "\n");
 
             // Bits 40-41 Reserved (set to 0 by default)
+            temp = classID.Substring(40, 2);
+            res = temp.Equals("00") ? true : false;
 
             // Bits 42-43 Real or Complex, Cartesian
             temp = classID.Substring(42, 2);
-            assignDataPayloadType(temp);
+            //assignDataPayloadType(temp);
             if (dataPayloadType[0])
                 report.Append("R/C: Real Data Payload Type \n");
             else if (dataPayloadType[1])
@@ -586,7 +593,27 @@ namespace HOUNDDOG_GUI
             temp = classID.Substring(48);
             report.Append("Vector Size: " + Convert.ToInt32(temp, 2) + "\n");
 
-            validVita = (streamIDPres && classIDPres && trail && (dataPayloadType[0] || dataPayloadType[1]) && dataFormat) ? true : false;
+            // Bits 32 - 47 Information Class Code
+            temp = classID.Substring(32, 16);
+            infoCode = Convert.ToInt32(temp).ToString("X");
+            temp2 = "";
+            for (int i = 8 - infoCode.Length; i > 0; i--)
+                temp2 += "0";
+            temp2 += infoCode;
+            infoCode = temp2;
+            report.Append("Information Class Code: 0x" + infoCode + "h\n");
+
+            // Bits 48 - 63 Packet Class Code
+            temp = classID.Substring(48);
+            pktCode = Convert.ToInt32(temp).ToString("X");
+            temp2 = "";
+            for (int i = 8 - pktCode.Length; i > 0; i--)
+                temp2 += "0";
+            temp2 += pktCode;
+            pktCode = temp2;
+            report.Append("Packet Class Code: 0x" + pktCode + "h\n");
+
+            validVita = (streamIDPres && classIDPres && trail && (dataPayloadType[0] || dataPayloadType[1]) && dataFormat && res) ? true : false;
 
             return report.ToString();
         }

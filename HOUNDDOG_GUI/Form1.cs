@@ -83,6 +83,16 @@ namespace HOUNDDOG_GUI
             set { otherOrInvalidPacks = value; }
         }
 
+        public bool getFileorLive()
+        {
+            return fromFile.Checked;
+        }
+
+        public string getFileLoadLoc()
+        {
+            return openFileDialog1.FileName;
+        }
+
         public bool getVerboseValue()
         {
             return verboseCheck.Checked;
