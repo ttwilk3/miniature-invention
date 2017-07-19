@@ -83,6 +83,11 @@ namespace HOUNDDOG_GUI
             set { otherOrInvalidPacks = value; }
         }
 
+        public sockets getSock()
+        {
+            return sock;
+        }
+
         public bool getFileorLive()
         {
             return fromFile.Checked;

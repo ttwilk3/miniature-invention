@@ -44,6 +44,31 @@ namespace HOUNDDOG_GUI
 
             // Start capture 'INFINTE' number of packets
             // This method will return when EOF reached.
+            using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(frm.getSock().FileLoc, true)) // For Valid Packets
+            {
+                if (frm.getFileorLive() == true)
+                {
+                    file.WriteLine("*****THESE PACKETS ARE PARSED FROM: " + frm.getFileLoadLoc() + "*****\n");
+                }
+                else
+                {
+                    file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
+                }
+            }
+            using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(frm.getSock().badPackFileLoc, true)) // For Valid Packets
+            {
+                if (frm.getFileorLive() == true)
+                {
+                    file.WriteLine("*****THESE PACKETS ARE PARSED FROM: " + frm.getFileLoadLoc() + "*****\n");
+                }
+                else
+                {
+                    file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
+                }
+            }
+
             device.Capture();
 
             // Close the pcap device

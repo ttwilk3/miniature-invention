@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HOUNDDOG_GUI
 {
-    class Vita49
+    public class Vita49
     {
         // All the dictionaries for lookup
         Dictionary<string, string> packetType = new Dictionary<string, string>();

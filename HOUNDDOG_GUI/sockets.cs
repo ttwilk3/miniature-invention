@@ -23,7 +23,7 @@ namespace HOUNDDOG_GUI
         }
     }
 
-    class sockets
+    public class sockets
     {
         dotnetWinpCap wpcap = null;
         ArrayList devlist = null;
@@ -89,6 +89,11 @@ namespace HOUNDDOG_GUI
         {
             get { return fileL; }
             set { fileL = value; }
+        }
+
+        public string badPackFileLoc
+        {
+            get { return badPacks; }
         }
 
         public DataTable getTable()
