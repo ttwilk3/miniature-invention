@@ -61,7 +61,7 @@
             // 
             // cartesianChart1
             // 
-            this.cartesianChart1.Location = new System.Drawing.Point(799, 50);
+            this.cartesianChart1.Location = new System.Drawing.Point(721, 50);
             this.cartesianChart1.Name = "cartesianChart1";
             this.cartesianChart1.Size = new System.Drawing.Size(375, 100);
             this.cartesianChart1.TabIndex = 13;
@@ -71,7 +71,7 @@
             // 
             this.cartesianChart2.Location = new System.Drawing.Point(27, 427);
             this.cartesianChart2.Name = "cartesianChart2";
-            this.cartesianChart2.Size = new System.Drawing.Size(1148, 240);
+            this.cartesianChart2.Size = new System.Drawing.Size(1069, 240);
             this.cartesianChart2.TabIndex = 14;
             this.cartesianChart2.Text = "cartesianChart2";
             // 
@@ -279,7 +279,7 @@
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1149, 236);
+            this.dataGridView1.Size = new System.Drawing.Size(1071, 236);
             this.dataGridView1.TabIndex = 33;
             // 
             // dataFormat
@@ -344,7 +344,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1197, 676);
+            this.ClientSize = new System.Drawing.Size(1109, 676);
             this.Controls.Add(this.discoOpt);
             this.Controls.Add(this.loadLoc);
             this.Controls.Add(this.fileLoadChoose);
