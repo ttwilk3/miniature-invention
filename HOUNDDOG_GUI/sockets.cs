@@ -31,12 +31,13 @@ namespace HOUNDDOG_GUI
         int pack_count = 0;
         private System.ComponentModel.Container components = null;
         List<string> cbAdapters = new List<string>(); // List of available capture points on device
-        int SelectedIndex = 1;
+        int SelectedIndex = 0;
         Vita49 pack = new Vita49(); // Instance of the parser
         DataTable table = new DataTable(); // Populated with parsed packet data for display in GUI
         string fileL = System.IO.Directory.GetCurrentDirectory() + @"\data.txt"; // Save Location
         List<double> dataPayNormalized = new List<double>(); // Normalized data payload data, currently just Reals
         DateTime dt = new DateTime();
+        string badPacks = @"\invalidPackets.txt";
         //string fileL = @"C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG\bin\Debug\data.txt";
 
         //List<Packet> packets = new List<Packet>(); // Other option instead of using the table
@@ -125,6 +126,7 @@ namespace HOUNDDOG_GUI
                     cbAdapters.Add(((Device)devlist[i]).Name + ":" + ((Device)devlist[i]).Description); // Get all capture points on device
                 }
             }
+            setBadPack();
         }
 
         //public List<Packet> myPackets
@@ -182,7 +184,7 @@ namespace HOUNDDOG_GUI
                         file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
                     }
                 }
-                string badPacks = System.IO.Directory.GetCurrentDirectory() + @"\invalidPackets.txt";
+                //string badPacks = System.IO.Directory.GetCurrentDirectory() + @"\invalidPackets.txt";
                 using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(badPacks, true)) // For Valid Packets
                 {
@@ -409,7 +411,7 @@ namespace HOUNDDOG_GUI
 
                 if (pack.valVita == false) // For Invalid Packets
                 {
-                    string badPacks = System.IO.Directory.GetCurrentDirectory() + @"\invalidPackets.txt";
+                    //string badPacks = System.IO.Directory.GetCurrentDirectory() + @"\invalidPackets.txt";
                     using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(badPacks, true))
                     {
@@ -457,6 +459,21 @@ namespace HOUNDDOG_GUI
             {
                 //System.Diagnostics.Debug.WriteLine(e.Message);
             }
+        }
+
+        public void setBadPack()
+        {
+            int j = 0;
+            string tempLoc = fileL;
+            for (j = tempLoc.Length - 1; j > 0; j--)
+            {
+                if (tempLoc[j].Equals('\\'))
+                {
+                    break;
+                }
+            }
+            tempLoc = tempLoc.Substring(0, j);
+            badPacks = tempLoc + badPacks;
         }
 
         // TODO -- Refactor All of the Functions below this comment

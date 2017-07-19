@@ -122,7 +122,7 @@ namespace HOUNDDOG_GUI
         {
             foreach (string s in sock.adapt)
                 comboBox1.Items.Add(s);
-            comboBox1.SelectedIndex = 1;
+            comboBox1.SelectedIndex = 0;
         }
 
         private void BindGrid()
@@ -229,6 +229,7 @@ namespace HOUNDDOG_GUI
             {
                 sock.FileLoc = saveFileDialog1.FileName;
                 saveLoc.Text = saveFileDialog1.FileName;
+                sock.setBadPack();
             }
         }
 
