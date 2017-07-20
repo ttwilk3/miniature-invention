@@ -56,6 +56,7 @@ namespace HOUNDDOG_GUI
                     file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
                 }
             }
+            frm.getSock().setBadPack();
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(frm.getSock().badPackFileLoc, true)) // For Valid Packets
             {

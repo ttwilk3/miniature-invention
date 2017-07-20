@@ -140,6 +140,7 @@ namespace HOUNDDOG_GUI
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            sock.setBadPack();
             if (fromFile.Checked != true)
             {
                 bool badInp = false;

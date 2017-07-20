@@ -468,6 +468,7 @@ namespace HOUNDDOG_GUI
 
         public void setBadPack()
         {
+            badPacks = @"\invalidPackets.txt";
             int j = 0;
             string tempLoc = fileL;
             for (j = tempLoc.Length - 1; j > 0; j--)
