@@ -80,10 +80,7 @@ namespace HOUNDDOG_GUI
             //Console.Write("Hit 'Enter' to exit...");
             //Console.ReadLine();
         }
-        
-        /// <summary>
-        /// Prints the source and dest MAC addresses of each received Ethernet frame
-        /// </summary>
+
         private void device_OnPacketArrival(object sender, CaptureEventArgs e)
         {
             if (e.Packet.LinkLayerType == PacketDotNet.LinkLayers.Ethernet)

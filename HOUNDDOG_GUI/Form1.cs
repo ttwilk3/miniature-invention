@@ -247,7 +247,7 @@ namespace HOUNDDOG_GUI
         private void SetAxisLimits(System.DateTime now)
         {
             cartesianChart1.AxisX[0].MaxValue = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 100ms ahead
-            cartesianChart1.AxisX[0].MinValue = now.Ticks - TimeSpan.FromSeconds(8).Ticks; //we only care about the last 8 seconds
+            cartesianChart1.AxisX[0].MinValue = now.Ticks - TimeSpan.FromSeconds(10).Ticks; //we only care about the last 10 seconds
         }
 
         private void TimerOnTick(object sender, EventArgs eventArgs)
@@ -364,6 +364,7 @@ namespace HOUNDDOG_GUI
 
                 GearedValues<double> temp = new GearedValues<double>();
                 temp.WithQuality(Quality.Low);
+                SetAxisLimitsPayload(myData);
                 //ChartValues<double> temp = new ChartValues<double>();
 
                 foreach (double d in myData)
@@ -388,6 +389,12 @@ namespace HOUNDDOG_GUI
         {
             cartesianChart2.AxisY[0].MaxValue = 1;
             cartesianChart2.AxisY[0].MinValue = 0;
+        }
+
+        private void SetAxisLimitsPayload(List<double> myData)
+        {
+            cartesianChart2.AxisY[0].MaxValue = myData.Max();
+            cartesianChart2.AxisY[0].MinValue = myData.Min();
         }
 
         private void InvokeUI(Action a)

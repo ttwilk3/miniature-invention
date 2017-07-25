@@ -16,5 +16,5 @@ NET40; DEBUG
 13725200742
 DefaultGeoMapTooltip.xaml;DefaultLegend.xaml;DefaultTooltip.xaml;HeatColorRange.xaml;Themes\Colors\metro.xaml;Themes\Colors\white.xaml;Themes\Colors\black.xaml;Themes\Colors\blue.xaml;Themes\Colors\material.xaml;Themes\base.xaml;Themes\Size\l.xaml;Themes\Size\m.xaml;Themes\Size\s.xaml;Themes\Weight\light.xaml;Themes\Weight\bold.xaml;Themes\Weight\normal.xaml;
 
-False
+True
 

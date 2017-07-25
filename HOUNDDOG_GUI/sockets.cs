@@ -356,7 +356,9 @@ namespace HOUNDDOG_GUI
 
                         double min = 1.0 * myData.Min();
                         double max = 1.0 * myData.Max();
-                        dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>(); // Real Values Normalized for plotting
+                        //dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>(); // Real Values Normalized for plotting
+                        //dataPayNormalized = myData.Select(x => Math.Log(x / max)).ToList<double>();
+                        dataPayNormalized = myData.Select(x => Math.Exp((x - max)/(max - min))).ToList<double>();
                     }
                     else if (pack.PayloadType[1] == true && dataPayload.Length > 1) // For Complex, Cartesian
                     {
@@ -364,7 +366,9 @@ namespace HOUNDDOG_GUI
 
                         double min = 1.0 * myData.Min();
                         double max = 1.0 * myData.Max();
-                        dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>(); // Real Values Normalized for plotting
+                        //dataPayNormalized = myData.Select(x => (x - min) / (max - min)).ToList<double>(); // Real Values Normalized for plotting
+                        //dataPayNormalized = myData.Select(x => Math.Log(x / max)).ToList<double>();
+                        dataPayNormalized = myData.Select(x => Math.Exp((x - max) / (max - min))).ToList<double>();
                     }
                     
                 }
