@@ -34,7 +34,7 @@ namespace HOUNDDOG_GUI
         int otherOrInvalidPacks = 0;
         string fileLoadLocation = @"";
         PcapReader pRead;
-        Point pt = new Point();
+        //Point pt = new Point();
 
         public class MeasureModel
         {
@@ -61,6 +61,8 @@ namespace HOUNDDOG_GUI
             refreshRate.Visible = false;
             refreshRateSlider.Visible = false;
             dataFormat.Visible = false;
+
+            writeToFile.Checked = true;
 
             Height -= 250;
         }
@@ -479,8 +481,8 @@ namespace HOUNDDOG_GUI
         {
             if (fromFile.Checked == true)
             {
-                pt = new Point(verboseCheck.Location.X, verboseCheck.Location.Y);
-                verboseCheck.Location = new Point(startButton.Location.X + startButton.Width + 25, startButton.Location.Y);
+                //pt = new Point(verboseCheck.Location.X, verboseCheck.Location.Y);
+                //verboseCheck.Location = new Point(startButton.Location.X + startButton.Width + 25, startButton.Location.Y);
                 fileLoadChoose.Visible = true;
                 loadLoc.Visible = true;
 
@@ -496,7 +498,7 @@ namespace HOUNDDOG_GUI
             }
             else
             {
-                verboseCheck.Location = pt;
+                //verboseCheck.Location = pt;
                 fileLoadChoose.Visible = false;
                 loadLoc.Visible = false;
 
@@ -564,6 +566,14 @@ namespace HOUNDDOG_GUI
             {
                 discoOpt.Visible = true;
             }
+        }
+
+        private void writeToFile_CheckedChanged(object sender, EventArgs e)
+        {
+            if (writeToFile.Checked == true)
+                sock.writeFile = true;
+            else
+                sock.writeFile = false;
         }
     }
 }

@@ -47,11 +47,11 @@ namespace HOUNDDOG_GUI
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(frm.getSock().FileLoc, true)) // For Valid Packets
             {
-                if (frm.getFileorLive() == true)
+                if (frm.getFileorLive() == true && sock.writeFile == true)
                 {
                     file.WriteLine("*****THESE PACKETS ARE PARSED FROM: " + frm.getFileLoadLoc() + "*****\n");
                 }
-                else
+                else if (sock.writeFile == true)
                 {
                     file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
                 }
@@ -60,11 +60,11 @@ namespace HOUNDDOG_GUI
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(frm.getSock().badPackFileLoc, true)) // For Valid Packets
             {
-                if (frm.getFileorLive() == true)
+                if (frm.getFileorLive() == true && sock.writeFile == true)
                 {
                     file.WriteLine("*****THESE PACKETS ARE PARSED FROM: " + frm.getFileLoadLoc() + "*****\n");
                 }
-                else
+                else if (sock.writeFile == true)
                 {
                     file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
                 }

@@ -38,6 +38,7 @@ namespace HOUNDDOG_GUI
         List<double> dataPayNormalized = new List<double>(); // Normalized data payload data, currently just Reals
         DateTime dt = new DateTime();
         string badPacks = @"\invalidPackets.txt";
+        bool writeToFile = false;
         //string fileL = @"C:\Users\truearrow\Documents\Visual Studio 2017\Projects\HOUNDDOG\HOUNDDOG\bin\Debug\data.txt";
 
         //List<Packet> packets = new List<Packet>(); // Other option instead of using the table
@@ -139,6 +140,12 @@ namespace HOUNDDOG_GUI
         //    get { return packets; }
         //}
 
+        public bool writeFile
+        {
+            get { return writeToFile; }
+            set { writeToFile = value; }
+        }
+
         public void CloseConnection()
         {
             if (wpcap != null)
@@ -180,11 +187,11 @@ namespace HOUNDDOG_GUI
                 using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(fileL, true)) // For Valid Packets
                 {
-                    if (frm.getFileorLive() == true)
+                    if (frm.getFileorLive() == true && writeToFile == true)
                     {
                         file.WriteLine("*****THESE PACKETS ARE PARSED FROM: " + frm.getFileLoadLoc() + "*****\n");
                     }
-                    else
+                    else if (writeToFile == true)
                     {
                         file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
                     }
@@ -193,11 +200,11 @@ namespace HOUNDDOG_GUI
                 using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(badPacks, true)) // For Valid Packets
                 {
-                    if (frm.getFileorLive() == true)
+                    if (frm.getFileorLive() == true && writeToFile == true)
                     {
                         file.WriteLine("*****THESE PACKETS ARE PARSED FROM: " + frm.getFileLoadLoc() + "*****\n");
                     }
-                    else
+                    else if (writeToFile == true)
                     {
                         file.WriteLine("*****THESE PACKETS ARE PARSED FROM A LIVE CAPTURE*****\n");
                     }
@@ -385,44 +392,10 @@ namespace HOUNDDOG_GUI
                 //Console.WriteLine(table.Rows.Count);
 
                 // Where all the generated reports from the V49 parser class are written to
-                using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(fileL, true)) // For Valid Packets
+                if (writeToFile == true)
                 {
-                    file.WriteLine("-----------------------------------------");
-                    if (pack.valVita == false)
-                        file.WriteLine("Not Vita-49 A compliant.\n");
-
-                    file.WriteLine(rtb.ToString());
-
-                    if (frm.getVerboseValue() == true)
-                        file.WriteLine(report); // VRT Header
-
-                    if (frm.getVerboseValue() == true && pack.classPres == true)
-                        file.WriteLine(report4); // Class ID
-
-                    if (pack.Trailer == true)
-                    {
-                        if (frm.getVerboseValue() == true)
-                            file.WriteLine(report2); // VRT Trailer
-                        pack.Trailer = false;
-                    }
-
-                    if (pack.PackType == false)
-                    {
-                        if (frm.getVerboseValue() == true)
-                        {
-                            file.WriteLine("Context Packet Data:\n0x" + contextStr + "h\n");
-                            file.WriteLine(report3); // Context Packet Data 
-                        }
-                    }
-                    file.WriteLine("-----------------------------------------");
-                }
-
-                if (pack.valVita == false) // For Invalid Packets
-                {
-                    //string badPacks = System.IO.Directory.GetCurrentDirectory() + @"\invalidPackets.txt";
                     using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(badPacks, true))
+                new System.IO.StreamWriter(fileL, true)) // For Valid Packets
                     {
                         file.WriteLine("-----------------------------------------");
                         if (pack.valVita == false)
@@ -448,11 +421,51 @@ namespace HOUNDDOG_GUI
                             if (frm.getVerboseValue() == true)
                             {
                                 file.WriteLine("Context Packet Data:\n0x" + contextStr + "h\n");
-                                file.WriteLine(report3); // Context Packet Data
+                                file.WriteLine(report3); // Context Packet Data 
                             }
                         }
-
                         file.WriteLine("-----------------------------------------");
+                    }
+                }
+
+                if (pack.valVita == false) // For Invalid Packets
+                {
+                    //string badPacks = System.IO.Directory.GetCurrentDirectory() + @"\invalidPackets.txt";
+                    if (writeToFile == true)
+                    {
+                        using (System.IO.StreamWriter file =
+                    new System.IO.StreamWriter(badPacks, true))
+                        {
+                            file.WriteLine("-----------------------------------------");
+                            if (pack.valVita == false)
+                                file.WriteLine("Not Vita-49 A compliant.\n");
+
+                            file.WriteLine(rtb.ToString());
+
+                            if (frm.getVerboseValue() == true)
+                                file.WriteLine(report); // VRT Header
+
+                            if (frm.getVerboseValue() == true && pack.classPres == true)
+                                file.WriteLine(report4); // Class ID
+
+                            if (pack.Trailer == true)
+                            {
+                                if (frm.getVerboseValue() == true)
+                                    file.WriteLine(report2); // VRT Trailer
+                                pack.Trailer = false;
+                            }
+
+                            if (pack.PackType == false)
+                            {
+                                if (frm.getVerboseValue() == true)
+                                {
+                                    file.WriteLine("Context Packet Data:\n0x" + contextStr + "h\n");
+                                    file.WriteLine(report3); // Context Packet Data
+                                }
+                            }
+
+                            file.WriteLine("-----------------------------------------");
+                        }
                     }
                 }
 

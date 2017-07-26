@@ -56,6 +56,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.loadLoc = new MetroFramework.Controls.MetroLabel();
             this.discoOpt = new MetroFramework.Controls.MetroCheckBox();
+            this.writeToFile = new MetroFramework.Controls.MetroCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -330,7 +331,7 @@
             // discoOpt
             // 
             this.discoOpt.AutoSize = true;
-            this.discoOpt.Location = new System.Drawing.Point(529, 104);
+            this.discoOpt.Location = new System.Drawing.Point(609, 104);
             this.discoOpt.Name = "discoOpt";
             this.discoOpt.Size = new System.Drawing.Size(92, 15);
             this.discoOpt.TabIndex = 38;
@@ -339,6 +340,17 @@
             this.discoOpt.Visible = false;
             this.discoOpt.CheckedChanged += new System.EventHandler(this.discoOpt_CheckedChanged);
             // 
+            // writeToFile
+            // 
+            this.writeToFile.AutoSize = true;
+            this.writeToFile.Location = new System.Drawing.Point(515, 104);
+            this.writeToFile.Name = "writeToFile";
+            this.writeToFile.Size = new System.Drawing.Size(88, 15);
+            this.writeToFile.TabIndex = 39;
+            this.writeToFile.Text = "Write To File";
+            this.writeToFile.UseSelectable = true;
+            this.writeToFile.CheckedChanged += new System.EventHandler(this.writeToFile_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -346,6 +358,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1109, 676);
+            this.Controls.Add(this.writeToFile);
             this.Controls.Add(this.discoOpt);
             this.Controls.Add(this.loadLoc);
             this.Controls.Add(this.fileLoadChoose);
@@ -405,6 +418,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private MetroFramework.Controls.MetroLabel loadLoc;
         private MetroFramework.Controls.MetroCheckBox discoOpt;
+        private MetroFramework.Controls.MetroCheckBox writeToFile;
     }
 }
 
