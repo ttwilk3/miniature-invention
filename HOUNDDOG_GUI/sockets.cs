@@ -298,6 +298,7 @@ namespace HOUNDDOG_GUI
                     byte[] classIDByte = s.SubArray(payloadInd, 8);
                     classID = formatBytestoBin(classIDByte);
                     report4 = pack.processClassID(classID);
+                    pack.classPres = true;
                 }
 
                 rtb.Append("    Packet Type: " + (pack.PackType ? "Data" : "Context") + "\n");
@@ -460,10 +461,9 @@ namespace HOUNDDOG_GUI
                                 if (frm.getVerboseValue() == true)
                                 {
                                     file.WriteLine("Context Packet Data:\n0x" + contextStr + "h\n");
-                                    file.WriteLine(report3); // Context Packet Data
+                                    file.WriteLine(report3); // Context Packet Data 
                                 }
                             }
-
                             file.WriteLine("-----------------------------------------");
                         }
                     }

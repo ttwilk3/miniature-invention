@@ -210,7 +210,7 @@ namespace HOUNDDOG_GUI
             fromFile.Enabled = true;
             fileLoadChoose.Enabled = true;
             startButton.Enabled = true;
-            timer2.Stop();
+            timer.Stop();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
@@ -225,9 +225,9 @@ namespace HOUNDDOG_GUI
         private void clearButton_Click(object sender, EventArgs e)
         {
             //BindGrid();
-            //dataGridView1.Refresh();
             //updateProgress();
             sock.clearTable();
+            dataGridView1.Refresh();
         }
 
         private void saveLocationButton_Click(object sender, EventArgs e)

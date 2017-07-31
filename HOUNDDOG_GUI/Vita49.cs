@@ -86,6 +86,7 @@ namespace HOUNDDOG_GUI
         public bool classPres
         {
             get { return classIDPres; }
+            set { classIDPres = value; }
         }
 
         public bool[] PayloadType
@@ -551,13 +552,13 @@ namespace HOUNDDOG_GUI
 
             // Bits 0-4 Set Per VRT
             temp = classID.Substring(0, 5);
-            report.Append("    Pad Bit Count: " + Convert.ToInt32(temp, 2) + "\n");
+            report.Append("    Pad Bit Count: " + Convert.ToInt64(temp, 2) + "\n");
 
             // Bits 5-7 Reserved (set to 0 by default)
 
             // Bits 8-31 OUI
             temp = classID.Substring(8, 24);
-            string OUI = Convert.ToInt32(temp).ToString("X");
+            string OUI = Convert.ToInt64(temp).ToString("X");
             string temp2 = "";
             for (int i = 8 - OUI.Length; i > 0; i--)
                 temp2 += "0";
@@ -567,7 +568,7 @@ namespace HOUNDDOG_GUI
             
             // Bits 32-39 Fixed Value
             temp = classID.Substring(32, 8);
-            report.Append("    Fixed Value: " + Convert.ToInt32(temp, 2) + "\n");
+            report.Append("    Fixed Value: " + Convert.ToInt64(temp, 2) + "\n");
 
             // Bits 40-41 Reserved (set to 0 by default)
             temp = classID.Substring(40, 2);
@@ -598,11 +599,11 @@ namespace HOUNDDOG_GUI
 
             // Bits 48-63 Vector Size
             temp = classID.Substring(48);
-            report.Append("    Vector Size: " + Convert.ToInt32(temp, 2) + "\n");
+            report.Append("    Vector Size: " + Convert.ToInt64(temp, 2) + "\n");
 
             // Bits 32 - 47 Information Class Code
             temp = classID.Substring(32, 16);
-            infoCode = Convert.ToInt32(temp).ToString("X");
+            infoCode = Convert.ToInt64(temp).ToString("X");
             temp2 = "";
             for (int i = 8 - infoCode.Length; i > 0; i--)
                 temp2 += "0";
@@ -612,7 +613,7 @@ namespace HOUNDDOG_GUI
 
             // Bits 48 - 63 Packet Class Code
             temp = classID.Substring(48);
-            pktCode = Convert.ToInt32(temp).ToString("X");
+            pktCode = Convert.ToInt64(temp).ToString("X");
             temp2 = "";
             for (int i = 8 - pktCode.Length; i > 0; i--)
                 temp2 += "0";

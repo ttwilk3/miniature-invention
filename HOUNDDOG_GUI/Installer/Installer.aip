@@ -14,7 +14,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_LiveCharts.Wpf.dll" Value="..\packages\LiveCharts.Wpf.0.9.7\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_LiveCharts.Wpf.dll_1" Value="..\LiveCharts\WpfView\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_LiveCharts.dll" Value="..\packages\LiveCharts.0.9.7\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_LiveCharts.dll_1" Value="..\LiveCharts\Core40\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_LiveCharts.dll_1" Value="..\LiveCharts\Core\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_MetroFramework.Design.dll" Value="..\packages\MetroModernUI.1.4.0.0\lib\net"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_MetroFramework.Fonts.dll" Value="..\packages\MetroModernUI.1.4.0.0\lib\net"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_MetroFramework.dll" Value="..\packages\MetroModernUI.1.4.0.0\lib\net"/>
