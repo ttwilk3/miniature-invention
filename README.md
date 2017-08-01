@@ -17,6 +17,7 @@
 
 ##### TODO:
 * Refactor all the conversion functions in sockets.cs, many could be consolidated.
+* Add Scaling to GUI, currently it is a fixed size.
 * Get more documentation for V49a format and complete the missing TODO fields for the packets. Specifically the Ephemris Fields.
 * More Verbosity levels to choose from.
 * Eventually add VITA 49.0, 49B, and 49.2 support.
