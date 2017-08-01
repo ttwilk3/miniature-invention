@@ -157,7 +157,7 @@ namespace HOUNDDOG_GUI
                     }
                     else
                     {
-                        if (packetLimit > 1000000)
+                        if (packetLimit > 1000000 || packetLimit < 0)
                         {
                             MetroMessageBox.Show(this, "Please enter a valid integer. Up to 1M packets.");
                             badInp = true;
@@ -248,7 +248,7 @@ namespace HOUNDDOG_GUI
 
         private void SetAxisLimits(System.DateTime now)
         {
-            cartesianChart1.AxisX[0].MaxValue = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 100ms ahead
+            cartesianChart1.AxisX[0].MaxValue = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 1s ahead
             cartesianChart1.AxisX[0].MinValue = now.Ticks - TimeSpan.FromSeconds(10).Ticks; //we only care about the last 10 seconds
         }
 

@@ -383,6 +383,7 @@
             this.Controls.Add(this.cartesianChart1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Resizable = false;
             this.Text = "HOUNDDOG";
