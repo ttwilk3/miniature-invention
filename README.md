@@ -33,22 +33,20 @@
 ## Example Parsed Packet Data:
 [Example Packets Gathered from a MMS MSDD-3000-1](https://www.mms-rf.com/products/msdd-3000-pps)
 
-Out of the several radios I tested, none of them were outputting valid Vita-49A packets. So I've included an "Almost-Valid" Data and Context packet. These are the two that are closest to what a valid packet should look like when parsed.
+Out of the several radios I tested, none of them were outputting valid Vita-49A packets. So I've included an "Almost-Valid" Context packet. This is the closest to what a valid packet should look like when parsed.
 
 Ran in SCAN mode, outputting VITA-49.
-### Example Almost-Valid Data Packet:
+### Example Valid Data Packet:
 -----------------------------------------
-	Not Vita-49 A compliant.
-
 	Content of packet : 
-	    Packet #: 0
-	    Length   : 8266
-	    Timestamp: Friday, June 30, 2017 6:10:36 PM
+	    Packet #: 2
+		Length   : 8266
+		Timestamp: Friday, July 14, 2017 5:02:56 PM
 	    Source: 192.168.128.103
 	    Destination: 255.255.255.255
 	    Source Port: 5603
 	    Destination Port: 7285
-	    VRT Header: 0x00011100 01101011 00001000 00001000
+	    VRT Header: 0x00011100 01100111 00001000 00001000
 	    Stream ID: 0x731C0029h
 	    VRT Trailer: 0x11110100 00000100 00000000 00000000
 	    Packet Type: Data
@@ -59,17 +57,18 @@ Ran in SCAN mode, outputting VITA-49.
 	    Trailer: 0x1 -- Trailer is present.
 	    TSI: 0x01 -- UTC
 	    TSF: 0x10 -- Real-Time (Picoseconds) Timestamp
-	    Count: 0x1011 : Decimal -- 11
+	    Count: 0x0111 : Decimal -- 7
 	    Size: 0x000010000000100 : Decimal -- 1028
 
 	VRT Class ID:
 	    Pad Bit Count: 0
 	    OUI: 0x00000000h
-	    Fixed Value: 0
-	    Data Type: Invalid
-	    Vector Size: 0
-	    Information Class Code: 0x00000000h
-	    Packet Class Code: 0x00000000h
+	    Fixed Value: 39
+	    R/C: Complex, Cartesian Data Payload Type 
+	    Data Type: 16-bit Signed Fixed Point
+	    Vector Size: 20000
+	    Information Class Code: 0x91AE40F5610h
+	    Packet Class Code: 0x5B0CE8995CA0h
 
 	VRT Trailer: 
 	    Calibrated Time Indicator Enable: 0x1 -- True
