@@ -329,7 +329,7 @@ namespace HOUNDDOG_GUI
                 List<double> myData = new List<double>();
                 // If it is a data packet, and the spectal display is enabled
                 // Temporarily just checking that the Payload Type has been set to Real, this only processes Real Data Payloads currently
-                // TODO -- Add IQ Complex Data Payload parsing and graphing
+                // TODO -- Add IQ Complex Data Payload parsing and graphing -- Finished?
                 if (pack.PayloadType.Contains(true))
                 {
                     if (pack.PayloadType[0])

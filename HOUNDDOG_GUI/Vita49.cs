@@ -44,52 +44,52 @@ namespace HOUNDDOG_GUI
             get { return packLen; }
         }
 
-        public bool Trailer
+        public bool Trailer // If there is a trailer in the packet
         {
             get { return trail; }
             set { trail = value; }
         }
 
-        public bool IntegerTimestamp
+        public bool IntegerTimestamp // If there is an integer timestamp
         {
             get { return intTimestamp; }
         }
 
-        public bool FractionalTimestamp
+        public bool FractionalTimestamp // If there is a fractional timestamp
         {
             get { return fracTimestamp; }
         }
 
-        public double SampleRate
+        public double SampleRate 
         {
             get { return sampRate; }
         }
 
-        public bool PackType
+        public bool PackType // If set to true then it is a data packet, if false then it is a context packet
         {
             get { return dataPack; }
             set { dataPack = value; }
         }
 
-        public bool valVita
+        public bool valVita // If the packet is valid or not
         {
             get { return validVita; }
             set { validVita = value; }
         }
 
-        public bool StreamID
+        public bool StreamID // If Stream ID is present
         {
             get { return streamIDPres; }
             set { streamIDPres = value; }
         }
 
-        public bool classPres
+        public bool classPres // If class ID is present
         {
             get { return classIDPres; }
             set { classIDPres = value; }
         }
 
-        public bool[] PayloadType
+        public bool[] PayloadType // 0 - Real, 1 - Complex, Cartesian, 2 - Complex, Polar
         {
             get { return dataPayloadType; }
         }
@@ -110,6 +110,7 @@ namespace HOUNDDOG_GUI
 
         public string parseHeader(string bin)
         {
+            // Reset all the booleans everytime you go to parse
             PackType = false;
             validVita = false;
             streamIDPres = false;
@@ -407,7 +408,7 @@ namespace HOUNDDOG_GUI
                         // Words 2
                         temp = binWords.Substring(ind, 64);
                         ind += 64;
-                        // 11 14 16
+                        // 11 14
                         if (i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 10)
                         {
                             string freqInt = temp.Substring(0, 44);

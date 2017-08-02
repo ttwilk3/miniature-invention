@@ -22,18 +22,18 @@ namespace HOUNDDOG_GUI
 {
     public partial class Form1 : MetroForm
     {
-        sockets sock;
-        bool limitSet = false;
-        int packetLimit;
-        Random rand = new Random();
-        int prevPackCount = 0;
+        sockets sock; // Socket Object, used to open the socket to start sniffing and parsing packets
+        bool limitSet = false; // Is the packet parse count set?
+        int packetLimit; // How many packets to capture
+        Random rand = new Random(); // RANDOM
+        int prevPackCount = 0; // Used in calculation for the packet # graph
         System.Timers.Timer timer = new System.Timers.Timer();
         System.Timers.Timer timer2 = new System.Timers.Timer();
-        int dataPacks = 0;
-        int contPacks = 0;
-        int otherOrInvalidPacks = 0;
+        int dataPacks = 0; // Data Packet Counter
+        int contPacks = 0; // Context Packet Counter
+        int otherOrInvalidPacks = 0; // All other packets or invalid packets
         string fileLoadLocation = @"";
-        PcapReader pRead;
+        PcapReader pRead; // Used for reading from a file
         //Point pt = new Point();
 
         public class MeasureModel
@@ -44,18 +44,19 @@ namespace HOUNDDOG_GUI
 
         public Form1()
         {
-            CheckForIllegalCrossThreadCalls = false;
+            CheckForIllegalCrossThreadCalls = false; // Bad programming, but needed so you can hijack the form thread from sockets.cs
             InitializeComponent();
-            sock = new sockets(this);
-            saveLoc.Text = sock.FileLoc;
+            sock = new sockets(this); // Pass this form to the socket object for use there
+            saveLoc.Text = sock.FileLoc; 
             loadLoc.Text = fileLoadLocation;
             verboseCheck.Checked = true;
-            updateComboBox();
+            updateComboBox(); // Populate combo box with what adapters are on your machine
             BindGrid();
 
-            setupPacketCountChart();
-            setupDataPayloadChart();
+            setupPacketCountChart(); // Set up Packet Counter Graph
+            setupDataPayloadChart(); // Set up Spectral Display
             
+            // Just some default starting values for the GUI
             cartesianChart2.Visible = false;
             cartesianChart2.Enabled = false;
             refreshRate.Visible = false;
@@ -132,8 +133,9 @@ namespace HOUNDDOG_GUI
             comboBox1.SelectedIndex = 0;
         }
 
-        private void BindGrid()
+        private void BindGrid() // Used to setup the Data Table
         {
+            // Have to bind the Data Table to a source
             DataTable temp = sock.getTable();
             BindingSource sBind = new BindingSource();
             sBind.DataSource = temp;
@@ -474,7 +476,7 @@ namespace HOUNDDOG_GUI
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            sock.CloseConnection();
+            sock.CloseConnection(); // Force the connection to be closed when the form closes.
         }
 
         private void fromFile_CheckedChanged(object sender, EventArgs e)
